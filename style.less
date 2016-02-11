@@ -1,0 +1,497 @@
+// General styles
+body {
+	font-family: 'Droid Serif', serif;
+}
+
+// Header
+.sitewide_header {
+	margin-bottom: 0px !important; // Removes extra space below the sitewide_header
+	box-shadow: none !important; // Removes box-shadow below sitewide_header
+}
+.evo_container__header {
+	margin-bottom: 20px;
+}
+// Site menu
+.navbar {
+	min-height: 56px;
+	.navbar-collapse {
+		padding: 0;
+	}
+}
+.navbar-nav.evo_container__menu {
+	width: 100%;
+	li {
+		margin-top: 18px;
+		list-style-type: none;
+		a {
+			margin: 0 15px;
+			padding: 20px 0;
+			text-transform: uppercase;
+			font-weight: 900;
+			letter-spacing: -0.15px;
+			font-size: 15px;
+		}
+		&.active a.selected {
+			text-decoration: underline;
+		}
+	}
+	
+	// User links in menu
+	.ufld_icon_links {
+		height: 54px;
+		float: right;
+		a {
+			height: 54px;
+			width: 54px;
+			border-radius: 0;
+			margin: 0;
+            background-color: transparent;
+			
+			span {
+				font-size: 18px;
+				line-height: 54px;
+				-webkit-transition-duration: 0.1s;
+				transition-duration: 0.1s;
+				-webkit-transition-property: transform;
+				transition-property: transform;
+				-webkit-transition-timing-function: ease-in-out;
+				transition-timing-function: ease-in-out;
+				&:hover {
+					-webkit-transform: rotate(30deg);
+					transform: rotate(30deg);
+				}
+			}
+		}
+	}
+}
+
+// Login widget form
+.widget_core_user_login {
+	#login_form {
+		.form-group {
+			margin: 0;
+		}
+		label {
+			text-align: left;
+			width: 160px;
+			padding-left: 0;
+		}
+		.controls {
+			padding: 0;
+			width: 100%;
+		}
+		.form_text_input.form-control {
+			width: 100%;
+		}
+	}
+	.submit {
+		font-size: 12px;
+	}
+	.field_login_btn {
+		.panel {
+			margin: 0;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			.panel-body {
+				padding-left: 0;
+				padding-right: 0;
+				padding-bottom: 0;
+				#submit_login_form {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+	.register_link {
+		display: block;
+		padding-top: 10px;
+	}
+}
+
+// Register widget form
+.widget_core_user_register {
+	#register_form {
+		.form-group {
+			margin: 0;
+		}
+		label {
+			text-align: left;
+			width: 160px;
+			padding-left: 0;
+		}
+		.controls {
+			padding: 0;
+			width: 100%;
+		}
+		.form_text_input.form-control {
+			width: 100%;
+		}
+	}
+	.submit {
+		font-size: 12px;
+	}
+	.field_register_btn {
+		.panel {
+			margin: 0;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			.panel-body {
+				padding-left: 0;
+				padding-right: 0;
+				padding-bottom: 0;
+				#submit_login_form {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}
+
+// Profile tabs on ?disp=profile
+ul.profile_tabs {
+	margin: 0 2ex 2ex;
+	position: relative;
+	top: 1px;
+}
+
+.profile_avatar {
+	float: right;
+	padding: 10px;
+	margin-left: 10px;
+}
+
+// Use full width for all textarea
+.form-horizontal .controls textarea.form-control {
+	width: 100%;
+}
+
+// A search button
+input.search_field {
+	margin-bottom: 0;
+	display: inline-block;
+}
+form.search .search_options {
+	width: 100%;
+	.search_option input {
+		margin-right: 5px;
+	}
+	.search_option label {
+		margin-bottom: 0;
+		margin-top: 5px;
+	}
+}
+div.compact_search_form {
+	input.search_field {
+		width: 100%;
+		margin: 0;
+	}
+}
+div.extended_search_form {
+	text-align: center;
+	margin: 0 auto 2em auto;
+	max-width: 530px;
+	.search_options {
+		text-align: center;
+		.search_option {
+			display: inline-block;
+			margin-right: 10px;
+		}
+	}
+}
+
+// Table for select categories of item
+table.catselect {
+	input#new_category_name {
+		width: 98% !important;
+	}
+}
+
+// Form elements on item edit page
+label.control-label[for=post_title] {
+	width: auto;
+}
+
+// A form to create a new message/thread
+textarea.message_text {
+	width: 95%;
+}
+
+// Links disp=comment
+.evo_comment_title a, .pull-right .evo_comment_type {
+	color: #337ab7;
+}
+
+.evo_post {
+	margin-bottom: 2em;
+	.small.text-muted {
+		margin: 4px 0 10px;
+		letter-spacing: 1px;
+		a, a .glyphicon {
+			color: inherit;
+		}
+	}
+}
+
+div.bSideItem {
+	background: #F7F5FA;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	h4 {
+		margin-top: 0;
+	}
+}
+
+// Login/Register forms:
+.skin-form {
+	.panel-body {
+		.panel {
+			border: none;
+			box-shadow: none;
+		}
+		.panel-body {
+			padding: 0;
+		}
+	}
+	.fieldset {
+		margin: 0;
+		div.input {
+			margin: 0;
+		}
+	}
+	.control-buttons, div.input {
+		padding: 0;
+		width: 100%;
+		text-align: center;
+	}
+}
+.evo_panel__login, .evo_panel__lostpass, .evo_panel__register, .evo_panel__activation {
+	min-width: 290px;
+	margin: 1.5em auto auto;
+	.panel {
+		margin: 5px 0;
+	}
+	.panel-body {
+		padding-top: 20px;
+		padding-bottom: 0;
+	}
+}
+.evo_panel__login {
+	max-width: 400px;
+}
+.evo_panel__lostpass {
+	max-width: 480px;
+	#ffield_x label {
+		display: none;
+	}
+}
+.evo_panel__activation {
+	max-width: 530px;
+	#activateinfo_form .control-buttons{
+		text-align: left;
+	}
+}
+.evo_panel__register {
+	max-width: 580px;
+	.control-buttons{
+		text-align: left;
+	}
+	&.register-disabled {
+		width: 350px;
+	}
+	.form-control {
+		&#country, &#u {
+			width: 100%;
+		}
+	}
+}
+.evo_form__login_links {
+	padding: 0 5px;
+	font-size: 92%;
+}
+.evo_form__login {
+	fieldset {
+		margin-bottom: 20px;
+	}
+	.controls {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+	}
+	.control-buttons {
+		margin-left: 0;
+	}
+	input.form-control[type=text], input.form-control[type=password] {
+		width: 100%;
+	}
+	.btn {
+		margin-top: 5px;
+	}
+}
+#login_form {
+	.control-buttons {
+		text-align: left;
+	}
+}
+.standard_login_link {
+	text-align: center;
+	margin: 3em 0 1ex 0;
+}
+.form_footer_notes {
+	margin-top: 0;
+}
+
+// Pagination
+.pagination {
+	margin: 0;
+}
+
+// Messages
+div.action_messages, div.log_container {
+	margin: 0;
+}
+
+// Positions on the action buttons near page titles
+.evo_post_title {
+	display: table;
+	h2 {
+		font-weight: 700;
+		display: table-cell;
+		margin: 0;
+		padding: 20px 0 10px;
+	}
+	.btn-group {
+		display: table-cell;
+		padding: 20px 0 10px 30px;
+		vertical-align: middle;
+	}
+}
+
+// This skin needs this for disp=posts to separate from lower pagination
+footer.row {
+	margin-top: 20px;
+}
+
+
+
+// ****************************************************************************
+// Widgets
+// ****************************************************************************
+
+.evo_widget {
+	h3, h4.panel-title {
+		font-size: 16px;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		text-align: center;
+		padding-bottom: 5px;
+		font-weight: bold;
+		margin: 80px 0 30px;
+	}
+}
+
+// List widgets format
+.widget_core_coll_post_list, // Recent posts
+.widget_core_coll_comment_list, // Recent comments
+.widget_core_coll_item_list, // Items list
+.widget_core_coll_xml_feeds { // XML Feeds
+	ul {
+		margin: 0;
+		li {
+			padding: 12px 0;
+			list-style-type: none;
+			a {
+				font-size: 17px;
+				letter-spacing: 0.3px;
+				font-weight: 400;
+				&:hover {
+					background-color: transparent !important;
+				}
+				span {
+					font-weight: 400 !important;
+				}
+			}
+		}
+	}
+}
+
+// Leading arrows on widgets ONLY ON MAIN SECTION
+main {
+	.widget_core_coll_post_list, // Recent posts
+	.widget_core_coll_item_list { // Items list
+		ul li a {
+			display: block;
+			&:after {
+				position: absolute;
+				content: "\f101";
+				right: 15px;
+				vertical-align: middle;
+				display: inline-block;
+				font-family: FontAwesome;
+			}
+		}
+	}
+
+	// Recent comments widget leading arrows
+	.widget_core_coll_comment_list { 
+		ul li a:last-child {
+			&:after {
+				position: absolute;
+				content: "\f101";
+				right: 15px;
+				vertical-align: middle;
+				display: inline-block;
+				font-family: FontAwesome;
+			}
+		}
+	}
+}
+
+// XML Feeds div.notes
+.widget_core_coll_xml_feeds {
+	div.notes {
+		padding: 12px 0;
+		display: block;
+	}
+}
+
+// Category list widget
+.widget_core_coll_category_list {
+	ul li a {
+		padding: 12px;
+		line-height: 50px;
+		border-radius: 20px;
+		
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		overflow: hidden;
+		-webkit-transition-duration: 0.1s;
+		transition-duration: 0.1s;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+// Sidebar widgets
+.evo_container__sidebar, .evo_container__sidebar2 {
+	.widget_core_coll_post_list, 
+	.widget_core_coll_comment_list, 
+	.widget_core_coll_item_list,
+	.widget_core_coll_xml_feeds {
+		ul li a {
+			font-size: 14px;
+		}
+	}
+	.widget_core_coll_xml_feeds div.notes {
+		a {
+			font-size: 14px;
+		}
+	}
+}

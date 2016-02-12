@@ -1,6 +1,14 @@
 body {
   font-family: 'Droid Serif', serif;
 }
+@media (min-width: 992px) {
+  .right-padding {
+    padding-right: 25px;
+  }
+  .left-padding {
+    padding-right: 25px;
+  }
+}
 .sitewide_header {
   margin-bottom: 0px !important;
   box-shadow: none !important;
@@ -182,7 +190,7 @@ textarea.message_text {
   color: #337ab7;
 }
 .evo_post {
-  margin-bottom: 2em;
+  margin-bottom: 8em;
 }
 .evo_post .small.text-muted {
   margin: 4px 0 10px;
@@ -191,6 +199,72 @@ textarea.message_text {
 .evo_post .small.text-muted a,
 .evo_post .small.text-muted a .glyphicon {
   color: inherit;
+}
+.evo_post header .evo_post__categories .categories-icon {
+  font-size: 24px;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 12px;
+  border-radius: 50%;
+  display: block;
+  width: 51px;
+  float: left;
+  margin-right: 10px;
+}
+.evo_post header .evo_post__categories a {
+  margin: 7px 10px 0px 0px;
+  line-height: 24px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 13px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.evo_post header .evo_post__categories a:hover {
+  text-decoration: none;
+}
+.evo_post header .evo_post__info {
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  padding-bottom: 25px;
+}
+.evo_post header .evo_post__info div,
+.evo_post header .evo_post__info > span {
+  display: inline-block;
+  margin-right: 25px;
+}
+.evo_post header .evo_post__info i {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.evo_post .evo_post__full {
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  line-height: 1.6em;
+}
+.evo_post .evo_post__full .evo_image_block {
+  margin: 0 0 60px 0;
+}
+.evo_post .evo_post__full .evo_image_block img {
+  border-radius: 0;
+}
+.evo_post .evo_post__full .evo_post_gallery {
+  margin-top: -45px;
+  margin-bottom: 44px;
+}
+.evo_post .evo_post__full .evo_post_gallery img {
+  border-radius: 0;
+}
+.evo_post footer .evo_post__tags {
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  line-height: 1.6em;
 }
 div.bSideItem {
   background: #F7F5FA;
@@ -315,7 +389,8 @@ div.log_container {
   font-weight: 700;
   display: table-cell;
   margin: 0;
-  padding: 20px 0 10px;
+  padding: 25px 0;
+  font-size: 46px;
 }
 .evo_post_title .btn-group {
   display: table-cell;
@@ -409,6 +484,30 @@ main .widget_core_coll_comment_list ul li a:last-child:after {
 .widget_core_coll_category_list ul li a:hover {
   text-decoration: none;
 }
+div.widget_core_coll_avatar {
+  text-align: left;
+}
+div.widget_core_coll_avatar img {
+  border-radius: 50%;
+}
+.widget_plugin_evo_Calr .bCalendarTable caption {
+  font-size: 14px;
+}
+.widget_plugin_evo_Calr .bCalendarTable .bCalendarRow th {
+  text-align: center;
+  padding: 8px 0;
+}
+.widget_plugin_evo_Calr .bCalendarTable .bCalendarRow #bCalendarToday {
+  border-radius: 0 !important;
+}
+.widget_plugin_evo_Calr .bCalendarTable td {
+  font-size: 12px;
+  padding: 8px 0;
+}
+.evo_container__sidebar,
+.evo_container__sidebar2 {
+  padding: 0 20px;
+}
 .evo_container__sidebar .widget_core_coll_post_list ul li a,
 .evo_container__sidebar2 .widget_core_coll_post_list ul li a,
 .evo_container__sidebar .widget_core_coll_comment_list ul li a,
@@ -422,4 +521,8 @@ main .widget_core_coll_comment_list ul li a:last-child:after {
 .evo_container__sidebar .widget_core_coll_xml_feeds div.notes a,
 .evo_container__sidebar2 .widget_core_coll_xml_feeds div.notes a {
   font-size: 14px;
+}
+.evo_container__sidebar .widget_plugin_evo_Calr table,
+.evo_container__sidebar2 .widget_plugin_evo_Calr table {
+  width: 100%;
 }

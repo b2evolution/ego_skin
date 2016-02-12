@@ -3,6 +3,17 @@ body {
 	font-family: 'Droid Serif', serif;
 }
 
+@media (min-width: 992px) {
+	// Right content padding when sidebar right enabled
+	.right-padding {
+		padding-right: 25px;
+	}
+	// Left content padding when sidebar left enabled
+	.left-padding {
+		padding-right: 25px;
+	}
+}
+
 // Header
 .sitewide_header {
 	margin-bottom: 0px !important; // Removes extra space below the sitewide_header
@@ -223,13 +234,95 @@ textarea.message_text {
 	color: #337ab7;
 }
 
+// Post layout
 .evo_post {
-	margin-bottom: 2em;
+	margin-bottom: 8em;
 	.small.text-muted {
 		margin: 4px 0 10px;
 		letter-spacing: 1px;
 		a, a .glyphicon {
 			color: inherit;
+		}
+	}
+	
+	// Posts header section
+	header {
+		.evo_post__categories {
+			.categories-icon { // Categories icon
+				font-size: 24px;
+				-moz-osx-font-smoothing: grayscale;
+				padding: 12px;
+				border-radius: 50%;
+				display: block;
+				width: 51px;
+				float: left;
+				margin-right: 10px;
+			}
+			a {
+				margin: 7px 10px 0px 0px;
+				line-height: 24px;
+				padding: 6px 12px;
+				border-radius: 20px;
+				display: inline-block;
+				font-size: 13px;
+
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+				box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+				overflow: hidden;
+				-webkit-transition-duration: 0.1s;
+				transition-duration: 0.1s;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+		
+		.evo_post__info { // Post info - below title section
+			font-size: 13px;
+			div, > span {
+				display: inline-block;
+				margin-right: 25px;
+			}
+			letter-spacing: 0.6px;
+			padding-bottom: 25px;
+			i {
+				font-size: 18px;
+				margin-right: 5px;
+			}
+		}
+	}
+	
+	// Post content layout
+	.evo_post__full {
+		font-size: 16px;
+		letter-spacing: 0.6px;
+		line-height: 1.6em;
+		
+		.evo_image_block { // Images inside the post
+			margin: 0 0 60px 0;
+			img {
+				border-radius: 0;
+			}
+		}
+		
+		.evo_post_gallery {
+			margin-top: -45px; // Remove white gap between the gallery and teaser image on disp=posts
+			margin-bottom: 44px;
+			img {
+				border-radius: 0;
+			}
+		}
+	}
+	
+	// Post footer
+	footer {
+		.evo_post__tags {
+			font-size: 15px;
+			letter-spacing: 0.6px;
+			line-height: 1.6em;
 		}
 	}
 }
@@ -361,7 +454,8 @@ div.action_messages, div.log_container {
 		font-weight: 700;
 		display: table-cell;
 		margin: 0;
-		padding: 20px 0 10px;
+		padding: 25px 0;
+		font-size: 46px;
 	}
 	.btn-group {
 		display: table-cell;
@@ -459,28 +553,55 @@ main {
 }
 
 // Category list widget
-.widget_core_coll_category_list {
-	ul li a {
-		padding: 12px;
-		line-height: 50px;
-		border-radius: 20px;
-		
-		-webkit-transform: translateZ(0);
-		transform: translateZ(0);
-		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-		-webkit-backface-visibility: hidden;
-		backface-visibility: hidden;
-		overflow: hidden;
-		-webkit-transition-duration: 0.1s;
-		transition-duration: 0.1s;
-		&:hover {
-			text-decoration: none;
+.widget_core_coll_category_list ul li a {
+	padding: 12px;
+	line-height: 50px;
+	border-radius: 20px;
+
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	overflow: hidden;
+	-webkit-transition-duration: 0.1s;
+	transition-duration: 0.1s;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+// Avatar widget
+div.widget_core_coll_avatar {
+	text-align: left;
+	img {
+		border-radius: 50%;
+	}
+}
+
+// Calendar widget
+.widget_plugin_evo_Calr .bCalendarTable {
+	caption {
+		font-size: 14px;
+	}
+	.bCalendarRow {
+		th {
+			text-align: center;
+			padding: 8px 0;
 		}
+		#bCalendarToday {
+			border-radius: 0 !important;
+		}
+	}
+	td {
+		font-size: 12px;
+		padding: 8px 0;
 	}
 }
 
 // Sidebar widgets
 .evo_container__sidebar, .evo_container__sidebar2 {
+	padding: 0 20px;
 	.widget_core_coll_post_list, 
 	.widget_core_coll_comment_list, 
 	.widget_core_coll_item_list,
@@ -492,6 +613,11 @@ main {
 	.widget_core_coll_xml_feeds div.notes {
 		a {
 			font-size: 14px;
+		}
+	}
+	.widget_plugin_evo_Calr {
+		table {
+			width: 100%;
 		}
 	}
 }

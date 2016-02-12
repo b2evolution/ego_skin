@@ -304,7 +304,10 @@ class ego_Skin extends Skin
 			*/
 			if ( $links_color = $this->get_setting( 'links_color' ) ) {
 				$custom_css .= '.container.main-page-content a { color: '. $links_color ." }\n";
-				$custom_css .= '.widget_core_coll_category_list ul li a:hover { border: 1px solid '. $links_color ." }\n";
+				$custom_css .= '
+				.widget_core_coll_category_list ul li a:hover,
+				.evo_post__categories a:hover
+				{ border: 1px solid '. $links_color ." }\n";
 			}
 		
 		
@@ -319,16 +322,25 @@ class ego_Skin extends Skin
 			}
 			if ( $site_borders = $this->get_setting( 'site_borders' ) ) {
 				$custom_css .= '
-				nav.navbar, 
-				.evo_widget h3, .evo_widget h4.panel-title, 
-				.widget_core_coll_post_list ul li, 
-				.widget_core_coll_comment_list ul li, 
+				nav.navbar,
+				.evo_widget h3, .evo_widget h4.panel-title,
+				.widget_core_coll_post_list ul li,
+				.widget_core_coll_comment_list ul li,
 				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
 				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes
 				{ border-bottom: 1px solid '. $site_borders ." }\n";
 				$custom_css .= 'nav.navbar div.ufld_icon_links a { border-left: 1px solid '. $site_borders ." }\n";
 				$custom_css .= 'nav.navbar div.ufld_icon_links a:last-child { border-right: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '.widget_core_coll_category_list ul li a { border: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '
+				.widget_core_coll_category_list ul li a,
+				.evo_post header .categories-icon,
+				.evo_post__categories a,
+				#bCalendarToday
+				{ border: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable th, .widget_plugin_evo_Calr .bCalendarTable td { border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders .'; border-right: 1px solid '. $site_borders ." }\n";
+				$custom_css .= 'nav.navbar div.ufld_icon_links a { border-left: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
 			}
 			
 			
@@ -706,12 +718,12 @@ class ego_Skin extends Skin
 
 			case 'left_sidebar':
 				// Left Sidebar
-				return 'col-md-9 pull-right';
+				return 'col-md-8 pull-right left-padding';
 
 			case 'right_sidebar':
 				// Right Sidebar
 			default:
-				return 'col-md-9';
+				return 'col-md-8 right-padding';
 		}
 	}
 }

@@ -46,15 +46,18 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<header>
 	<?php
 	
-		// Categories
-		$Item->categories( array(
-			'before'          => '<i class="fa fa-tags tags-icon"></i> ',
-			'after'           => ' ',
-			'include_main'    => true,
-			'include_other'   => true,
-			'include_external'=> true,
-			'link_categories' => true,
-		) );
+		if( ! $Item->is_intro() ) {
+			// Categories
+			$Item->categories( array(
+				'before'          => '<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon"></i>',
+				'after'           => '</div>',
+				'separator'       => '',
+				'include_main'    => true,
+				'include_other'   => true,
+				'include_external'=> true,
+				'link_categories' => true,
+			) );
+		}
 		
 		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
 
@@ -100,7 +103,7 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	if( ! $Item->is_intro() )
 	{ // Don't display the following for intro posts
 	?>
-	<div>
+	<div class="evo_post__info">
 	<?php
 		if( $Item->status != 'published' )
 		{
@@ -111,22 +114,22 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 
 		// We want to display the post time:
 		$Item->issue_time( array(
-				'before'      => '<i class="fa fa-clock-o"></i> ',
-				'after'       => ' ',
+				'before'      => '<div class="evo_post__post_date"><i class="fa fa-clock-o"></i> ',
+				'after'       => '</div>',
 				'time_format' => 'F j, Y',
 			) );
 
 		// Author
 		$Item->author( array(
-			'before'    => ' '.T_('<i class="fa fa-user"></i> ').' ',
-			'after'     => ' ',
+			'before'    => '<div class="evo_post__author"><i class="fa fa-user"></i> ',
+			'after'     => '</div>',
 			'link_text' => $params['author_link_text'],
 		) );
 	?>
 
 	<?php 
 	if( ! $Item->is_intro() ) { ?>
-		<span class="post_comments_link">
+		<span class="evo_post__comments">
 		<?php
 			// Link to comments, trackbacks, etc.:
 			$Item->feedback_link( array(
@@ -158,8 +161,8 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<?php
 		// Link for editing
 		$Item->edit_link( array(
-			'before'    => ' &bull; ',
-			'after'     => '',
+			'before'    => '<div>',
+			'after'     => '</div>',
 		) );
 	?>
 	</div>
@@ -215,9 +218,9 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 			if( ! $Item->is_intro() ) // Do NOT apply tags, comments and feedback on intro posts
 			{ // List all tags attached to this post:
 				$Item->tags( array(
-						'before'    => '<nav class="small post_tags">',
+						'before'    => '<nav class="evo_post__tags">'.T_('Tags: '),
 						'after'     => '</nav>',
-						'separator' => ' ',
+						'separator' => ', ',
 					) );
 		?>
 

@@ -1,6 +1,21 @@
-// General styles
+// ****************************************************************************
+// General Styles
+// ****************************************************************************
+
 body {
 	font-family: 'Droid Serif', serif;
+}
+
+// Content specific styles on all pages
+.main-page-content {
+	letter-spacing: 0.4px;
+	line-height: 1.6em;
+	margin: 70px auto;
+}
+
+// Content specfic styles on disp=front
+.disp_front .main-page-content {
+	font-size: 16px;
 }
 
 @media (min-width: 992px) {
@@ -14,6 +29,21 @@ body {
 	}
 }
 
+.alert .close {
+	top: 2px;
+}
+
+.transition-0.1s {
+	-webkit-transition-duration: 0.1s;
+	transition-duration: 0.1s;
+}
+
+
+
+// ****************************************************************************
+// Header + menu styles
+// ****************************************************************************
+
 // Header
 .sitewide_header {
 	margin-bottom: 0px !important; // Removes extra space below the sitewide_header
@@ -24,7 +54,9 @@ body {
 }
 // Site menu
 .navbar {
-	min-height: 56px;
+	min-height: 55px;
+	margin-bottom: 0px;
+	border-top: none !important;
 	.navbar-collapse {
 		padding: 0;
 	}
@@ -32,7 +64,7 @@ body {
 .navbar-nav.evo_container__menu {
 	width: 100%;
 	li {
-		margin-top: 18px;
+		margin-top: 17px;
 		list-style-type: none;
 		a {
 			margin: 0 15px;
@@ -40,7 +72,7 @@ body {
 			text-transform: uppercase;
 			font-weight: 900;
 			letter-spacing: -0.15px;
-			font-size: 15px;
+			font-size: 14px;
 		}
 		&.active a.selected {
 			text-decoration: underline;
@@ -56,25 +88,156 @@ body {
 			width: 54px;
 			border-radius: 0;
 			margin: 0;
-            background-color: transparent;
 			
 			span {
 				font-size: 18px;
 				line-height: 54px;
-				-webkit-transition-duration: 0.1s;
-				transition-duration: 0.1s;
+				
+				.transition-0.1s;
 				-webkit-transition-property: transform;
 				transition-property: transform;
 				-webkit-transition-timing-function: ease-in-out;
 				transition-timing-function: ease-in-out;
-				&:hover {
-					-webkit-transform: rotate(30deg);
-					transform: rotate(30deg);
-				}
+			}
+			
+			&.ufld_twitter:hover {
+				background-color: #00aced !important;
+				color: #fff;
+			}
+			&.ufld_facebook:hover {
+				background-color: #3b5998 !important;
+				color: #fff;
+			}
+			&.ufld_googleplus:hover {
+				background-color: #dd4b39 !important;
+				color: #fff;
+			}
+			&.ufld_linkedin:hover {
+				background-color: #007bb6 !important;
+				color: #fff;
+			}
+			&.ufld_github:hover {
+				background-color: #333333 !important;
+				color: #fff;
+			}
+		}
+	}
+	
+	// Header search section toggler
+	.header-search-toggle {
+		float: right;
+		i {
+			padding: 20px;
+			
+			.transition-0.1s;
+			-webkit-transition-property: transform;
+			transition-property: transform;
+			-webkit-transition-timing-function: ease-in-out;
+			transition-timing-function: ease-in-out;
+			
+			&:hover {
+				cursor: pointer;
+				-webkit-transform: scale(1.4);
+				transform: scale(1.4);
 			}
 		}
 	}
 }
+// Top Search Field Layout
+.header-main-search-field {
+	display: none;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	
+	-webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10);
+	-moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10);
+	box-shadow:	0px 1px 3px 0px rgba(0, 0, 0, 0.10);
+	
+	.search_field {
+		height: 100%;
+		font-size: 46px;
+		text-align: center;
+		padding-left: 15px;
+		padding-right: 15px;
+		
+		&::-webkit-input-placeholder { color:#eee; }
+		&::-moz-placeholder { color:#eee; } /* firefox 19+ */
+		&:-ms-input-placeholder { color:#eee; } /* ie */
+		input:-moz-placeholder { color:#eee; }
+		
+	}
+}
+
+// Front page extra section - default styles
+.front-page-extra-section {
+	font-size: 26px;
+	line-height: 1.6em;
+	text-align: center;
+	margin: 25px auto 70px;
+	
+	.extra-section-btn-wrapper {
+		margin-top: 50px;
+		
+		a {
+			border-radius: 3px;
+			border-width: 2px;
+			border-style: solid;
+			font-size: 18px;
+			letter-spacing: 1px;
+			padding: 12px 25px;
+			
+				.transition-0.1s;
+				-webkit-transition-timing-function: ease-in-out;
+				transition-timing-function: ease-in-out;
+			
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+// Responsive layout
+@media (min-width: 992px) {
+	.navbar-nav.evo_container__menu .ufld_icon_links a {
+		background-color: transparent;
+	}
+}
+@media (max-width: 992px) {
+	.navbar-nav.evo_container__menu .ufld_icon_links {
+		width: 54px;
+		&:before {
+			font-family: FontAwesome;
+			display: inline-block;
+			content: '\f1e0';
+			font-size: 18px;
+			height: 54px;
+			width: 54px !important;
+			line-height: 54px;
+			
+				.transition-0.1s;
+				-webkit-transition-timing-function: ease-in-out;
+				transition-timing-function: ease-in-out;
+		}
+		&:hover:before {
+			cursor: pointer;
+			color: #fff;
+		}
+		a {
+			display: none;
+			&.drop-down-social {
+				display: block;
+				width: 55px;
+			}
+			z-index: 1009;
+		}
+	}
+}
+
+// ****************************************************************************
+
+
 
 // Login widget form
 .widget_core_user_login {
@@ -197,6 +360,18 @@ div.compact_search_form {
 	input.search_field {
 		width: 100%;
 		margin: 0;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		box-shadow: none;
+		border-radius: 0;
+		padding: 6px 12px 6px 0;
+	}
+	.search_submit {
+		border-radius: 0;
+		&:hover {
+			z-index: 0;
+		}
 	}
 }
 div.extended_search_form {
@@ -234,8 +409,14 @@ textarea.message_text {
 	color: #337ab7;
 }
 
+
+
+// ****************************************************************************
+// Post styles
+// ****************************************************************************
+
 // Post layout
-.evo_post {
+.evo_post, .evo_intro_post, .evo_featured_post {
 	margin-bottom: 8em;
 	.small.text-muted {
 		margin: 4px 0 10px;
@@ -272,8 +453,7 @@ textarea.message_text {
 				-webkit-backface-visibility: hidden;
 				backface-visibility: hidden;
 				overflow: hidden;
-				-webkit-transition-duration: 0.1s;
-				transition-duration: 0.1s;
+				.transition-0.1s;
 				&:hover {
 					text-decoration: none;
 				}
@@ -286,11 +466,14 @@ textarea.message_text {
 				display: inline-block;
 				margin-right: 25px;
 			}
-			letter-spacing: 0.6px;
+			letter-spacing: 1px;
 			padding-bottom: 25px;
 			i {
 				font-size: 18px;
 				margin-right: 5px;
+			}
+			.evo_post__author a {
+				font-weight: 400;
 			}
 		}
 	}
@@ -315,6 +498,26 @@ textarea.message_text {
 				border-radius: 0;
 			}
 		}
+		
+		.evo_post__full_text {
+			.evo_post_more_link {
+				margin: 35px 0;
+				a {
+					font-size: 15px;
+					padding: 15px 35px;
+					border-radius: 50px;
+					.transition-0.1s;
+					&:after {
+						font-family: 'FontAwesome';
+						content: '\f101';
+						padding-left: 8px;
+					}
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+		}
 	}
 	
 	// Post footer
@@ -326,6 +529,71 @@ textarea.message_text {
 		}
 	}
 }
+.evo_featured_post {
+	padding-left: 15px;
+}
+
+// Positions on the action buttons near page titles
+.evo_post_title {
+	display: table;
+	h2 {
+		font-weight: 700;
+		display: table-cell;
+		margin: 0;
+		padding: 25px 0;
+		font-size: 46px;
+	}
+	.btn-group {
+		display: table-cell;
+		padding: 20px 0 10px 30px;
+		vertical-align: middle;
+	}
+}
+
+// Special Posts Simple Layout
+.disp_posts, .disp_front {
+	.special_posts_simple_layout__title {
+		h2 {
+			font-size: 24px;
+			padding: 10px 0;
+		}
+	}
+	.evo_post header .special_posts_simple_layout__info {
+		padding-bottom: 10px;
+	}
+}
+
+// Special Intro post Cover image style
+.evo_cover_image {
+    text-align: center;
+    display: table;
+    vertical-align: middle;
+    width: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 580px;
+	.evo_content_block {
+		vertical-align: middle;
+		display: table-cell;
+		width: 100%;
+		text-align: center;
+		.evo_intro_post {
+			margin-bottom: 0;
+			.evo_post_title, .evo_post_title h2, .evo_post_title .btn-group {
+				display: block;
+			}
+			.btn-group a {
+				float: none;
+			}
+		}
+	}
+}
+
+// ****************************************************************************
+
+
 
 div.bSideItem {
 	background: #F7F5FA;
@@ -439,29 +707,19 @@ div.bSideItem {
 
 // Pagination
 .pagination {
-	margin: 0;
+	margin: 0 0 4em 0;
+	li span, li a {
+			border-radius: 4px;
+			font-size: 13px;
+			padding: 10px 16px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+	}
 }
 
 // Messages
 div.action_messages, div.log_container {
 	margin: 0;
-}
-
-// Positions on the action buttons near page titles
-.evo_post_title {
-	display: table;
-	h2 {
-		font-weight: 700;
-		display: table-cell;
-		margin: 0;
-		padding: 25px 0;
-		font-size: 46px;
-	}
-	.btn-group {
-		display: table-cell;
-		padding: 20px 0 10px 30px;
-		vertical-align: middle;
-	}
 }
 
 // This skin needs this for disp=posts to separate from lower pagination
@@ -564,8 +822,7 @@ main {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	overflow: hidden;
-	-webkit-transition-duration: 0.1s;
-	transition-duration: 0.1s;
+	.transition-0.1s;
 	&:hover {
 		text-decoration: none;
 	}
@@ -599,6 +856,22 @@ div.widget_core_coll_avatar {
 	}
 }
 
+// Organization members widget
+.widget_core_org_members {
+	.evo_org_member {
+		margin-top: 15px;
+		h3 {
+			margin: 25px 0 20px;
+		}
+		p.user_field {
+			height: auto !important;
+		}
+		img.img-responsive {
+			border-radius: 0 !important;
+		}
+	}
+}
+
 // Sidebar widgets
 .evo_container__sidebar, .evo_container__sidebar2 {
 	padding: 0 20px;
@@ -618,6 +891,36 @@ div.widget_core_coll_avatar {
 	.widget_plugin_evo_Calr {
 		table {
 			width: 100%;
+		}
+	}
+}
+
+// Tag cloud
+p.tag_cloud a {
+    font-size: 14px !important;
+    margin: 0 1px 6px 0;
+    display: inline-block;
+    line-height: 1;
+    border-radius: 30px;
+	padding: 8px 15px;
+	
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	overflow: hidden;
+	.transition-0.1s;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+@media (max-width: 992px) {
+	.evo_container__sidebar, .evo_container__sidebar2 {
+		.widget_plugin_evo_Calr table {
+			width: 320px;
+			margin: 0 auto;
 		}
 	}
 }

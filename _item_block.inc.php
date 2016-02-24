@@ -25,6 +25,7 @@ $params = array_merge( array(
 		// Controlling the title:
 		'disp_title'                 => true,
 		'item_title_line_before'     => '<div class="evo_post_title">',	// Note: we use an extra class because it facilitates styling
+		'item_title_line_before_spec'=> '<div class="evo_post_title special_posts_simple_layout__title">',
 			'item_title_before'          => '<h2>',	
 			'item_title_after'           => '</h2>',
 			'item_title_single_before'   => '<h1>',	// This replaces the above in case of disp=single or disp=page
@@ -46,10 +47,11 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<header>
 	<?php
 	
-		if( ! $Item->is_intro() ) {
-			// Categories
+		if( ! $Item->is_intro() ) { ?>
+			<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon <?php if ( $disp == 'front' && $Skin->get_setting( 'posts_simple_lay' ) == true ) { echo 'hidden'; } ?>"></i>
+		<?php // Categories
 			$Item->categories( array(
-				'before'          => '<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon"></i>',
+				'before'          => '',
 				'after'           => '</div>',
 				'separator'       => '',
 				'include_main'    => true,
@@ -64,7 +66,12 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 		// ------- Title -------
 		if( $params['disp_title'] )
 		{
-			echo $params['item_title_line_before'];
+			// Check if Special Posts Layout is enabled
+			if ( $Skin->get_setting( 'posts_simple_lay' ) == false ) {
+				echo $params['item_title_line_before'];
+			} else {
+				echo $params['item_title_line_before_spec'];
+			}
 
 			if( $disp == 'single' || $disp == 'page' )
 			{
@@ -103,7 +110,7 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	if( ! $Item->is_intro() )
 	{ // Don't display the following for intro posts
 	?>
-	<div class="evo_post__info">
+	<div class="evo_post__info <?php if ( $Skin->get_setting( 'posts_simple_lay' ) == true ) { echo 'special_posts_simple_layout__info'; } ?>">
 	<?php
 		if( $Item->status != 'published' )
 		{
@@ -202,12 +209,32 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	}
 	else
 	{
-	// this will create a <section>
-		// ---------------------- POST CONTENT INCLUDED HERE ----------------------
-		skin_include( '_item_content.inc.php', $params );
-		// Note: You can customize the default item content by copying the generic
-		// /skins/_item_content.inc.php file into the current skin folder.
-		// -------------------------- END OF POST CONTENT -------------------------
+		if ( $Skin->get_setting( 'posts_simple_lay' ) == false ) {
+			// this will create a <section>
+				// ---------------------- POST CONTENT INCLUDED HERE ----------------------
+				skin_include( '_item_content.inc.php', array_merge( array(
+					'more_link_text'           => 'Continue reading',
+					), $params ) );
+				// Note: You can customize the default item content by copying the generic
+				// /skins/_item_content.inc.php file into the current skin folder.
+			// -------------------------- END OF POST CONTENT -------------------------
+		} else { // If simple Blog Layout is selected
+				// this will create a Simple Blog <section>
+				echo '<div class="special_posts_simple_layout__evo_post">';
+				// ---------------------- POST CONTENT INCLUDED HERE ----------------------
+				skin_include( '_item_content.inc.php', array_merge( array(
+					'more_link_text'           => 'Continue reading',
+					
+					'image_limit'              => 0,
+					'gallery_image_limit'      => 0,
+					
+					'before_more_link'         => '<p class="evo_post_more_link hidden">',
+					), $params ) );
+				// Note: You can customize the default item content by copying the generic
+				// /skins/_item_content.inc.php file into the current skin folder.
+				// -------------------------- END OF POST CONTENT -------------------------
+				echo '</div>';
+		}
 	// this will end a </section>
 	}
 	?>
@@ -215,7 +242,8 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<footer>
 
 		<?php
-			if( ! $Item->is_intro() ) // Do NOT apply tags, comments and feedback on intro posts
+			if( ! $Item->is_intro() && $Skin->get_setting( 'posts_simple_lay' ) == false ) 
+			// Do NOT apply tags, comments and feedback on intro posts and when Simple Blog Layout is selected
 			{ // List all tags attached to this post:
 				$Item->tags( array(
 						'before'    => '<nav class="evo_post__tags">'.T_('Tags: '),

@@ -98,9 +98,53 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 <div class="container main-page-content">
 
+<header class="row">
+
+	<div class="<?php echo $Skin->get_column_class_front(); ?>">
+		
+		<div class="evo_container evo_container__header center">
+		<?php
+			// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
+			// Display container and contents:
+			skin_container( NT_('Header'), array(
+					// The following params will be used as defaults for widgets included in this container:
+					'block_start'       => '<div class="evo_widget $wi_class$">',
+					'block_end'         => '</div>',
+					'block_title_start' => '<h1>',
+					'block_title_end'   => '</h1>',
+				) );
+			// ----------------------------- END OF "Header" CONTAINER -----------------------------
+		?>
+		</div>
+		
+		<?php 
+		if ( $Skin->get_setting( 'fr_sec_enable' ) == true )
+		{ // Check if enabled Front page special section in the back-office
+			// ---------------------- FRONT PAGE EXTRA INTRO SECTION ------------------------
+			echo '<div class="front-page-extra-section">';
+			
+				// Textfield
+				echo $Skin->get_setting( 'fr_sec_txt' );
+				
+				if ($Skin->get_setting( 'frsec_but_enable' ) == true )
+				{ // If button is enabled, show with default settings
+					echo '<div class="extra-section-btn-wrapper"><a href="' . $Skin->get_setting( 'fr_sec_btn_link' ) . '">
+						' . $Skin->get_setting( 'fr_sec_btn_txt' ) . '
+					</a></div>';
+				}
+				
+			echo '</div>';
+			// ---------------------- FRONT PAGE EXTRA INTRO SECTION ------------------------
+		}
+		?>
+		
+	</div><!-- .col -->
+
+</header><!-- .row -->
+
 <div class="row">
 
-	<div class="<?php echo $Skin->get_column_class(); ?>">
+	<div class="<?php echo $Skin->get_column_class_front(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
 
@@ -248,10 +292,10 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 
 	<?php
-	if( $Skin->is_visible_sidebar() )
+	if( $Skin->is_visible_sidebar_front() )
 	{ // Display sidebar:
 	?>
-	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
+	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout_front' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<!-- =================================== START OF SIDEBAR =================================== -->
 		<div class="evo_container evo_container__sidebar">
 		<?php

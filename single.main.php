@@ -100,7 +100,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 <div class="row">
 
-	<div class="<?php echo $Skin->get_column_class(); ?>">
+	<div class="<?php echo $Skin->get_column_class_single(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
 
@@ -248,10 +248,10 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 
 	<?php
-	if( $Skin->is_visible_sidebar() )
+	if( $Skin->is_visible_sidebar_single() )
 	{ // Display sidebar:
 	?>
-	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
+	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout_posts' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<!-- =================================== START OF SIDEBAR =================================== -->
 		<div class="evo_container evo_container__sidebar">
 		<?php

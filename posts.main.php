@@ -96,11 +96,36 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	) );
 ?>
 
+		<?php
+		// Go Grab the featured post if Special Intro Post is enabled
+		if ( $Skin->get_setting( 'spec_intro_post' ) == true ) {
+			if( ! in_array( $disp, array( 'single', 'page' ) ) && $Item = & get_featured_Item() )
+			{ // We have a featured/intro post to display:
+		
+			// Special Cover image placement
+			$cover_image_url = $Item->get_cover_image_url();
+			if ( ! empty( $cover_image_url ) ) {  ?>
+				<div class="evo_cover_image" style="background-image: url(<?php echo $cover_image_url; ?>);" class="img-responsive">
+			<?php }
+			
+				// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
+				skin_include( '_item_block.inc.php', array(
+						'feature_block' => true,
+						'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
+						'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
+						'item_class'   => ($Item->is_intro() ? 'evo_intro_post' : 'evo_featured_post'),
+					) );
+				// ----------------------------END ITEM BLOCK  ----------------------------
+			echo '</div>';
+			}
+		}
+		?>
+
 <div class="container main-page-content">
 
 <div class="row">
 
-	<div class="<?php echo $Skin->get_column_class(); ?>">
+	<div class="<?php echo $Skin->get_column_class_posts(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
 
@@ -156,17 +181,19 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		?>
 
 		<?php
-		// Go Grab the featured post:
-		if( ! in_array( $disp, array( 'single', 'page' ) ) && $Item = & get_featured_Item() )
-		{ // We have a featured/intro post to display:
-			// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
-			skin_include( '_item_block.inc.php', array(
-					'feature_block' => true,
-					'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
-					'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
-					'item_class'   => ($Item->is_intro() ? 'evo_intro_post' : 'evo_featured_post'),
-				) );
-			// ----------------------------END ITEM BLOCK  ----------------------------
+		// Go Grab the featured post on regular Intro Post placement
+		if ( $Skin->get_setting( 'spec_intro_post' ) == false ) {
+			if( ! in_array( $disp, array( 'single', 'page' ) ) && $Item = & get_featured_Item() && $Skin->get_setting( 'spec_intro_post' ) == false )
+			{ // We have a featured/intro post to display:
+				// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
+				skin_include( '_item_block.inc.php', array(
+						'feature_block' => true,
+						'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
+						'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
+						'item_class'   => ($Item->is_intro() ? 'evo_intro_post' : 'evo_featured_post'),
+					) );
+				// ----------------------------END ITEM BLOCK  ----------------------------
+			}
 		}
 		?>
 
@@ -248,10 +275,10 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 
 	<?php
-	if( $Skin->is_visible_sidebar() )
+	if( $Skin->is_visible_sidebar_posts() )
 	{ // Display sidebar:
 	?>
-	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
+	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout_posts' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<!-- =================================== START OF SIDEBAR =================================== -->
 		<div class="evo_container evo_container__sidebar">
 		<?php

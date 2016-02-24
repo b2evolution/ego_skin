@@ -55,7 +55,34 @@ class ego_Skin extends Skin
 		return 6;
 	}
 
+	
+	/**
+	 * Get supported collection kinds.
+	 *
+	 * This should be overloaded in skins.
+	 *
+	 * For each kind the answer could be:
+	 * - 'yes' : this skin does support that collection kind (the result will be was is expected)
+	 * - 'partial' : this skin is not a primary choice for this collection kind (but still produces an output that makes sense)
+	 * - 'maybe' : this skin has not been tested with this collection kind
+	 * - 'no' : this skin does not support that collection kind (the result would not be what is expected)
+	 * There may be more possible answers in the future...
+	 */
+	public function get_supported_coll_kinds()
+	{
+		$supported_kinds = array(
+				'main' => 'yes',
+				'std' => 'yes',		// Blog
+				'photo' => 'yes',
+				'forum' => 'no',
+				'manual' => 'yes',
+				'group' => 'yes',  // Tracker
+				// Any kind that is not listed should be considered as "maybe" supported
+			);
+		return $supported_kinds;
+	}
 
+	
 	/**
 	 * Get definitions for editable params
 	 *
@@ -69,24 +96,20 @@ class ego_Skin extends Skin
 					'layout' => 'begin_fieldset',
 					'label'  => T_('General Layout Settings')
 				),
-					// Sidebar layout
+					// Posts Disp layout
 					'layout' => array(
-						'label' => T_('Layout'),
+						'label' => T_('Default Pages Layout'),
 						'note' => '',
 						'defaultvalue' => 'right_sidebar',
 						'options' => array(
-								'single_column'              => T_('Single Column Large'),
-								'left_sidebar'               => T_('Left Sidebar'),
-								'right_sidebar'              => T_('Right Sidebar'),
-							),
+							'single_column'              => T_('Single Column Large'),
+							'single_column_normal'       => T_('Single Column'),
+							'single_column_narrow'       => T_('Single Column Narrow'),
+							'single_column_extra_narrow' => T_('Single Column Extra Narrow'),
+							'left_sidebar'               => T_('Left Sidebar'),
+							'right_sidebar'              => T_('Right Sidebar'),
+						),
 						'type' => 'select',
-					),
-					// Enable/disable sidebar on disp=front 
-					'front_sidebar' => array(
-						'label' => T_('Front disp sidebar'),
-						'note' => T_('Check to enable sidebar on front page (disp=front).'),
-						'defaultvalue' => 0,
-						'type' => 'checkbox',
 					),
 					'max_image_height' => array(
 						'label' => T_('Max image height'),
@@ -94,6 +117,19 @@ class ego_Skin extends Skin
 						'defaultvalue' => '',
 						'type' => 'integer',
 						'allow_empty' => true,
+						'size' => '7',
+					),
+					'links_color' => array(
+						'label'        => T_('Links Color Schemes'),
+						'note'         => T_('Default links color schemes is #096.'),
+						'defaultvalue' => '#096',
+						'type'         => 'color',
+					),
+					'site_bg_color' => array(
+						'label'         => T_('Site background color'),
+						'note'          => T_('Default color is #fff.'),
+						'defaultvalue'  => '#fff',
+						'type'          => 'color',
 					),
 					'site_borders' => array(
 						'label'         => T_('Borders color on site'),
@@ -106,32 +142,35 @@ class ego_Skin extends Skin
 				),
 
 
-				// Typography layout
-				'typo_layout_start' => array(
-					'layout' => 'begin_fieldset',
-					'label'  => T_('Typography Settings')
-				),
-					'links_color' => array(
-						'label'        => T_('Links Color Schemes'),
-						'note'         => T_('Default links color schemes is #096.'),
-						'defaultvalue' => '#096',
-						'type'         => 'color',
-					),
-				'typo_layout_end' => array(
-					'layout' => 'end_fieldset',
-				),
-
-
 				// Navigation links
 				'nav_links_start' => array(
 					'layout' => 'begin_fieldset',
-					'label'  => T_('Navigation Settings')
+					'label'  => T_('Navigation Menu Settings')
 				),
+					'menu_bg_color' => array(
+						'label'         => T_('Navigation background color'),
+						'note'          => T_('Default color is #fff.'),
+						'defaultvalue'  => '#fff',
+						'type'          => 'color',
+					),
 					'menu_a_color' => array(
 						'label'         => T_('Navigation links color'),
 						'note'          => T_('Default color is #333.'),
 						'defaultvalue'  => '#333',
 						'type'          => 'color',
+					),
+					'nav_search' => array(
+						'label' => T_('Navigation Search Field'),
+						'note' => T_('Check to enable a skin-specific search field in navigation menu.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'nav_hamb_menu' => array(
+						'label'          => T_('Hamburger menu at'),
+						'note'           => T_('px. Set the width in pixels below which menu will have hamburger layout. Type <b>numbers only</b>.'),
+						'defaultvalue'   => '820',
+						'type'           => 'text',
+						'size'           => '7',
 					),
 				'nav_links_end' => array(
 					'layout' => 'end_fieldset',
@@ -140,18 +179,137 @@ class ego_Skin extends Skin
 				
 				'front_disp_start' => array(
 					'layout' => 'begin_fieldset',
-					'label'  => T_('Menu Settings')
+					'label'  => T_('Front Page Settings')
 				),
+					// Front Disp layout
+					'layout_front' => array(
+						'label' => T_('Front Page Layout'),
+						'note' => '',
+						'defaultvalue' => 'single_column_narrow',
+						'options' => array(
+							'single_column'              => T_('Single Column Large'),
+							'single_column_normal'       => T_('Single Column'),
+							'single_column_narrow'       => T_('Single Column Narrow'),
+							'single_column_extra_narrow' => T_('Single Column Extra Narrow'),
+							'left_sidebar'               => T_('Left Sidebar'),
+							'right_sidebar'              => T_('Right Sidebar'),
+						),
+						'type' => 'select',
+					),
 					'fr_sec_enable' => array(
 						'label' => T_('Enable front page intro section'),
 						'note' => T_('Check this to show a special intro section on disp=front of this skin.'),
 						'defaultvalue' => 1,
 						'type' => 'checkbox',
 					),
+					'fr_sec_txt' => array(
+						'label' => T_('Intro text'),
+						'note' => T_('This is the introduction text that will appear in the disp=front. Type text or code in this field.'),
+						'defaultvalue' => "
+Welcome to Ego skin. Built specially for <a href='http://b2evolution.net/'>b2evolution</a>.<br/>
+Set the button destination in the back-office:",
+						'type' => 'textarea',
+					),
+					'frsec_but_enable' => array(
+						'label' => T_('Enable section button'),
+						'note' => T_('Check this to enable the linking button in this section.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'fr_sec_btn_link' => array(
+						'label' => T_('Link URL'),
+						'note' => T_('Type the link destination (URL) you want this button to lead on. It can be any page, even external.'),
+						'defaultvalue' => "http://b2evolution.net/",
+						'type' => 'text',
+						'size' => 50,
+					),
+					'fr_sec_btn_txt' => array(
+						'label' => T_('Link title'),
+						'note' => T_('Type the title of the link.'),
+						'defaultvalue' => 'Link title',
+						'type' => 'text',
+						'size' => 20,
+					),
 				'front_disp_end' => array(
 					'layout' => 'end_fieldset',
 				),
 				
+				
+				'posts_disp_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Posts Page Settings')
+				),
+					// Posts Disp layout
+					'layout_posts' => array(
+						'label' => T_('Posts Page Layout'),
+						'note' => '',
+						'defaultvalue' => 'right_sidebar',
+						'options' => array(
+							'single_column'              => T_('Single Column Large'),
+							'single_column_normal'       => T_('Single Column'),
+							'single_column_narrow'       => T_('Single Column Narrow'),
+							'single_column_extra_narrow' => T_('Single Column Extra Narrow'),
+							'left_sidebar'               => T_('Left Sidebar'),
+							'right_sidebar'              => T_('Right Sidebar'),
+						),
+						'type' => 'select',
+					),
+					// Simple Posts display
+					'posts_simple_lay' => array(
+						'label' => T_('Simple Posts Page Display'),
+						'note' => T_('Check this to enable a very simple posts layout on Posts page.'),
+						'defaultvalue' => 0,
+						'type' => 'checkbox',
+					),
+					// Intro Post layout
+					'spec_intro_post' => array(
+						'label' => T_('Special Intro Post Position'),
+						'note' => T_('Check this to enable a special Intro post placement on Posts Page.'),
+						'defaultvalue' => 0,
+						'type' => 'checkbox',
+					),
+					// Top pagination
+					'top_pagination' => array(
+						'label' => T_('Enable top pagination'),
+						'note' => T_('Check this to enable top page pagination.'),
+						'defaultvalue' => 0,
+						'type' => 'checkbox',
+					),
+					// Bottom pagination
+					'bottom_pagination' => array(
+						'label' => T_('Enable bottom pagination'),
+						'note' => T_('Check this to enable bottom page pagination.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+				'posts_disp_end' => array(
+					'layout' => 'end_fieldset',
+				),
+				
+				
+				'single_disp_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Single Page Settings')
+				),
+					// Single Disp layout
+					'layout_single' => array(
+						'label' => T_('Single Page Layout'),
+						'note' => '',
+						'defaultvalue' => 'right_sidebar',
+						'options' => array(
+							'single_column'              => T_('Single Column Large'),
+							'single_column_normal'       => T_('Single Column'),
+							'single_column_narrow'       => T_('Single Column Narrow'),
+							'single_column_extra_narrow' => T_('Single Column Extra Narrow'),
+							'left_sidebar'               => T_('Left Sidebar'),
+							'right_sidebar'              => T_('Right Sidebar'),
+						),
+						'type' => 'select',
+					),
+				'single_disp_end' => array(
+					'layout' => 'end_fieldset',
+				),				
+
 
 				'section_colorbox_start' => array(
 					'layout' => 'begin_fieldset',
@@ -280,6 +438,7 @@ class ego_Skin extends Skin
 			) );
 			
 		// Skin specific initializations:
+		require_js( $this->get_url().'scripts.js' );
 		
 
 		// Limit images by max height:
@@ -291,23 +450,78 @@ class ego_Skin extends Skin
 		
 		// Add custom CSS:
 		$custom_css = '';
-		
-		
-			// 
-			$front_sidebar = $this->get_setting( 'front_sidebar' );
 			
 	
 			/**
 			* ============================================================================
-			* Typography Customization
+			* General Customization
 			* ============================================================================
 			*/
 			if ( $links_color = $this->get_setting( 'links_color' ) ) {
 				$custom_css .= '.container.main-page-content a { color: '. $links_color ." }\n";
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a:hover,
-				.evo_post__categories a:hover
+				.evo_post__categories a:hover,
+				.evo_post__full .evo_post__full_text .evo_post_more_link a
 				{ border: 1px solid '. $links_color ." }\n";
+				$custom_css .= '
+				div.compact_search_form .search_submit,
+				.extra-section-btn-wrapper a:hover,
+				.navbar-nav.evo_container__menu .ufld_icon_links:hover:before,
+				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
+				.pagination>.active>span,
+				.pagination>.active>span:hover,
+				.pagination>li>a:hover
+				{ background-color: '. $links_color ." }\n";
+				$custom_css .= '
+				div.compact_search_form .search_submit,
+				.extra-section-btn-wrapper a,
+				p.tag_cloud a:hover,
+				.pagination>.active>span,
+				.pagination>.active>span:hover,
+				.pagination>li>a:hover
+				{ border-color: '. $links_color ." }\n";
+				$custom_css .= '.evo_featured_post { border-left: 5px solid '. $links_color ." }\n";
+			}
+			
+			if ( $site_bg_color = $this->get_setting( 'site_bg_color' ) ) {
+				$custom_css .= '#skin_wrapper { background-color: '. $site_bg_color ." }\n";
+				$custom_css .= '
+				.extra-section-btn-wrapper a:hover,
+				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
+				.pagination>li>a:hover
+				{ color: '. $site_bg_color ." }\n";
+			}
+			
+			if ( $site_borders = $this->get_setting( 'site_borders' ) ) {
+				$custom_css .= '
+				nav.navbar,
+				.evo_widget h3, .evo_widget h4.panel-title,
+				.widget_core_coll_post_list ul li,
+				.widget_core_coll_comment_list ul li,
+				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
+				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes,
+				.compact_search_form input.search_field
+				{ border-bottom: 1px solid '. $site_borders ." }\n";
+				$custom_css .= 'nav.navbar div.ufld_icon_links a,
+				.navbar-nav.evo_container__menu .ufld_icon_links:before,
+				.header-search-toggle
+				{ border-left: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '
+				.widget_core_coll_category_list ul li a,
+				.evo_post header .categories-icon, .evo_featured_post .categories-icon,
+				.evo_post__categories a,
+				#bCalendarToday,
+				p.tag_cloud a,
+				.pagination>li>a
+				{ border: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '
+				.widget_plugin_evo_Calr .bCalendarTable th,
+				.widget_plugin_evo_Calr .bCalendarTable td,
+				.navbar-nav.evo_container__menu .ufld_icon_links a.drop-down-social
+				{ border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
+				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
 			}
 		
 		
@@ -316,31 +530,19 @@ class ego_Skin extends Skin
 			* Menu Customization
 			* ============================================================================
 			*/
+			if ( $menu_bg_color = $this->get_setting( 'menu_bg_color' ) ) {
+				$custom_css .= '.collapse.navbar-collapse, .header-main-search-field .search_field, .ufld_icon_links a.drop-down-social { background-color: '. $menu_bg_color ." }\n";
+			}
+			
 			if ( $menu_a_color = $this->get_setting( 'menu_a_color' ) ) {
 				$custom_css .= '.evo_container__menu li a, .navbar-nav.evo_container__menu .ufld_icon_links a { color: '. $menu_a_color ." }\n";
 				$custom_css .= '.navbar-header span.icon-bar { background-color: '. $menu_a_color ." }\n";
 			}
-			if ( $site_borders = $this->get_setting( 'site_borders' ) ) {
-				$custom_css .= '
-				nav.navbar,
-				.evo_widget h3, .evo_widget h4.panel-title,
-				.widget_core_coll_post_list ul li,
-				.widget_core_coll_comment_list ul li,
-				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
-				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes
-				{ border-bottom: 1px solid '. $site_borders ." }\n";
-				$custom_css .= 'nav.navbar div.ufld_icon_links a { border-left: 1px solid '. $site_borders ." }\n";
-				$custom_css .= 'nav.navbar div.ufld_icon_links a:last-child { border-right: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '
-				.widget_core_coll_category_list ul li a,
-				.evo_post header .categories-icon,
-				.evo_post__categories a,
-				#bCalendarToday
-				{ border: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable th, .widget_plugin_evo_Calr .bCalendarTable td { border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders .'; border-right: 1px solid '. $site_borders ." }\n";
-				$custom_css .= 'nav.navbar div.ufld_icon_links a { border-left: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
+			
+			if ( $nav_hamb_menu = $this->get_setting( 'nav_hamb_menu' ) ) {
+				$custom_css .= '@media (max-width: '. $nav_hamb_menu ."px) {
+				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important;}.navbar-nav {float: none!important;margin-top: 7.5px;}.navbar-nav>li {float: none;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}
+				}\n";
 			}
 			
 			
@@ -700,6 +902,84 @@ class ego_Skin extends Skin
 			return true;
 		}
 	}
+	
+	
+	/**
+	 * Check if we can display a sidebar for the Front page layout
+	 *
+	 * @param boolean TRUE to check if at least one sidebar container is visible
+	 * @return boolean TRUE to display a sidebar
+	 */
+	function is_visible_sidebar_front( $check_containers = false )
+	{
+		$layout = $this->get_setting( 'layout_front' );
+
+		if( $layout != 'left_sidebar' && $layout != 'right_sidebar' )
+		{ // Sidebar is not displayed for selected skin layout
+			return false;
+		}
+
+		if( $check_containers )
+		{ // Check if at least one sidebar container is visible
+			return ( $this->is_visible_container( 'sidebar' ) ||  $this->is_visible_container( 'sidebar2' ) );
+		}
+		else
+		{ // We should not check the visibility of the sidebar containers for this case
+			return true;
+		}
+	}
+	
+	
+	/**
+	 * Check if we can display a sidebar for the Posts page layout
+	 *
+	 * @param boolean TRUE to check if at least one sidebar container is visible
+	 * @return boolean TRUE to display a sidebar
+	 */
+	function is_visible_sidebar_posts( $check_containers = false )
+	{
+		$layout = $this->get_setting( 'layout_posts' );
+
+		if( $layout != 'left_sidebar' && $layout != 'right_sidebar' )
+		{ // Sidebar is not displayed for selected skin layout
+			return false;
+		}
+
+		if( $check_containers )
+		{ // Check if at least one sidebar container is visible
+			return ( $this->is_visible_container( 'sidebar' ) ||  $this->is_visible_container( 'sidebar2' ) );
+		}
+		else
+		{ // We should not check the visibility of the sidebar containers for this case
+			return true;
+		}
+	}
+	
+	
+	/**
+	 * Check if we can display a sidebar for the Single page layout
+	 *
+	 * @param boolean TRUE to check if at least one sidebar container is visible
+	 * @return boolean TRUE to display a sidebar
+	 */
+	function is_visible_sidebar_single( $check_containers = false )
+	{
+		$layout = $this->get_setting( 'layout_single' );
+
+		if( $layout != 'left_sidebar' && $layout != 'right_sidebar' )
+		{ // Sidebar is not displayed for selected skin layout
+			return false;
+		}
+
+		if( $check_containers )
+		{ // Check if at least one sidebar container is visible
+			return ( $this->is_visible_container( 'sidebar' ) ||  $this->is_visible_container( 'sidebar2' ) );
+		}
+		else
+		{ // We should not check the visibility of the sidebar containers for this case
+			return true;
+		}
+	}
 
 
 	/**
@@ -715,6 +995,132 @@ class ego_Skin extends Skin
 			case 'single_column':
 				// Single Column Large
 				return 'col-md-12';
+				
+			case 'single_column_normal':
+				// Single Column
+				return 'col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1';
+
+			case 'single_column_narrow':
+				// Single Column Narrow
+				return 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2';
+
+			case 'single_column_extra_narrow':
+				// Single Column Extra Narrow
+				return 'col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3';
+
+			case 'left_sidebar':
+				// Left Sidebar
+				return 'col-md-8 pull-right left-padding';
+
+			case 'right_sidebar':
+				// Right Sidebar
+			default:
+				return 'col-md-8 right-padding';
+		}
+	}
+	
+	
+	/**
+	 * Get value for attbiute "class" of column block
+	 * depending on skin setting "Layout Front"
+	 *
+	 * @return string
+	 */
+	function get_column_class_front()
+	{
+		switch( $this->get_setting( 'layout_front' ) )
+		{
+			case 'single_column':
+				// Single Column Large
+				return 'col-md-12';
+				
+			case 'single_column_normal':
+				// Single Column
+				return 'col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1';
+
+			case 'single_column_narrow':
+				// Single Column Narrow
+				return 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2';
+
+			case 'single_column_extra_narrow':
+				// Single Column Extra Narrow
+				return 'col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3';
+
+			case 'left_sidebar':
+				// Left Sidebar
+				return 'col-md-8 pull-right left-padding';
+
+			case 'right_sidebar':
+				// Right Sidebar
+			default:
+				return 'col-md-8 right-padding';
+		}
+	}
+	
+
+	/**
+	 * Get value for attbiute "class" of column block
+	 * depending on skin setting "Layout Posts"
+	 *
+	 * @return string
+	 */
+	function get_column_class_posts()
+	{
+		switch( $this->get_setting( 'layout_posts' ) )
+		{
+			case 'single_column':
+				// Single Column Large
+				return 'col-md-12';
+				
+			case 'single_column_normal':
+				// Single Column
+				return 'col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1';
+
+			case 'single_column_narrow':
+				// Single Column Narrow
+				return 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2';
+
+			case 'single_column_extra_narrow':
+				// Single Column Extra Narrow
+				return 'col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3';
+
+			case 'left_sidebar':
+				// Left Sidebar
+				return 'col-md-8 pull-right left-padding';
+
+			case 'right_sidebar':
+				// Right Sidebar
+			default:
+				return 'col-md-8 right-padding';
+		}
+	}
+	
+	
+	/**
+	 * Get value for attbiute "class" of column block
+	 * depending on skin setting "Layout Single"
+	 *
+	 * @return string
+	 */
+	function get_column_class_single()
+	{
+		switch( $this->get_setting( 'layout_single' ) )
+		{
+			case 'single_column':
+				// Single Column Large
+				return 'col-md-12';
+				
+			case 'single_column_normal':
+				// Single Column
+				return 'col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1';
+
+			case 'single_column_narrow':
+				// Single Column Narrow
+				return 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2';
+
+			case 'single_column_extra_narrow':
+				// Single Column Extra Narrow
+				return 'col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3';
 
 			case 'left_sidebar':
 				// Left Sidebar

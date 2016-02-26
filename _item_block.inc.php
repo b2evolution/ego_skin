@@ -24,6 +24,7 @@ $params = array_merge( array(
 		'item_status_class'          => 'evo_post__',
 		// Controlling the title:
 		'disp_title'                 => true,
+		'item_title_masonry_before'  => '<div class="evo_post_masonry">',
 		'item_title_line_before'     => '<div class="evo_post_title">',	// Note: we use an extra class because it facilitates styling
 		'item_title_line_before_spec'=> '<div class="evo_post_title special_posts_simple_layout__title">',
 			'item_title_before'          => '<h2>',	
@@ -38,8 +39,18 @@ $params = array_merge( array(
 		'author_link_text'           => 'preferredname',
 	), $params );
 
+// Posts Format Masonry - Columns number
+$columns_count = '';
+if ( $disp == 'posts' && ($Skin->get_setting( 'posts_masonry' ) == 'two') ) {
+   $columns_count = 'two-cols';
+} else if ( $disp == 'posts' && ($Skin->get_setting( 'posts_masonry' ) == 'three') ) {
+   $columns_count = 'three-cols';
+}
 
-echo '<div class="evo_content_block">'; // Beginning of post display
+echo '<div class="evo_content_block';
+	// If not Intro post and not Simple Posts selected and Masonry posts selected, add special Masonry class "grid-item"
+	if ( ! $Item->is_intro() && $disp == 'posts' && $Skin->get_setting( 'posts_format' ) == 'masonry' ) { echo ' grid-item '.$columns_count; }
+echo '">'; // Beginning of post display
 ?>
 
 <article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>">
@@ -47,8 +58,8 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<header>
 	<?php
 	
-		if( ! $Item->is_intro() ) { ?>
-			<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon <?php if ( $disp == 'front' && $Skin->get_setting( 'posts_simple_lay' ) == true ) { echo 'hidden'; } ?>"></i>
+		if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) != 'masonry' ) { ?>
+			<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon <?php if ( $disp == 'posts' && $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo 'hidden'; } ?>"></i>
 		<?php // Categories
 			$Item->categories( array(
 				'before'          => '',
@@ -67,8 +78,10 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 		if( $params['disp_title'] )
 		{
 			// Check if Special Posts Layout is enabled
-			if ( $Skin->get_setting( 'posts_simple_lay' ) == false ) {
+			if ( $Skin->get_setting( 'posts_format' ) == 'default' ) {
 				echo $params['item_title_line_before'];
+			} else if ( $Skin->get_setting( 'posts_format' ) == 'masonry' && $disp == 'posts' ) {
+				echo $params['item_title_masonry_before'];
 			} else {
 				echo $params['item_title_line_before_spec'];
 			}
@@ -110,7 +123,7 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	if( ! $Item->is_intro() )
 	{ // Don't display the following for intro posts
 	?>
-	<div class="evo_post__info <?php if ( $Skin->get_setting( 'posts_simple_lay' ) == true ) { echo 'special_posts_simple_layout__info'; } ?>">
+	<div class="evo_post__info<?php if ( $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo ' special_posts_simple_layout__info'; } ?>">
 	<?php
 		if( $Item->status != 'published' )
 		{
@@ -126,12 +139,15 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 				'time_format' => 'F j, Y',
 			) );
 
+		// Show author info only if not two-cols or three-cols Masonry layout
+		if ( $columns_count == '' ) {
 		// Author
 		$Item->author( array(
 			'before'    => '<div class="evo_post__author"><i class="fa fa-user"></i> ',
 			'after'     => '</div>',
 			'link_text' => $params['author_link_text'],
 		) );
+		}
 	?>
 
 	<?php 
@@ -209,7 +225,7 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	}
 	else
 	{
-		if ( $Skin->get_setting( 'posts_simple_lay' ) == false ) {
+		if ( $Skin->get_setting( 'posts_format' ) == 'default' ) {
 			// this will create a <section>
 				// ---------------------- POST CONTENT INCLUDED HERE ----------------------
 				skin_include( '_item_content.inc.php', array_merge( array(
@@ -218,13 +234,24 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 				// Note: You can customize the default item content by copying the generic
 				// /skins/_item_content.inc.php file into the current skin folder.
 			// -------------------------- END OF POST CONTENT -------------------------
-		} else { // If simple Blog Layout is selected
+		} else if ( $Skin->get_setting( 'posts_format' ) == 'masonry' ) { // If Masonry Post Format
 				// this will create a Simple Blog <section>
 				echo '<div class="special_posts_simple_layout__evo_post">';
 				// ---------------------- POST CONTENT INCLUDED HERE ----------------------
-				skin_include( '_item_content.inc.php', array_merge( array(
-					'more_link_text'           => 'Continue reading',
-					
+				skin_include( '_item_content.inc.php', array_merge( array(					
+					'image_limit'              => 1,
+					'gallery_image_limit'      => 0,
+					'before_more_link'         => '<p class="evo_post_more_link hidden">',
+					), $params ) );
+				// Note: You can customize the default item content by copying the generic
+				// /skins/_item_content.inc.php file into the current skin folder.
+				// -------------------------- END OF POST CONTENT -------------------------
+				echo '</div>';
+		} else { // If other Post Format is selected
+				// this will create a Simple Blog <section>
+				echo '<div class="special_posts_simple_layout__evo_post">';
+				// ---------------------- POST CONTENT INCLUDED HERE ----------------------
+				skin_include( '_item_content.inc.php', array_merge( array(					
 					'image_limit'              => 0,
 					'gallery_image_limit'      => 0,
 					
@@ -242,7 +269,7 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<footer>
 
 		<?php
-			if( ! $Item->is_intro() && $Skin->get_setting( 'posts_simple_lay' ) == false ) 
+			if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) == 'default' ) 
 			// Do NOT apply tags, comments and feedback on intro posts and when Simple Blog Layout is selected
 			{ // List all tags attached to this post:
 				$Item->tags( array(

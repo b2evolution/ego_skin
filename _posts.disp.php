@@ -31,12 +31,17 @@ if ( $Skin->get_setting( 'top_pagination' ) == true ) {
 }
 // ------------------------- END OF PREV/NEXT PAGE LINKS -------------------------
 
+// Check if Masonry is selected
+if ( $Skin->get_setting( 'posts_format' ) == 'masonry' ) {
+	echo '<div class="grid">';
+}
 // --------------------------------- START OF POSTS -------------------------------------
 // Display message if no post:
 display_if_empty();
 
 while( mainlist_get_item() )
 { // For each blog post, do everything below up to the closing curly brace "}"
+
 
 	// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
 	skin_include( '_item_block.inc.php', array_merge( array(
@@ -45,6 +50,10 @@ while( mainlist_get_item() )
 	// ----------------------------END ITEM BLOCK  ----------------------------
 
 } // ---------------------------------- END OF POSTS ------------------------------------
+// Check if Masonry is selected
+if ( $Skin->get_setting( 'posts_format' ) == 'masonry' ) {
+	echo '</div>';
+}
 
 // -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
 if ( $Skin->get_setting( 'bottom_pagination' ) == true ) {

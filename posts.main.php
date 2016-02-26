@@ -107,7 +107,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			if ( ! empty( $cover_image_url ) ) {  ?>
 				<div class="evo_cover_image" style="background-image: url(<?php echo $cover_image_url; ?>);" class="img-responsive">
 			<?php }
-			
+
 				// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
 				skin_include( '_item_block.inc.php', array(
 						'feature_block' => true,
@@ -116,6 +116,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 						'item_class'   => ($Item->is_intro() ? 'evo_intro_post' : 'evo_featured_post'),
 					) );
 				// ----------------------------END ITEM BLOCK  ----------------------------
+
 			echo '</div>';
 			}
 		}
@@ -317,7 +318,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
 		</div>
-
+		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false ) { ?>
 		<div class="evo_container evo_container__sidebar2">
 		<?php
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
@@ -355,6 +356,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
 		</div>
+		<?php } // if Sidebar2 Single option not selected ?>
 	</aside><!-- .col -->
 	<?php }// if visible sidebar ?>
 
@@ -435,6 +437,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 </div><!-- .container -->
 
+	<a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 <?php
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------

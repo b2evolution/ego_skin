@@ -335,6 +335,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		?>
 		</div>
 
+		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false ) { ?>
 		<div class="evo_container evo_container__sidebar2">
 		<?php
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
@@ -372,8 +373,9 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
 		</div>
+		<?php } // if Sidebar2 Single option not selected ?>
 	</aside><!-- .col -->
-	<?php }// if visible sidebar ?>
+	<?php } // if visible sidebar ?>
 
 </div><!-- .row -->
 

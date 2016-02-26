@@ -584,10 +584,50 @@ textarea.message_text {
 			.evo_post_title, .evo_post_title h2, .evo_post_title .btn-group {
 				display: block;
 			}
-			.btn-group a {
-				float: none;
+			.btn-group {
+				padding-left: 0;
+				a {
+					float: none;
+				}
 			}
 		}
+	}
+}
+
+// Masonry Posts layout
+.disp_posts .grid-item {
+	&.two-cols, &.three-cols {
+		float: left;
+		padding: 0 15px;
+		article {
+			margin-bottom: 50px;
+			.evo_post_masonry h2 a {
+				font-size: 20px;
+				font-weight: 700;
+			}
+			.evo_post__info {
+				padding-bottom: 15px;
+			}
+			.evo_image_block {
+				margin-bottom: 15px;
+			}
+			.evo_post__full_text {
+				font-size: 15px;
+				letter-spacing: 0.2px;
+			}
+		}
+	}
+}
+
+.disp_posts .grid-item {
+	&.two-cols {
+		width: 50%;
+	}
+}
+
+.disp_posts .grid-item {
+	&.three-cols {
+		width: 33.333%;
 	}
 }
 
@@ -725,6 +765,34 @@ div.action_messages, div.log_container {
 // This skin needs this for disp=posts to separate from lower pagination
 footer.row {
 	margin-top: 20px;
+}
+
+
+
+// ****************************************************************************
+// Back to Top - Slide top button
+// ****************************************************************************
+.back-to-top {
+	display: none;
+	height: 40px;
+	width: 40px;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	z-index: 9998;
+	font-size: 2rem;
+	font-size: 20px;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.back-to-top.show {
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 
 

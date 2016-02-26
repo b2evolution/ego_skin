@@ -254,13 +254,28 @@ Set the button destination in the back-office:",
 						),
 						'type' => 'select',
 					),
-					// Simple Posts display
-					'posts_simple_lay' => array(
-						'label' => T_('Simple Posts Page Display'),
-						'note' => T_('Check this to enable a very simple posts layout on Posts page.'),
-						'defaultvalue' => 0,
-						'type' => 'checkbox',
-					),
+				   'posts_format' => array(
+						'label'    => T_('Posts Format'),
+						'note'     => '',
+						'type'     => 'radio',
+						'options'  => array(
+							array( 'default', T_('Default') ),
+							array( 'simple', T_('Simple') ),
+							array( 'masonry', T_('Masonry') ),
+						),
+						'defaultvalue' => 'default',
+				   ),
+				   'posts_masonry' => array(
+						'label'    => T_('Masonry Columns'),
+						'note'     => 'Select the number of columns if Masonry post format selected above.',
+						'type'     => 'radio',
+						'options'  => array(
+							array( 'one', T_('1 Column') ),
+							array( 'two', T_('2 Columns') ),
+							array( 'three', T_('3 Columns') ),
+						),
+						'defaultvalue' => 'one',
+				   ),
 					// Intro Post layout
 					'spec_intro_post' => array(
 						'label' => T_('Special Intro Post Position'),
@@ -305,6 +320,13 @@ Set the button destination in the back-office:",
 							'right_sidebar'              => T_('Right Sidebar'),
 						),
 						'type' => 'select',
+					),
+					// Sidebar 2 Container Only
+					'sidebar2_single' => array(
+						'label' => T_('Sidebar2 on Single Page'),
+						'note' => T_('Check this to enable Sidebar2 container <b>only</b> on Single page. On other pages regular Sidebar container will be shown.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
 					),
 				'single_disp_end' => array(
 					'layout' => 'end_fieldset',
@@ -422,7 +444,7 @@ Set the button destination in the back-office:",
 	 */
 	function display_init()
 	{
-		global $Messages, $debug;
+		global $Messages, $debug, $disp;
 
 		// Request some common features that the parent function (Skin::display_init()) knows how to provide:
 		parent::display_init( array(
@@ -438,7 +460,21 @@ Set the button destination in the back-office:",
 			) );
 			
 		// Skin specific initializations:
-		require_js( $this->get_url().'scripts.js' );
+		require_js( $this->get_url().'js/scripts.js' );
+		
+		// Include Masonry Grind for Posts Disp
+		if ( $disp == 'posts' ) {
+			require_js( $this->get_url() . 'js/masonry.pkgd.min.js' );
+			add_js_headline("
+				jQuery( document ).ready( function($) {
+					$('.grid').masonry({
+						// options
+						itemSelector: '.grid-item',
+						//columnWidth: 200
+					});
+				});
+			");
+		}
 		
 
 		// Limit images by max height:
@@ -471,7 +507,8 @@ Set the button destination in the back-office:",
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
 				.pagination>.active>span,
 				.pagination>.active>span:hover,
-				.pagination>li>a:hover
+				.pagination>li>a:hover,
+				.back-to-top
 				{ background-color: '. $links_color ." }\n";
 				$custom_css .= '
 				div.compact_search_form .search_submit,
@@ -489,7 +526,8 @@ Set the button destination in the back-office:",
 				$custom_css .= '
 				.extra-section-btn-wrapper a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
-				.pagination>li>a:hover
+				.pagination>li>a:hover,
+				.back-to-top, .back-to-top:hover
 				{ color: '. $site_bg_color ." }\n";
 			}
 			
@@ -522,6 +560,7 @@ Set the button destination in the back-office:",
 				{ border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
+				$custom_css .= 'blockquote { border-color: '. $site_borders ." }\n";
 			}
 		
 		

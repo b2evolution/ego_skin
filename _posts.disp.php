@@ -15,10 +15,22 @@
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
+// Pagination Alignment Customization
+$pagination_alignment = '';
+$pagination_alignment = $Skin->get_setting( 'pag_alignment' );
+
+if ( $pagination_alignment == 'left') {
+   $align = 'left';
+} else if ( $pagination_alignment == 'right') {
+   $align = 'right';
+} else {
+   $align = 'center';
+}
+
 // -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
 if ( $Skin->get_setting( 'top_pagination' ) == true ) {
 	mainlist_page_links( array(
-			'block_start'           => '<div class="center"><ul class="pagination">',
+			'block_start'           => '<div class="'. $align .'"><ul class="pagination">',
 			'block_end'             => '</ul></div>',
 			'page_item_before'      => '<li>',
 			'page_item_after'       => '</li>',
@@ -58,7 +70,7 @@ if ( $Skin->get_setting( 'posts_format' ) == 'masonry' ) {
 // -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
 if ( $Skin->get_setting( 'bottom_pagination' ) == true ) {
 mainlist_page_links( array(
-		'block_start'           => '<div class="center"><ul class="pagination">',
+		'block_start'           => '<div class="'. $align .'"><ul class="pagination">',
 		'block_end'             => '</ul></div>',
 		'page_current_template' => '<span>$page_num$</span>',
 		'page_item_before'      => '<li>',

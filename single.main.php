@@ -96,6 +96,28 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	) );
 ?>
 
+		<?php
+		// Go Grab the featured post if Special Intro Post is enabled
+		if ( $Skin->get_setting( 'spec_cover_image' ) == true ) {
+			
+			// Special Cover image placement
+			$cover_image_url = $Item->get_cover_image_url();
+			if ( ! empty( $cover_image_url ) ) {  ?>
+				<div class="evo_cover_image" style="background-image: url(<?php echo $cover_image_url; ?>);" class="img-responsive">
+			<?php }
+
+				// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
+				skin_include( '_item_block.inc.php', array(
+						'feature_block' => true,
+						'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
+						'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
+					) );
+				// ----------------------------END ITEM BLOCK  ----------------------------
+
+			echo '</div>';
+		}
+		?>
+		
 <div class="container main-page-content">
 
 <div class="row">
@@ -410,6 +432,9 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 </div><!-- .container -->
 
+<?php if ( $Skin->get_setting( 'backtotop_vis' ) == true ) { ?>
+	<a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<?php } ?>
 
 <?php
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------

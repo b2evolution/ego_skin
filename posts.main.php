@@ -437,7 +437,9 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 </div><!-- .container -->
 
+<?php if ( $Skin->get_setting( 'backtotop_vis' ) == true ) { ?>
 	<a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<?php } ?>
 
 <?php
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------

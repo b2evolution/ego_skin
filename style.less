@@ -600,7 +600,7 @@ textarea.message_text {
 		float: left;
 		padding: 0 15px;
 		article {
-			margin-bottom: 50px;
+			margin-bottom: 15px;
 			.evo_post_masonry h2 a {
 				font-size: 20px;
 				font-weight: 700;
@@ -618,16 +618,24 @@ textarea.message_text {
 		}
 	}
 }
-
-.disp_posts .grid-item {
-	&.two-cols {
-		width: 50%;
+// Masonry responsive layout
+@media (min-width: 992px) {
+	.disp_posts .grid-item {
+		&.two-cols {
+			width: 50%;
+		}
+	}
+	.disp_posts .grid-item {
+		&.three-cols {
+			width: 50%;
+		}
 	}
 }
-
-.disp_posts .grid-item {
-	&.three-cols {
-		width: 33.333%;
+@media (min-width: 1200px) {
+	.disp_posts .grid-item {
+		&.three-cols {
+			width: 33.333%;
+		}
 	}
 }
 
@@ -773,7 +781,8 @@ footer.row {
 // Back to Top - Slide top button
 // ****************************************************************************
 .back-to-top {
-	display: none;
+	visibility: hidden;
+	opacity: 0;
 	height: 40px;
 	width: 40px;
 	position: fixed;
@@ -785,14 +794,17 @@ footer.row {
 	text-align: center;
 	line-height: 40px;
 	border-radius: 2px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
 	overflow: hidden;
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
+	&:hover {
+		margin-bottom: 3px;
+	}
 }
-.back-to-top.show {
-	-webkit-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+.back-to-top.visible {
+	visibility: visible;
+	opacity: 1;
 }
 
 

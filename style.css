@@ -546,7 +546,7 @@ textarea.message_text {
 }
 .disp_posts .grid-item.two-cols article,
 .disp_posts .grid-item.three-cols article {
-  margin-bottom: 50px;
+  margin-bottom: 15px;
 }
 .disp_posts .grid-item.two-cols article .evo_post_masonry h2 a,
 .disp_posts .grid-item.three-cols article .evo_post_masonry h2 a {
@@ -566,11 +566,18 @@ textarea.message_text {
   font-size: 15px;
   letter-spacing: 0.2px;
 }
-.disp_posts .grid-item.two-cols {
-  width: 50%;
+@media (min-width: 992px) {
+  .disp_posts .grid-item.two-cols {
+    width: 50%;
+  }
+  .disp_posts .grid-item.three-cols {
+    width: 50%;
+  }
 }
-.disp_posts .grid-item.three-cols {
-  width: 33.333%;
+@media (min-width: 1200px) {
+  .disp_posts .grid-item.three-cols {
+    width: 33.333%;
+  }
 }
 div.bSideItem {
   background: #F7F5FA;
@@ -700,7 +707,8 @@ footer.row {
   margin-top: 20px;
 }
 .back-to-top {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   height: 40px;
   width: 40px;
   position: fixed;
@@ -712,14 +720,17 @@ footer.row {
   text-align: center;
   line-height: 40px;
   border-radius: 2px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.back-to-top.show {
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+.back-to-top:hover {
+  margin-bottom: 3px;
+}
+.back-to-top.visible {
+  visibility: visible;
+  opacity: 1;
 }
 .evo_widget h3,
 .evo_widget h4.panel-title {

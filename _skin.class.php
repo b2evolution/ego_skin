@@ -96,7 +96,6 @@ class ego_Skin extends Skin
 					'layout' => 'begin_fieldset',
 					'label'  => T_('General Layout Settings')
 				),
-					// Posts Disp layout
 					'layout' => array(
 						'label' => T_('Default Pages Layout'),
 						'note' => '',
@@ -136,6 +135,12 @@ class ego_Skin extends Skin
 						'note'          => T_('Default color is #eee. If you wan\'t to remove borders, simply set their color the same as the background color.'),
 						'defaultvalue'  => '#eee',
 						'type'          => 'color',
+					),
+					'backtotop_vis' => array(
+						'label' => T_('"Back to Top" button'),
+						'note' => T_('Check to enable the "Back to Top" button.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
 					),
 				'section_layout_end' => array(
 					'layout' => 'end_fieldset',
@@ -297,6 +302,17 @@ Set the button destination in the back-office:",
 						'defaultvalue' => 1,
 						'type' => 'checkbox',
 					),
+					'pag_alignment' => array(
+						'label'        => T_('Pagination Alignment'),
+						'note'         => T_(''),
+						'type'         => 'select',
+						'options'      => array(
+							'left'   => T_('Left'),
+							'center' => T_('Center'),
+							'right'  => T_('Right'),
+						),
+					'defaultvalue' => 'left',
+               ),
 				'posts_disp_end' => array(
 					'layout' => 'end_fieldset',
 				),
@@ -325,6 +341,13 @@ Set the button destination in the back-office:",
 					'sidebar2_single' => array(
 						'label' => T_('Sidebar2 on Single Page'),
 						'note' => T_('Check this to enable Sidebar2 container <b>only</b> on Single page. On other pages regular Sidebar container will be shown.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					// Intro Post layout
+					'spec_cover_image' => array(
+						'label' => T_('Special Cover Image Position'),
+						'note' => T_('Check this to enable a special cover image placement.'),
 						'defaultvalue' => 1,
 						'type' => 'checkbox',
 					),
@@ -527,7 +550,7 @@ Set the button destination in the back-office:",
 				.extra-section-btn-wrapper a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
 				.pagination>li>a:hover,
-				.back-to-top, .back-to-top:hover
+				.back-to-top, .back-to-top:hover, .back-to-top:active, .back-to-top:focus, .back-to-top:visited
 				{ color: '. $site_bg_color ." }\n";
 			}
 			

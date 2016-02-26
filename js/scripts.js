@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
 		$back_to_top = $( '.back-to-top' );
 
 	$(window).scroll( function() {
-		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('show') : $back_to_top.removeClass('show');
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('visible') : $back_to_top.removeClass('visible');
 	});
 
 	// Smooth scroll to top

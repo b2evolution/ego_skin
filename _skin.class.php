@@ -542,11 +542,12 @@ Set the button destination in the back-office:",
 			* ============================================================================
 			*/
 			if ( $links_color = $this->get_setting( 'links_color' ) ) {
-				$custom_css .= '.container.main-page-content a { color: '. $links_color ." }\n";
+				$custom_css .= '.container.main-page-content a, #submit_preview_buttons_wrapper .preview { color: '. $links_color ." }\n";
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a:hover,
 				.evo_post__categories a:hover,
-				.evo_post__full .evo_post__full_text .evo_post_more_link a
+				.evo_post__full .evo_post__full_text .evo_post_more_link a,
+				#submit_preview_buttons_wrapper .preview:hover
 				{ border: 1px solid '. $links_color ." }\n";
 				$custom_css .= '
 				div.compact_search_form .search_submit,
@@ -556,7 +557,8 @@ Set the button destination in the back-office:",
 				.pagination>.active>span,
 				.pagination>.active>span:hover,
 				.pagination>li>a:hover,
-				.back-to-top
+				.back-to-top,
+				#submit_preview_buttons_wrapper .submit
 				{ background-color: '. $links_color ." }\n";
 				$custom_css .= '
 				div.compact_search_form .search_submit,
@@ -564,7 +566,8 @@ Set the button destination in the back-office:",
 				p.tag_cloud a:hover,
 				.pagination>.active>span,
 				.pagination>.active>span:hover,
-				.pagination>li>a:hover
+				.pagination>li>a:hover,
+				#submit_preview_buttons_wrapper .submit
 				{ border-color: '. $links_color ." }\n";
 				$custom_css .= '.evo_featured_post { border-left: 5px solid '. $links_color ." }\n";
 				
@@ -605,7 +608,8 @@ Set the button destination in the back-office:",
 				.evo_post__categories a,
 				#bCalendarToday,
 				p.tag_cloud a,
-				.pagination>li>a
+				.pagination>li>a,
+				#submit_preview_buttons_wrapper .preview
 				{ border: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '
 				.widget_plugin_evo_Calr .bCalendarTable th,
@@ -828,25 +832,25 @@ Set the button destination in the back-office:",
 				return array(
 					'layout'         => 'fieldset',
 					'formclass'      => 'form-horizontal',
-					'formstart'      => '',
-					'formend'        => '',
+					'formstart'      => '<div class="contact-form">',
+					'formend'        => '</div>',
 					'title_fmt'      => '<span style="float:right">$global_icons$</span><h2>$title$</h2>'."\n",
 					'no_title_fmt'   => '<span style="float:right">$global_icons$</span>'."\n",
-					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="fieldset_wrapper_$id$"><fieldset $fieldset_attribs$><div class="panel panel-default">'."\n"
+					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="submit_preview_buttons_wrapper"><fieldset $fieldset_attribs$><div class="panel panel-default">'."\n"
 															.'<legend class="panel-heading" $title_attribs$>$fieldset_title$</legend><div class="panel-body $class$">'."\n",
 					'fieldset_end'   => '</div></div></fieldset></div>'."\n",
 					'fieldstart'     => '<div class="form-group" $ID$>'."\n",
 					'fieldend'       => "</div>\n\n",
-					'labelclass'     => 'control-label col-sm-3',
+					'labelclass'     => 'control-label',
 					'labelstart'     => '',
 					'labelend'       => "\n",
-					'labelempty'     => '<label class="control-label col-sm-3"></label>',
-					'inputstart'     => '<div class="controls col-sm-9">',
+					'labelempty'     => '<label class="control-label"></label>',
+					'inputstart'     => '<div class="controls">',
 					'inputend'       => "</div>\n",
-					'infostart'      => '<div class="controls col-sm-9"><div class="form-control-static">',
+					'infostart'      => '<div class="controls"><div class="form-control-static">',
 					'infoend'        => "</div></div>\n",
-					'buttonsstart'   => '<div class="form-group"><div class="control-buttons col-sm-offset-3 col-sm-9">',
-					'buttonsend'     => "</div></div>\n\n",
+					'buttonsstart'   => '<div class="control-buttons">',
+					'buttonsend'     => "</div>\n\n",
 					'customstart'    => '<div class="custom_content">',
 					'customend'      => "</div>\n",
 					'note_format'    => ' <span class="help-inline">%s</span>',

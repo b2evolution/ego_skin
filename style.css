@@ -595,7 +595,8 @@ textarea.message_text {
   max-width: 700px;
   margin: 0 auto;
 }
-.comments-wrapper {
+.comments-wrapper,
+#feedbacks .alert.alert-info {
   margin-top: 80px;
 }
 .evo_comment {
@@ -625,6 +626,33 @@ textarea.message_text {
   .evo_comment {
     margin-left: 0px;
   }
+}
+.contact-form .form-group {
+  float: left;
+  width: 50%;
+}
+.contact-form .form-group#ffield_g,
+.contact-form .form-group#ffield_uploadfile_A1 {
+  width: 100%;
+}
+.contact-form .form-group:last-of-type {
+  width: 100%;
+}
+.contact-form .fieldset_wrapper.fieldset#submit_preview_buttons_wrapper {
+  clear: both;
+}
+.contact-form label {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.contact-form .form-control {
+  padding: 20px 15px;
+  border-radius: 2px;
+  box-shadow: none;
+}
+.contact-form #submit_preview_buttons_wrapper .preview {
+  background-color: transparent;
 }
 div.bSideItem {
   background: #F7F5FA;

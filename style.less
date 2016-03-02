@@ -660,7 +660,13 @@ textarea.message_text {
 	}
 }
 
-.comments-wrapper {
+
+
+// ****************************************************************************
+// Comments Layout
+// ****************************************************************************
+
+.comments-wrapper, #feedbacks .alert.alert-info {
 	margin-top: 80px;
 }
 
@@ -692,6 +698,42 @@ textarea.message_text {
 	}
 	.evo_comment {
 		margin-left: 0px;
+	}
+}
+
+.contact-form {
+	.form-group { // Input areas
+		float: left;
+		width: 50%;
+		&#ffield_g, &#ffield_uploadfile_A1 { // Textarea
+			width: 100%;
+		}
+		
+		&:last-of-type {
+			width: 100%;
+		}
+	}
+	
+	.fieldset_wrapper.fieldset#submit_preview_buttons_wrapper {
+		clear: both;
+	}
+	
+	label {
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.6px;
+	}
+	
+	.form-control {
+		padding: 20px 15px;
+		border-radius: 2px;
+		box-shadow: none;
+	}
+	
+	#submit_preview_buttons_wrapper {
+		.preview {
+			background-color: transparent;
+		}
 	}
 }
 

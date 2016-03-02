@@ -35,6 +35,32 @@ skin_include( '_html_header.inc.php', array() );
 // If site headers are enabled, they will be included here:
 siteskin_include( '_site_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
+
+// Default params:
+$params = array(
+		'feature_block'              => false,			// fp>yura: what is this for??
+		// Classes for the <article> tag:
+		'item_class'                 => 'evo_post evo_content_block',
+		'item_type_class'            => 'evo_post__ptyp_',
+		'item_status_class'          => 'evo_post__',
+		// Controlling the title:
+		'disp_title'                 => true,
+		'item_title_masonry_before'  => '<div class="evo_post_masonry">',
+		'item_title_line_before'     => '<div class="evo_post_title">',	// Note: we use an extra class because it facilitates styling
+		'item_title_line_before_spec'=> '<div class="evo_post_title special_posts_simple_layout__title">',
+			'item_title_before'          => '<h2>',	
+			'item_title_after'           => '</h2>',
+			'item_title_single_before'   => '<h1>',	// This replaces the above in case of disp=single or disp=page
+			'item_title_single_after'    => '</h1>',
+		'item_title_line_after'      => '</div>',
+		// Controlling the content:
+		'content_mode'               => 'auto',		// excerpt|full|normal|auto -- auto will auto select depending on $disp-detail
+		'image_class'                => 'img-responsive',
+		'image_size'                 => 'fit-1280x720',
+		'author_link_text'           => 'preferredname',
+	);
+
+
 echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>";
 ?>
 <nav class="navbar">				
@@ -98,22 +124,144 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 		<?php
 		// Go Grab the featured post if Special Intro Post is enabled
-		if ( $Skin->get_setting( 'spec_cover_image' ) == true ) {
-			
+		if ( $Skin->get_setting( 'spec_cover_image' ) == true )
+		{ // We have a featured/intro post to display:
+		
 			// Special Cover image placement
 			$cover_image_url = $Item->get_cover_image_url();
 			if ( ! empty( $cover_image_url ) ) {  ?>
-				<div class="evo_cover_image" style="background-image: url(<?php echo $cover_image_url; ?>);" class="img-responsive">
+				<div class="evo_post evo_cover_image" style="background-image: url(<?php echo $cover_image_url; ?>);" class="img-responsive">
+					<header class="spec_cover_image__header">
+					
+		<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon"></i>
+		<?php // Categories
+			$Item->categories( array(
+				'before'          => '',
+				'after'           => '</div>',
+				'separator'       => '',
+				'include_main'    => true,
+				'include_other'   => true,
+				'include_external'=> true,
+				'link_categories' => true,
+			) );
+		
+		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
+
+		// ------- Title -------
+		if( $params['disp_title'] )
+		{
+			// Check if Special Posts Layout is enabled
+			if ( $Skin->get_setting( 'posts_format' ) == 'simple' ) {
+				echo $params['item_title_line_before_spec'];
+			} else {
+				echo $params['item_title_line_before'];
+			}
+
+			if( $disp == 'single' || $disp == 'page' )
+			{
+				$title_before = $params['item_title_single_before'];
+				$title_after = $params['item_title_single_after'];
+			}
+			else
+			{
+				$title_before = $params['item_title_before'];
+				$title_after = $params['item_title_after'];
+			}
+
+			// POST TITLE:
+			$Item->title( array(
+					'before'    => $title_before,
+					'after'     => $title_after,
+					'link_type' => '#'
+				) );
+
+			// EDIT LINK:
+			if( $Item->is_intro() )
+			{ // Display edit link only for intro posts, because for all other posts the link is displayed on the info line.
+				$Item->edit_link( array(
+							'before' => '<div class="'.button_class( 'group' ).'">',
+							'after'  => '</div>',
+							'text'   => $Item->is_intro() ? get_icon( 'edit' ).' '.T_('Edit Intro') : '#',
+							'class'  => button_class( 'text' ),
+						) );
+			}
+
+			echo $params['item_title_line_after'];
+		}
+	?>
+
+	<?php
+	if( ! $Item->is_intro() )
+	{ // Don't display the following for intro posts
+	?>
+	<div class="evo_post__info<?php if ( $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo ' special_posts_simple_layout__info'; } ?>">
+	<?php
+		if( $Item->status != 'published' )
+		{
+			$Item->format_status( array(
+					'template' => '<div class="evo_status evo_status__$status$ badge pull-right">$status_title$</div>',
+				) );
+		}
+
+		// We want to display the post time:
+		$Item->issue_time( array(
+				'before'      => '<div class="evo_post__post_date"><i class="fa fa-clock-o"></i> ',
+				'after'       => '</div>',
+				'time_format' => 'F j, Y',
+			) );
+
+		// Author
+		$Item->author( array(
+			'before'    => '<div class="evo_post__author"><i class="fa fa-user"></i> ',
+			'after'     => '</div>',
+			'link_text' => $params['author_link_text'],
+		) );
+	?>
+
+	<?php 
+	if( ! $Item->is_intro() ) { ?>
+		<span class="evo_post__comments">
+		<?php
+			// Link to comments, trackbacks, etc.:
+			$Item->feedback_link( array(
+							'type' => 'comments',
+							'link_before' => '<i class="fa fa-comment-o"></i> ',
+							'link_after' => '',
+							'link_text_zero' => '0 '.T_('Comments'),
+							'link_text_one' => '1 '.T_('Comment'),
+							'link_text_more' => '%d '.T_('Comments'),
+							'link_title' => '#',
+							// fp> WARNING: creates problem on home page: 'link_class' => 'btn btn-default btn-sm',
+							// But why do we even have a comment link on the home page ? (only when logged in)
+						) );
+
+			// Link to comments, trackbacks, etc.:
+			$Item->feedback_link( array(
+							'type' => 'trackbacks',
+							'link_before' => '<i class="fa fa-comment"></i> ',
+							'link_after' => '',
+							'link_text_zero' => '0 '.T_('Feedbacks'),
+							'link_text_one' => '1 '.T_('Feedback'),
+							'link_text_more' => '%d '.T_('Feedbacks'),
+							'link_title' => '#',
+						) );
+		?>
+		</span>
+	<?php } ?>
+		
+	<?php
+		// Link for editing
+		$Item->edit_link( array(
+			'before'    => '<div>',
+			'after'     => '</div>',
+		) );
+	?>
+	</div>
+	<?php
+	}
+	?>
+	</header>
 			<?php }
-
-				// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
-				skin_include( '_item_block.inc.php', array(
-						'feature_block' => true,
-						'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
-						'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
-					) );
-				// ----------------------------END ITEM BLOCK  ----------------------------
-
 			echo '</div>';
 		}
 		?>
@@ -125,6 +273,19 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	<div class="<?php echo $Skin->get_column_class_single(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
+		
+		<?php 			
+		// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
+			item_prevnext_links( array(
+					'block_start' => '<nav><ul class="pager special_pager_layout">',
+						'prev_start'  => '<li class="previous">',
+						'prev_end'    => '</li>',
+						'next_start'  => '<li class="next">',
+						'next_end'    => '</li>',
+					'block_end'   => '</ul></nav>',
+				) );
+			// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
+		?>
 
 		<!-- ================================= START OF MAIN AREA ================================== -->
 
@@ -138,19 +299,6 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 				) );
 			// --------------------------------- END OF MESSAGES ---------------------------------
 		}
-		?>
-
-		<?php
-			// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
-			item_prevnext_links( array(
-					'block_start' => '<nav><ul class="pager">',
-						'prev_start'  => '<li class="previous">',
-						'prev_end'    => '</li>',
-						'next_start'  => '<li class="next">',
-						'next_end'    => '</li>',
-					'block_end'   => '</ul></nav>',
-				) );
-			// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
 		?>
 
 		<?php

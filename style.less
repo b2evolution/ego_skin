@@ -404,11 +404,6 @@ textarea.message_text {
 	width: 95%;
 }
 
-// Links disp=comment
-.evo_comment_title a, .pull-right .evo_comment_type {
-	color: #337ab7;
-}
-
 
 
 // ****************************************************************************
@@ -485,15 +480,15 @@ textarea.message_text {
 		line-height: 1.6em;
 		
 		.evo_image_block { // Images inside the post
-			margin: 0 0 60px 0;
+			margin: 0 0 25px 0;
 			img {
 				border-radius: 0;
 			}
 		}
 		
 		.evo_post_gallery {
-			margin-top: -45px; // Remove white gap between the gallery and teaser image on disp=posts
-			margin-bottom: 44px;
+			margin-top: -10px; // Remove white gap between the gallery and teaser image on disp=posts
+			margin-bottom: 10px;
 			img {
 				border-radius: 0;
 			}
@@ -548,6 +543,13 @@ textarea.message_text {
 		padding: 20px 0 10px 30px;
 		vertical-align: middle;
 	}
+}
+.disp_single .evo_post_title h1 {
+	font-weight: 700;
+	display: table-cell;
+	margin: 0;
+	padding: 25px 0;
+	font-size: 46px;
 }
 
 // Special Posts Simple Layout
@@ -639,7 +641,63 @@ textarea.message_text {
 	}
 }
 
+// Special Cover Image position disp=single
+.disp_single .spec_cover_image__header {
+	padding: 15% 15px 0;
+	display: table-cell;
+	vertical-align: middle;
+	.evo_post_title, .evo_post__categories, .evo_post__info {
+		display: block;
+		text-align: left;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+}
+
+// Disp single navigation
+.pager {
+	li {
+	}
+}
+
+.comments-wrapper {
+	margin-top: 80px;
+}
+
+.evo_comment {
+	margin-left: 59px;
+	.evo_comment_title {
+		padding: 15px 15px 0px;
+		a:hover {
+			background-color: transparent;
+		}
+	}
+}
+.evo_content_block  .evo_comment_avatar img {
+	margin: 0;
+}
+.ratings_table {
+	display: block;
+}
+@media (max-width: 414px) {
+	.evo_content_block {
+		.evo_comment_avatar {
+			display: block;
+			text-align: center;
+			img {
+				float: none;
+				margin-bottom: -5px;
+			}
+		}
+	}
+	.evo_comment {
+		margin-left: 0px;
+	}
+}
+
 // ****************************************************************************
+
+
 
 
 
@@ -780,6 +838,7 @@ footer.row {
 // ****************************************************************************
 // Back to Top - Slide top button
 // ****************************************************************************
+
 .back-to-top {
 	visibility: hidden;
 	opacity: 0;
@@ -954,6 +1013,14 @@ div.widget_core_coll_avatar {
 
 // Sidebar widgets
 .evo_container__sidebar, .evo_container__sidebar2 {
+
+	// No margin-top on the first widget title
+	.evo_widget:nth-child(1) {
+		div > h4 {
+			margin-top: 0 !important;
+		}
+	}
+
 	padding: 0 20px;
 	.widget_core_coll_post_list, 
 	.widget_core_coll_comment_list, 

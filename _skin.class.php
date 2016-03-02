@@ -344,12 +344,37 @@ Set the button destination in the back-office:",
 						'defaultvalue' => 1,
 						'type' => 'checkbox',
 					),
-					// Intro Post layout
-					'spec_cover_image' => array(
-						'label' => T_('Special Cover Image Position'),
-						'note' => T_('Check this to enable a special cover image placement.'),
-						'defaultvalue' => 1,
-						'type' => 'checkbox',
+					'cover_image_start' => array(
+						'layout' => 'begin_fieldset',
+						'label'  => T_('Cover Image Settings')
+					),
+						// Intro Post layout
+						'spec_cover_image' => array(
+							'label' => T_('Special Cover Image Position'),
+							'note' => T_('Check this to enable a special cover image placement.'),
+							'defaultvalue' => 1,
+							'type' => 'checkbox',
+						),
+						'cover_text' => array(
+							'label'         => T_('Cover section text color'),
+							'note'          => T_('Default color is #555.'),
+							'defaultvalue'  => '#555',
+							'type'          => 'color',
+						),
+						'cover_links' => array(
+							'label'         => T_('Cover section links color'),
+							'note'          => T_('Default color is #666666.'),
+							'defaultvalue'  => '#666666',
+							'type'          => 'color',
+						),
+						'cover_borders' => array(
+							'label'         => T_('Cover section borders color'),
+							'note'          => T_('Default color is #888.'),
+							'defaultvalue'  => '#888',
+							'type'          => 'color',
+						),
+					'cover_image_end' => array(
+						'layout' => 'end_fieldset',
 					),
 				'single_disp_end' => array(
 					'layout' => 'end_fieldset',
@@ -542,6 +567,12 @@ Set the button destination in the back-office:",
 				.pagination>li>a:hover
 				{ border-color: '. $links_color ." }\n";
 				$custom_css .= '.evo_featured_post { border-left: 5px solid '. $links_color ." }\n";
+				
+				// Fix for Gender colors settings
+				if ( $this->get_setting( 'gender_colored' ) == true ) {
+					$custom_css .= '.container.main-page-content a.user.man { color: #00F'." }\n";
+					$custom_css .= '.container.main-page-content a.user.woman { color: #e100af'." }\n";
+				}
 			}
 			
 			if ( $site_bg_color = $this->get_setting( 'site_bg_color' ) ) {
@@ -584,6 +615,7 @@ Set the button destination in the back-office:",
 				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
 				$custom_css .= 'blockquote { border-color: '. $site_borders ." }\n";
+				$custom_css .= '.evo_comment_avatar img { border: 3px solid '. $site_borders ." }\n";
 			}
 		
 		
@@ -610,9 +642,22 @@ Set the button destination in the back-office:",
 			
 			/**
 			* ============================================================================
-			* Front page section
+			* Single page `
 			* ============================================================================
 			*/
+			if ( $cover_text = $this->get_setting( 'cover_text' ) ) {
+				$custom_css .= '.spec_cover_image__header { color: '. $cover_text ." }\n";
+				$custom_css .= '.spec_cover_image__header .evo_post__categories a:hover { border: 1px solid '. $cover_text ." }\n";
+			}
+			if ( $cover_links = $this->get_setting( 'cover_links' ) ) {
+				$custom_css .= '.spec_cover_image__header a { color: '. $cover_links ." }\n";
+			}
+			if ( $cover_borders = $this->get_setting( 'cover_borders' ) ) {
+				$custom_css .= '
+				.spec_cover_image__header .evo_post__categories a,
+				.spec_cover_image__header .evo_post__categories .categories-icon
+				{ border: 1px solid '. $cover_borders ." }\n";
+			}
 	
 		
 		if( ! empty( $custom_css ) )

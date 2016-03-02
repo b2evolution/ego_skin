@@ -55,10 +55,13 @@ echo '">'; // Beginning of post display
 
 <article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>">
 
+	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && $disp == 'single' ) { 
+		// We leave this blank because <header> will not be shown if Special Cover Image position on disp=single
+	} else { ?>
 	<header>
 	<?php
 	
-		if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) != 'masonry' ) { ?>
+		if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) != 'masonry' || empty($Item->get_cover_image_url()) ) { ?>
 			<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon <?php if ( $disp == 'posts' && $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo 'hidden'; } ?>"></i>
 		<?php // Categories
 			$Item->categories( array(
@@ -78,12 +81,12 @@ echo '">'; // Beginning of post display
 		if( $params['disp_title'] )
 		{
 			// Check if Special Posts Layout is enabled
-			if ( $Skin->get_setting( 'posts_format' ) == 'default' ) {
-				echo $params['item_title_line_before'];
-			} else if ( $Skin->get_setting( 'posts_format' ) == 'masonry' && $disp == 'posts' ) {
+			if ( $Skin->get_setting( 'posts_format' ) == 'simple' ) {
+				echo $params['item_title_line_before_spec'];
+			} else if ( $Skin->get_setting( 'posts_format' ) == 'masonry' ) {
 				echo $params['item_title_masonry_before'];
 			} else {
-				echo $params['item_title_line_before_spec'];
+				echo $params['item_title_line_before'];
 			}
 
 			if( $disp == 'single' || $disp == 'page' )
@@ -189,10 +192,9 @@ echo '">'; // Beginning of post display
 		) );
 	?>
 	</div>
-	<?php
-	}
-	?>
+	<?php } ?>
 	</header>
+	<?php } ?>
 
 	<?php
 	if( $disp == 'single' )
@@ -213,7 +215,7 @@ echo '">'; // Beginning of post display
 			'block_title_start' => '<h3>',
 			'block_title_end' => '</h3>',
 			// Template params for "Item Tags" widget
-			'widget_coll_item_tags_before'    => '<div class="small">'.T_('Tags').': ',
+			'widget_coll_item_tags_before'    => '<div class="evo_post__full">'.T_('Tags').': ',
 			'widget_coll_item_tags_after'     => '</div>',
 			// Params for skin file "_item_content.inc.php"
 			'widget_coll_item_content_params' => $params,
@@ -269,7 +271,7 @@ echo '">'; // Beginning of post display
 	<footer>
 
 		<?php
-			if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) == 'default' ) 
+			if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) == 'default' && $disp == 'posts' ) 
 			// Do NOT apply tags, comments and feedback on intro posts and when Simple Blog Layout is selected
 			{ // List all tags attached to this post:
 				$Item->tags( array(
@@ -282,12 +284,16 @@ echo '">'; // Beginning of post display
 
 		<?php } ?>
 	</footer>
-
+	
 	<?php
 		// ------------------ FEEDBACK (COMMENTS/TRACKBACKS) INCLUDED HERE ------------------
 		skin_include( '_item_feedback.inc.php', array_merge( array(
 				'before_section_title' => '<div class="clearfix"></div><h3 class="evo_comment__list_title">',
 				'after_section_title'  => '</h3>',
+				'comment_title_before'  => '<div><h4 class="evo_comment_title panel-title">',
+				'comment_info_before'   => '<footer class="evo_comment_footer clear"><small>',
+				'comment_avatar_before' => '<div class="comments-wrapper"><span class="evo_comment_avatar">',
+				'comment_end'           => '</article></div>',
 			), $params ) );
 		// Note: You can customize the default item feedback by copying the generic
 		// /skins/_item_feedback.inc.php file into the current skin folder.

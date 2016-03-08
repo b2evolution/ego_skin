@@ -6,7 +6,9 @@ body {
   line-height: 1.6em;
   margin: 70px auto;
 }
-.disp_front .main-page-content {
+.disp_front .main-page-content,
+.evo_post_comment_notification,
+.evo_post_feedback_feed_msg {
   font-size: 16px;
 }
 @media (min-width: 992px) {
@@ -627,32 +629,61 @@ textarea.message_text {
     margin-left: 0px;
   }
 }
-.contact-form .form-group {
+.comment-form .form-group {
   float: left;
   width: 50%;
 }
-.contact-form .form-group#ffield_g,
-.contact-form .form-group#ffield_uploadfile_A1 {
+.comment-form .form-group#ffield_g,
+.comment-form .form-group#ffield_uploadfile_A1 {
   width: 100%;
 }
-.contact-form .form-group:last-of-type {
+.comment-form .form-group:last-of-type {
   width: 100%;
 }
-.contact-form .fieldset_wrapper.fieldset#submit_preview_buttons_wrapper {
-  clear: both;
-}
-.contact-form label {
+.comment-form label {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.6px;
 }
-.contact-form .form-control {
+.comment-form .form-control {
   padding: 20px 15px;
   border-radius: 2px;
   box-shadow: none;
 }
-.contact-form #submit_preview_buttons_wrapper .preview {
+.comment-form #submit_preview_buttons_wrapper {
+  clear: both;
+}
+.comment-form #submit_preview_buttons_wrapper .preview {
   background-color: transparent;
+  margin-right: 10px;
+}
+.comment-form #submit_preview_buttons_wrapper .submit:hover {
+  background-color: transparent !important;
+}
+.comment-form #submit_preview_buttons_wrapper input.btn {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  padding: 12px 15px;
+}
+.comment-form #submit_preview_buttons_wrapper .panel-body.fieldset {
+  padding: 0;
+}
+.comment-form #submit_preview_buttons_wrapper .panel-heading {
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.comment-form #submit_preview_buttons_wrapper .action_icon {
+  font-size: 16px;
+  font-weight: 400;
+}
+.comment-form--title {
+  margin-top: 80px;
+  border-top: 3px solid #eee;
+  padding-top: 25px;
+}
+.evo_post_comment_notification {
+  margin-top: 25px;
 }
 div.bSideItem {
   background: #F7F5FA;

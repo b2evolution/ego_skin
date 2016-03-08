@@ -73,10 +73,10 @@ class ego_Skin extends Skin
 		$supported_kinds = array(
 				'main' => 'yes',
 				'std' => 'yes',		// Blog
-				'photo' => 'yes',
+				'photo' => 'no',
 				'forum' => 'no',
 				'manual' => 'yes',
-				'group' => 'yes',  // Tracker
+				'group' => 'no',  // Tracker
 				// Any kind that is not listed should be considered as "maybe" supported
 			);
 		return $supported_kinds;
@@ -281,13 +281,6 @@ Set the button destination in the back-office:",
 						),
 						'defaultvalue' => 'one',
 				   ),
-					// Intro Post layout
-					'spec_intro_post' => array(
-						'label' => T_('Special Intro Post Position'),
-						'note' => T_('Check this to enable a special Intro post placement on Posts Page.'),
-						'defaultvalue' => 0,
-						'type' => 'checkbox',
-					),
 					// Top pagination
 					'top_pagination' => array(
 						'label' => T_('Enable top pagination'),
@@ -542,7 +535,9 @@ Set the button destination in the back-office:",
 			* ============================================================================
 			*/
 			if ( $links_color = $this->get_setting( 'links_color' ) ) {
-				$custom_css .= '.container.main-page-content a, #submit_preview_buttons_wrapper .preview { color: '. $links_color ." }\n";
+				$custom_css .= '.container.main-page-content a,
+				#submit_preview_buttons_wrapper .preview, #submit_preview_buttons_wrapper .submit:hover
+				{ color: '. $links_color ." }\n";
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a:hover,
 				.evo_post__categories a:hover,
@@ -620,6 +615,7 @@ Set the button destination in the back-office:",
 				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
 				$custom_css .= 'blockquote { border-color: '. $site_borders ." }\n";
 				$custom_css .= '.evo_comment_avatar img { border: 3px solid '. $site_borders ." }\n";
+				$custom_css .= '.comment-form--title { border-top: 3px solid '. $site_borders ." }\n";
 			}
 		
 		
@@ -832,11 +828,11 @@ Set the button destination in the back-office:",
 				return array(
 					'layout'         => 'fieldset',
 					'formclass'      => 'form-horizontal',
-					'formstart'      => '<div class="contact-form">',
+					'formstart'      => '<div class="comment-form">',
 					'formend'        => '</div>',
 					'title_fmt'      => '<span style="float:right">$global_icons$</span><h2>$title$</h2>'."\n",
 					'no_title_fmt'   => '<span style="float:right">$global_icons$</span>'."\n",
-					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="submit_preview_buttons_wrapper"><fieldset $fieldset_attribs$><div class="panel panel-default">'."\n"
+					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="submit_preview_buttons_wrapper"><fieldset $fieldset_attribs$><div>'."\n"
 															.'<legend class="panel-heading" $title_attribs$>$fieldset_title$</legend><div class="panel-body $class$">'."\n",
 					'fieldset_end'   => '</div></div></fieldset></div>'."\n",
 					'fieldstart'     => '<div class="form-group" $ID$>'."\n",

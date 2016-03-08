@@ -14,7 +14,7 @@ body {
 }
 
 // Content specfic styles on disp=front
-.disp_front .main-page-content {
+.disp_front .main-page-content, .evo_post_comment_notification, .evo_post_feedback_feed_msg {
 	font-size: 16px;
 }
 
@@ -701,40 +701,71 @@ textarea.message_text {
 	}
 }
 
-.contact-form {
+.comment-form {
 	.form-group { // Input areas
 		float: left;
 		width: 50%;
 		&#ffield_g, &#ffield_uploadfile_A1 { // Textarea
 			width: 100%;
 		}
-		
-		&:last-of-type {
+		&:last-of-type { // Submit and preview buttons wrapper
 			width: 100%;
 		}
 	}
-	
-	.fieldset_wrapper.fieldset#submit_preview_buttons_wrapper {
-		clear: both;
-	}
-	
+
 	label {
 		font-weight: 400;
 		text-transform: uppercase;
 		letter-spacing: 0.6px;
 	}
-	
+
 	.form-control {
 		padding: 20px 15px;
 		border-radius: 2px;
 		box-shadow: none;
 	}
-	
-	#submit_preview_buttons_wrapper {
+
+	#submit_preview_buttons_wrapper { // Submit and preview buttons background-color on hover remove
+		clear: both;
 		.preview {
 			background-color: transparent;
+			margin-right: 10px;
+		}
+		.submit:hover {
+			background-color: transparent !important;
+		}
+		input.btn {
+			-webkit-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+			padding: 12px 15px;
+		}
+		
+		.panel-body.fieldset {
+			padding: 0;
+		}
+		
+		// "Add a meta comment" title
+		.panel-heading {
+			padding: 15px 0;
+			font-size: 18px;
+			font-weight: bold;
+		}
+		
+		// Add a meta comment link
+		.action_icon {
+			font-size: 16px;
+			font-weight: 400;
 		}
 	}
+}
+// "Leave a comment" title
+.comment-form--title {
+	margin-top: 80px;    
+	border-top: 3px solid #eee;
+    padding-top: 25px;
+}
+.evo_post_comment_notification {
+	margin-top: 25px;
 }
 
 // ****************************************************************************

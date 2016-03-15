@@ -55,9 +55,9 @@ echo '">'; // Beginning of post display
 
 <article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>">
 
-	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && $disp == 'single' ) { 
-		// We leave this blank because <header> will not be shown if Special Cover Image position on disp=single
-	} else { ?>
+	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && ! empty($Item->get_cover_image_url()) )
+	{ 
+	} else { ?> 
 	<header>
 	<?php
 	
@@ -152,10 +152,8 @@ echo '">'; // Beginning of post display
 		) );
 		}
 	?>
-
-	<?php 
-	if( ! $Item->is_intro() ) { ?>
-		<span class="evo_post__comments">
+	
+	<span class="evo_post__comments">
 		<?php
 			// Link to comments, trackbacks, etc.:
 			$Item->feedback_link( array(
@@ -181,8 +179,7 @@ echo '">'; // Beginning of post display
 							'link_title' => '#',
 						) );
 		?>
-		</span>
-	<?php } ?>
+	</span>
 		
 	<?php
 		// Link for editing

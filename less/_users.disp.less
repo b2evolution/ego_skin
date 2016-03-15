@@ -1,0 +1,48 @@
+// ****************************************************************************
+// Disp users
+// ****************************************************************************
+
+.results {
+	.fieldset_title {
+		padding-bottom: 15px;
+		.form-group {
+			margin-top: 30px;
+		}
+	}
+	.filters {
+		margin-bottom: 15px;
+		.filters_title {
+			.fa-caret-down, .fa-caret-right {
+				width: 10px;
+			}
+		}
+		// Min - max age field & organization field & country field
+		#ffield_age_min, #ffield_org, #ffield_country {
+			display: block;
+		}
+		// Add new criteria field
+		#ffield_criteria_type_A2 {
+			#ffield_criteria_value_A1 {
+				margin-top: 2px;
+			}
+		}
+	}
+	.form-group {
+		margin-top: 15px;
+	}
+}
+
+@media (max-width: 768px) {
+	.results {
+		.filters {
+			#ffield_keywords {
+				.form_text_input {
+					width: 150px;
+				}
+			}
+			.filter-button-wrapper {
+				margin-top: 0px;
+			}
+		}
+	}
+}

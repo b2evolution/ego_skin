@@ -272,7 +272,7 @@ Set the button destination in the back-office:",
 				   ),
 				   'posts_masonry' => array(
 						'label'    => T_('Masonry Columns'),
-						'note'     => 'Select the number of columns if Masonry post format selected above.',
+						'note'     => '(Select the number of columns if Masonry post format selected above)',
 						'type'     => 'radio',
 						'options'  => array(
 							array( 'one', T_('1 Column') ),
@@ -536,13 +536,17 @@ Set the button destination in the back-office:",
 			*/
 			if ( $links_color = $this->get_setting( 'links_color' ) ) {
 				$custom_css .= '.container.main-page-content a,
-				#submit_preview_buttons_wrapper .preview, #submit_preview_buttons_wrapper .submit:hover
+				#submit_preview_buttons_wrapper .preview,
+				#submit_preview_buttons_wrapper .submit:hover,
+				.filter-submit
 				{ color: '. $links_color ." }\n";
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a:hover,
 				.evo_post__categories a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a,
-				#submit_preview_buttons_wrapper .preview:hover
+				#submit_preview_buttons_wrapper .preview:hover,
+				.results .fieldset_title .action_icon:hover,
+				.filter-submit:hover
 				{ border: 1px solid '. $links_color ." }\n";
 				$custom_css .= '
 				div.compact_search_form .search_submit,
@@ -553,7 +557,10 @@ Set the button destination in the back-office:",
 				.pagination>.active>span:hover,
 				.pagination>li>a:hover,
 				.back-to-top,
-				#submit_preview_buttons_wrapper .submit
+				#submit_preview_buttons_wrapper .submit,
+				.evo_comment__meta_info .badge-meta,
+				.results .fieldset_title .action_icon:hover,
+				.filter-submit:hover
 				{ background-color: '. $links_color ." }\n";
 				$custom_css .= '
 				div.compact_search_form .search_submit,
@@ -579,7 +586,8 @@ Set the button destination in the back-office:",
 				.extra-section-btn-wrapper a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
 				.pagination>li>a:hover,
-				.back-to-top, .back-to-top:hover, .back-to-top:active, .back-to-top:focus, .back-to-top:visited
+				.back-to-top, .back-to-top:hover, .back-to-top:active, .back-to-top:focus, .back-to-top:visited,
+				.results .fieldset_title .action_icon:hover, .filter-submit:hover
 				{ color: '. $site_bg_color ." }\n";
 			}
 			
@@ -591,7 +599,8 @@ Set the button destination in the back-office:",
 				.widget_core_coll_comment_list ul li,
 				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
 				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes,
-				.compact_search_form input.search_field
+				.compact_search_form input.search_field,
+				.widget_plugin_evo_Arch ul li, .arcdir_list_wrapper ul li
 				{ border-bottom: 1px solid '. $site_borders ." }\n";
 				$custom_css .= 'nav.navbar div.ufld_icon_links a,
 				.navbar-nav.evo_container__menu .ufld_icon_links:before,
@@ -604,7 +613,11 @@ Set the button destination in the back-office:",
 				#bCalendarToday,
 				p.tag_cloud a,
 				.pagination>li>a,
-				#submit_preview_buttons_wrapper .preview
+				#submit_preview_buttons_wrapper .preview,
+				.evo_comment,
+				.special_pager_layout li a,
+				.results .fieldset_title .action_icon,
+				.filter-submit
 				{ border: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '
 				.widget_plugin_evo_Calr .bCalendarTable th,
@@ -612,7 +625,7 @@ Set the button destination in the back-office:",
 				.navbar-nav.evo_container__menu .ufld_icon_links a.drop-down-social
 				{ border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '#bCalendarToday { background-color: '. $site_borders ." }\n";
+				$custom_css .= '#bCalendarToday, .special_pager_layout li a:hover, .results .fieldset_title .action_icon, .filter-submit { background-color: '. $site_borders ." }\n";
 				$custom_css .= 'blockquote { border-color: '. $site_borders ." }\n";
 				$custom_css .= '.evo_comment_avatar img { border: 3px solid '. $site_borders ." }\n";
 				$custom_css .= '.comment-form--title { border-top: 3px solid '. $site_borders ." }\n";
@@ -683,7 +696,7 @@ Set the button destination in the back-office:",
 				// Results list (Used to view the lists of the users, messages, contacts and etc.):
 				return array(
 					'page_url' => '', // All generated links will refer to the current page
-					'before' => '<div class="results panel panel-default">',
+					'before' => '<div class="results">',
 					'content_start' => '<div id="$prefix$ajax_content">',
 					'header_start' => '',
 						'header_text' => '<div class="center"><ul class="pagination">'
@@ -691,18 +704,18 @@ Set the button destination in the back-office:",
 							.'</ul></div>',
 						'header_text_single' => '',
 					'header_end' => '',
-					'head_title' => '<div class="panel-heading fieldset_title"><span class="pull-right">$global_icons$</span><h3 class="panel-title">$title$</h3></div>'."\n",
-					'global_icons_class' => 'btn btn-default btn-sm',
-					'filters_start'        => '<div class="filters panel-body">',
+					'head_title' => '<h2>$title$</h2><div class="fieldset_title"><div class="form-group">$global_icons$</div></div>'."\n",
+					'global_icons_class' => 'btn btn-sm',
+					'filters_start'        => '<div class="filters">',
 					'filters_end'          => '</div>',
-					'filter_button_class'  => 'btn-sm btn-info',
-					'filter_button_before' => '<div class="form-group pull-right">',
+					'filter_button_class'  => 'btn-sm btn-info filter-submit',
+					'filter_button_before' => '<div class="form-group floatright filter-button-wrapper">',
 					'filter_button_after'  => '</div>',
 					'messages_start' => '<div class="messages form-inline">',
 					'messages_end' => '</div>',
 					'messages_separator' => '<br />',
 					'list_start' => '<div class="table_scroll">'."\n"
-					               .'<table class="table table-striped table-bordered table-hover table-condensed" cellspacing="0">'."\n",
+					               .'<table class="table table-condensed" cellspacing="0">'."\n",
 						'head_start' => "<thead>\n",
 							'line_start_head' => '<tr>',  // TODO: fusionner avec colhead_start_first; mettre a jour admin_UI_general; utiliser colspan="$headspan$"
 							'colhead_start' => '<th $class_attrib$>',

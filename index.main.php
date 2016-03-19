@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the main/default page template for the "bootstrap_blog" skin.
+ * This is the main/default page template for the "fisa_blog" skin.
  *
  * This skin only uses one single template which includes most of its features.
  * It will also rely on default includes for specific dispays (like the comment form).
@@ -12,7 +12,7 @@
  * to handle the request (based on $disp).
  *
  * @package evoskins
- * @subpackage bootstrap_blog
+ * @subpackage horizon_blog_skin
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 

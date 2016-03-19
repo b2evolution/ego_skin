@@ -2,6 +2,7 @@
 // General Styles
 // ****************************************************************************
 
+// Site Font family
 body {
 	font-family: 'Droid Serif', serif;
 }
@@ -10,23 +11,12 @@ body {
 .main-page-content {
 	letter-spacing: 0.4px;
 	line-height: 1.6em;
-	margin: 70px auto;
+	margin: 70px auto 30px;
 }
 
 // Content specfic styles on disp=front
 .disp_front .main-page-content, .evo_post_comment_notification, .evo_post_feedback_feed_msg {
 	font-size: 16px;
-}
-
-@media (min-width: 992px) {
-	// Right content padding when sidebar right enabled
-	.right-padding {
-		padding-right: 25px;
-	}
-	// Left content padding when sidebar left enabled
-	.left-padding {
-		padding-right: 25px;
-	}
 }
 
 .alert .close {
@@ -194,43 +184,6 @@ body {
 			&:hover {
 				text-decoration: none;
 			}
-		}
-	}
-}
-
-// Responsive layout
-@media (min-width: 992px) {
-	.navbar-nav.evo_container__menu .ufld_icon_links a {
-		background-color: transparent;
-	}
-}
-@media (max-width: 992px) {
-	.navbar-nav.evo_container__menu .ufld_icon_links {
-		width: 54px;
-		&:before {
-			font-family: FontAwesome;
-			display: inline-block;
-			content: '\f1e0';
-			font-size: 18px;
-			height: 54px;
-			width: 54px !important;
-			line-height: 54px;
-			
-				.transition-0.1s;
-				-webkit-transition-timing-function: ease-in-out;
-				transition-timing-function: ease-in-out;
-		}
-		&:hover:before {
-			cursor: pointer;
-			color: #fff;
-		}
-		a {
-			display: none;
-			&.drop-down-social {
-				display: block;
-				width: 55px;
-			}
-			z-index: 1009;
 		}
 	}
 }
@@ -460,7 +413,7 @@ textarea.message_text {
 			div, > span {
 				display: inline-block;
 			}
-			.evo_post__post_date, .evo_post__author a, .evo_post__comments {
+			.evo_post__post_date, .evo_post__author, .evo_post__comments {
 				margin-right: 25px;
 			}
 			letter-spacing: 1px;
@@ -622,26 +575,6 @@ textarea.message_text {
 		}
 	}
 }
-// Masonry responsive layout
-@media (min-width: 992px) {
-	.disp_posts .grid .grid-item {
-		&.two-cols {
-			width: 50%;
-		}
-	}
-	.disp_posts .grid .grid-item {
-		&.three-cols {
-			width: 50%;
-		}
-	}
-}
-@media (min-width: 1200px) {
-	.disp_posts .grid .grid-item {
-		&.three-cols {
-			width: 33.333%;
-		}
-	}
-}
 
 // Special Cover Image position disp=single
 .disp_single .spec_cover_image__header {
@@ -719,21 +652,6 @@ textarea.message_text {
 }
 .ratings_table {
 	display: block;
-}
-@media (max-width: 414px) {
-	.evo_content_block {
-		.evo_comment_avatar {
-			display: block;
-			text-align: center;
-			img {
-				float: none;
-				margin-bottom: -5px;
-			}
-		}
-	}
-	.evo_comment {
-		margin-left: 0px;
-	}
 }
 
 .comment-form {
@@ -940,6 +858,25 @@ div.action_messages, div.log_container {
 footer.row {
 	margin-top: 20px;
 }
+
+.evo_container__footer {
+	.widget_plugin_evo_Calr table.bCalendarTable {
+		min-width: 290px;
+	}
+	.evo_widget {
+		margin-bottom: 30px;
+	}
+}
+
+
+
+
+// ****************************************************************************
+// Footer section
+// ****************************************************************************
+
+
+
 
 
 
@@ -1191,16 +1128,6 @@ p.tag_cloud a {
 	}
 }
 
-@media (max-width: 992px) {
-	.evo_container__sidebar, .evo_container__sidebar2 {
-		margin-top: 80px;
-		.widget_plugin_evo_Calr table {
-			max-width: 320px;
-			margin: 0 auto;
-		}
-	}
-}
-
 
 
 
@@ -1225,3 +1152,32 @@ p.tag_cloud a {
 .disp_comments .comments-wrapper:first-child {
 	margin-top: 30px;
 }
+
+// ****************************************************************************
+// Disp tags
+// ****************************************************************************
+.disp_tags main p.tag_cloud {
+	margin-top: 30px;
+}
+
+// ****************************************************************************
+// Disp help
+// ****************************************************************************
+.disp_help main {
+	> h2 {
+		margin-bottom: 30px;
+	}
+	p {
+		font-size: 16px;
+	}
+}
+
+// ****************************************************************************
+// Disp mediaidx module
+// ****************************************************************************
+@import "less/_mediaidx.disp.less";
+
+// ****************************************************************************
+// Responsive layout module
+// ****************************************************************************
+@import "less/_responsive.module.less";

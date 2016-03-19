@@ -1,0 +1,126 @@
+// ****************************************************************************
+// Responsive layout
+// ****************************************************************************
+
+@media (min-width: 768px) {
+	// Video link layout
+	.evo_post, .evo_intro_post, .evo_featured_post {
+		.evo_post__full {
+			.evo_post__full_text {
+				.videoblock {
+					margin-bottom: 25px;
+					iframe {
+						width: 100%;
+						max-width: 100%;
+						height: 411px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	// Right content padding when sidebar right enabled
+	.right-padding {
+		padding-right: 25px;
+	}
+	// Left content padding when sidebar left enabled
+	.left-padding {
+		padding-right: 25px;
+	}
+	.navbar-nav.evo_container__menu .ufld_icon_links a {
+		background-color: transparent;
+	}
+	
+	// Masonry responsive layout
+	.disp_posts .grid .grid-item {
+		&.two-cols {
+			width: 50%;
+		}
+	}
+	.disp_posts .grid .grid-item {
+		&.three-cols {
+			width: 50%;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.disp_posts .grid .grid-item {
+		&.three-cols {
+			width: 33.333%;
+		}
+	}
+}
+
+@media (max-width: 414px) {
+	.evo_content_block {
+		.evo_comment_avatar {
+			display: block;
+			text-align: center;
+			img {
+				float: none;
+				margin-bottom: -5px;
+			}
+		}
+	}
+	.evo_comment {
+		margin-left: 0px;
+	}
+}
+
+@media (max-width: 768px) {
+	// Video link layout
+	.evo_post, .evo_intro_post, .evo_featured_post {
+		.evo_post__full {
+			.evo_post__full_text {
+				.videoblock {
+					iframe {
+						width: 100%;
+						height: auto !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	.navbar-nav.evo_container__menu .ufld_icon_links {
+		width: 54px;
+		&:before {
+			font-family: FontAwesome;
+			display: inline-block;
+			content: '\f1e0';
+			font-size: 18px;
+			height: 54px;
+			width: 54px !important;
+			line-height: 54px;
+			
+				.transition-0.1s;
+				-webkit-transition-timing-function: ease-in-out;
+				transition-timing-function: ease-in-out;
+		}
+		&:hover:before {
+			cursor: pointer;
+			color: #fff;
+		}
+		a {
+			display: none;
+			&.drop-down-social {
+				display: block;
+				width: 55px;
+			}
+			z-index: 1009;
+		}
+	}
+	
+	.evo_container__sidebar, .evo_container__sidebar2 {
+		margin-top: 80px;
+		.widget_plugin_evo_Calr table {
+			max-width: 320px;
+			margin: 0 auto;
+		}
+	}
+}

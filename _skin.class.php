@@ -371,8 +371,36 @@ Set the button destination in the back-office:",
 					),
 				'single_disp_end' => array(
 					'layout' => 'end_fieldset',
-				),				
+				),
 
+
+				// Footer layout customzation
+				'footer_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Footer Settings')
+				),
+					'spec_sw_footer' => array(
+						'label'         => T_('Special sitewide footer'),
+						'note'          => T_('Check to enable the special sitewide footer (cookies declaration) layout.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'sp_sw_f_bg_col' => array(
+						'label'         => T_('SW Footer background color'),
+						'note'          => T_('Set the background color of the special sitewide footer section.'),
+						'defaultvalue'  => '#333',
+						'type'          => 'color',
+					),
+					'sp_sw_f_col' => array(
+						'label'         => T_('SW Footer color'),
+						'note'          => T_('Set the color of the special sitewide footer section.'),
+						'defaultvalue'  => '#fff',
+						'type'          => 'color',
+					),
+				'single_disp_end' => array(
+					'layout' => 'end_fieldset',
+				),
+				
 
 				'section_colorbox_start' => array(
 					'layout' => 'begin_fieldset',
@@ -670,6 +698,24 @@ Set the button destination in the back-office:",
 				.spec_cover_image__header .evo_post__categories a,
 				.spec_cover_image__header .evo_post__categories .categories-icon
 				{ border: 1px solid '. $cover_borders ." }\n";
+			}
+			
+			
+			/**
+			* ============================================================================
+			* Special sitewide footer layout
+			* ============================================================================
+			*/
+			if ( $this->get_setting( 'spec_sw_footer' ) == true ) {
+				// if special sitewide footer layout is enabled
+				$custom_css .= 'footer.sitewide_footer { font-size: 14px; letter-spacing: 0.3px; font-family: "Droid Serif", serif; padding: 10px 0; border: none; box-shadow: none; '." }\n";
+
+				if ( $sp_sw_f_bg_col = $this->get_setting( 'sp_sw_f_bg_col' ) ) {
+					$custom_css .= 'footer.sitewide_footer { background-color: '. $sp_sw_f_bg_col ." }\n";
+				}
+				if ( $sp_sw_f_col = $this->get_setting( 'sp_sw_f_col' ) ) {
+					$custom_css .= 'footer.sitewide_footer, footer.sitewide_footer a, footer.sitewide_footer a:hover { color: '. $sp_sw_f_col ." }\n";
+				}
 			}
 	
 		

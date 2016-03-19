@@ -217,37 +217,6 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			'link_text' => $params['author_link_text'],
 		) );
 	?>
-
-	<?php 
-	if( ! $Item->is_intro() ) { ?>
-		<span class="evo_post__comments">
-		<?php
-			// Link to comments, trackbacks, etc.:
-			$Item->feedback_link( array(
-							'type' => 'comments',
-							'link_before' => '<i class="fa fa-comment-o"></i> ',
-							'link_after' => '',
-							'link_text_zero' => '0 '.T_('Comments'),
-							'link_text_one' => '1 '.T_('Comment'),
-							'link_text_more' => '%d '.T_('Comments'),
-							'link_title' => '#',
-							// fp> WARNING: creates problem on home page: 'link_class' => 'btn btn-default btn-sm',
-							// But why do we even have a comment link on the home page ? (only when logged in)
-						) );
-
-			// Link to comments, trackbacks, etc.:
-			$Item->feedback_link( array(
-							'type' => 'trackbacks',
-							'link_before' => '<i class="fa fa-comment"></i> ',
-							'link_after' => '',
-							'link_text_zero' => '0 '.T_('Feedbacks'),
-							'link_text_one' => '1 '.T_('Feedback'),
-							'link_text_more' => '%d '.T_('Feedbacks'),
-							'link_title' => '#',
-						) );
-		?>
-		</span>
-	<?php } ?>
 		
 	<?php
 		// Link for editing

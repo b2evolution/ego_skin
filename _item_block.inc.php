@@ -55,13 +55,17 @@ echo '">'; // Beginning of post display
 
 <article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>">
 
-	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && ! empty($Item->get_cover_image_url()) )
-	{ 
+	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && ! empty($Item->get_cover_image_url()) && $disp == 'single' )
+	{ // We leave this blank if special cover image option is checked and if there is no cover image upladed
 	} else { ?> 
-	<header>
-	<?php
 	
-		if( ! $Item->is_intro() && $Skin->get_setting( 'posts_format' ) != 'masonry' || empty($Item->get_cover_image_url()) ) { ?>
+	<header>
+	
+	<?php
+		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
+
+		if( ! $Item->is_intro() ) {
+			if ( $Skin->get_setting( 'posts_format' ) != 'masonry' || empty($Item->get_cover_image_url()) ) { ?>
 			<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon <?php if ( $disp == 'posts' && $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo 'hidden'; } ?>"></i>
 		<?php // Categories
 			$Item->categories( array(
@@ -73,10 +77,11 @@ echo '">'; // Beginning of post display
 				'include_external'=> true,
 				'link_categories' => true,
 			) );
+			}
 		}
-		
-		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
+		?>
 
+		<?php
 		// ------- Title -------
 		if( $params['disp_title'] )
 		{
@@ -120,77 +125,87 @@ echo '">'; // Beginning of post display
 
 			echo $params['item_title_line_after'];
 		}
-	?>
-
-	<?php
-	if( ! $Item->is_intro() )
-	{ // Don't display the following for intro posts
-	?>
-	<div class="evo_post__info<?php if ( $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo ' special_posts_simple_layout__info'; } ?>">
-	<?php
-		if( $Item->status != 'published' )
-		{
-			$Item->format_status( array(
-					'template' => '<div class="evo_status evo_status__$status$ badge pull-right">$status_title$</div>',
-				) );
-		}
-
-		// We want to display the post time:
-		$Item->issue_time( array(
-				'before'      => '<div class="evo_post__post_date"><i class="fa fa-clock-o"></i> ',
-				'after'       => '</div>',
-				'time_format' => 'F j, Y',
-			) );
-
-		// Show author info only if not two-cols or three-cols Masonry layout
-		if ( $columns_count == '' ) {
-		// Author
-		$Item->author( array(
-			'before'    => '<div class="evo_post__author"><i class="fa fa-user"></i> ',
-			'after'     => '</div>',
-			'link_text' => $params['author_link_text'],
-		) );
-		}
-	?>
-	
-	<span class="evo_post__comments">
-		<?php
-			// Link to comments, trackbacks, etc.:
-			$Item->feedback_link( array(
-							'type' => 'comments',
-							'link_before' => '<i class="fa fa-comment-o"></i> ',
-							'link_after' => '',
-							'link_text_zero' => '0 '.T_('Comments'),
-							'link_text_one' => '1 '.T_('Comment'),
-							'link_text_more' => '%d '.T_('Comments'),
-							'link_title' => '#',
-							// fp> WARNING: creates problem on home page: 'link_class' => 'btn btn-default btn-sm',
-							// But why do we even have a comment link on the home page ? (only when logged in)
-						) );
-
-			// Link to comments, trackbacks, etc.:
-			$Item->feedback_link( array(
-							'type' => 'trackbacks',
-							'link_before' => '<i class="fa fa-comment"></i> ',
-							'link_after' => '',
-							'link_text_zero' => '0 '.T_('Feedbacks'),
-							'link_text_one' => '1 '.T_('Feedback'),
-							'link_text_more' => '%d '.T_('Feedbacks'),
-							'link_title' => '#',
-						) );
 		?>
-	</span>
+
+		<?php
+		if( ! $Item->is_intro() )
+		{ // Don't display the following for intro posts
+		?>
+		<div class="evo_post__info<?php if ( $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo ' special_posts_simple_layout__info'; } ?>">
+			<?php
+				if( $Item->status != 'published' )
+				{
+					$Item->format_status( array(
+							'template' => '<div class="evo_status evo_status__$status$ badge pull-right">$status_title$</div>',
+						) );
+				}
+			?>
+
+			<?php
+				// We want to display the post time:
+				$Item->issue_time( array(
+					'before'      => '<div class="evo_post__post_date"><i class="fa fa-clock-o"></i> ',
+					'after'       => '</div>',
+					'time_format' => 'F j, Y',
+				) );
+			?>
+				
+			<?php
+				// Show author info only if not two-cols or three-cols Masonry layout
+				if ( $columns_count == '' ) {
+					// Author
+					$Item->author( array(
+						'before'    => '<div class="evo_post__author"><i class="fa fa-user"></i> ',
+						'after'     => '</div>',
+						'link_text' => $params['author_link_text'],
+					) );
+				}
+			?>
+
+			<?php
+				if ( $disp == 'posts' ) {
+
+				echo '<span class="evo_post__comments">';
+				// Link to comments, trackbacks, etc.:
+				$Item->feedback_link( array(
+								'type' => 'comments',
+								'link_before' => '<i class="fa fa-comment-o"></i> ',
+								'link_after' => '',
+								'link_text_zero' => '0 '.T_('Comments'),
+								'link_text_one' => '1 '.T_('Comment'),
+								'link_text_more' => '%d '.T_('Comments'),
+								'link_title' => '#',
+								// fp> WARNING: creates problem on home page: 'link_class' => 'btn btn-default btn-sm',
+								// But why do we even have a comment link on the home page ? (only when logged in)
+							) );
+
+				// Link to comments, trackbacks, etc.:
+				$Item->feedback_link( array(
+								'type' => 'trackbacks',
+								'link_before' => '<i class="fa fa-comment"></i> ',
+								'link_after' => '',
+								'link_text_zero' => '0 '.T_('Feedbacks'),
+								'link_text_one' => '1 '.T_('Feedback'),
+								'link_text_more' => '%d '.T_('Feedbacks'),
+								'link_title' => '#',
+							) );
+				echo '</span>';
+
+				}
+			?>
+
+			<?php
+				// Link for editing
+				$Item->edit_link( array(
+					'before'    => '<div>',
+					'after'     => '</div>',
+				) );
+			?>
+		</div>
+		<?php } ?>
 		
-	<?php
-		// Link for editing
-		$Item->edit_link( array(
-			'before'    => '<div>',
-			'after'     => '</div>',
-		) );
-	?>
-	</div>
-	<?php } ?>
 	</header>
+	
 	<?php } ?>
 
 	<?php

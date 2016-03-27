@@ -18,6 +18,28 @@ body {
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
 }
+#evo_toolbar {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+textarea.form-control:focus,
+#login_form input:focus:invalid:focus,
+#login_form select:focus:invalid:focus,
+#login_form textarea:focus:invalid:focus,
+div.control input:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: 0;
+  outline-offset: 0;
+  box-shadow: none;
+}
 .sitewide_header {
   margin-bottom: 0px !important;
   box-shadow: none !important;
@@ -51,17 +73,29 @@ body {
 .navbar-nav.evo_container__menu li.active a.selected {
   text-decoration: underline;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links {
+.navbar-nav.evo_container__menu .navbar-toggle-hamb,
+.navbar-header .navbar-toggle-hamb {
+  padding: 21px 16px;
+  margin: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 0;
+}
+.navbar-nav.evo_container__menu .ufld_icon_links,
+.navbar-header .ufld_icon_links {
   height: 54px;
   float: right;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a {
+.navbar-nav.evo_container__menu .ufld_icon_links a,
+.navbar-header .ufld_icon_links a {
   height: 54px;
   width: 54px;
   border-radius: 0;
   margin: 0;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a span {
+.navbar-nav.evo_container__menu .ufld_icon_links a span,
+.navbar-header .ufld_icon_links a span {
   font-size: 18px;
   line-height: 54px;
   -webkit-transition-duration: 0.1s;
@@ -71,30 +105,37 @@ body {
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_twitter:hover {
+.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_twitter:hover,
+.navbar-header .ufld_icon_links a.ufld_twitter:hover {
   background-color: #00aced !important;
   color: #fff;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_facebook:hover {
+.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_facebook:hover,
+.navbar-header .ufld_icon_links a.ufld_facebook:hover {
   background-color: #3b5998 !important;
   color: #fff;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_googleplus:hover {
+.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_googleplus:hover,
+.navbar-header .ufld_icon_links a.ufld_googleplus:hover {
   background-color: #dd4b39 !important;
   color: #fff;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_linkedin:hover {
+.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_linkedin:hover,
+.navbar-header .ufld_icon_links a.ufld_linkedin:hover {
   background-color: #007bb6 !important;
   color: #fff;
 }
-.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_github:hover {
+.navbar-nav.evo_container__menu .ufld_icon_links a.ufld_github:hover,
+.navbar-header .ufld_icon_links a.ufld_github:hover {
   background-color: #333333 !important;
   color: #fff;
 }
-.navbar-nav.evo_container__menu .header-search-toggle {
+.header-search-toggle {
   float: right;
+  padding: 0;
+  margin: 0;
 }
-.navbar-nav.evo_container__menu .header-search-toggle i {
+.header-search-toggle i {
   padding: 20px;
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
@@ -103,10 +144,14 @@ body {
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-.navbar-nav.evo_container__menu .header-search-toggle i:hover {
+.header-search-toggle i:hover {
   cursor: pointer;
   -webkit-transform: scale(1.4);
   transform: scale(1.4);
+}
+.header-social-toggle {
+  padding: 0;
+  margin: 0;
 }
 .header-main-search-field {
   display: none;
@@ -181,10 +226,11 @@ body {
   font-size: 12px;
 }
 .widget_core_user_login .field_login_btn .panel {
-  margin: 0;
-  border: none;
-  border-radius: 0;
+  padding: 0;
+  border: 0;
   box-shadow: none;
+  border-radius: 0;
+  background: transparent;
 }
 .widget_core_user_login .field_login_btn .panel .panel-body {
   padding-left: 0;
@@ -690,59 +736,108 @@ div.bSideItem h4 {
 .skin-form div.input {
   padding: 0;
   width: 100%;
-  text-align: center;
 }
-.evo_panel__login,
-.evo_panel__lostpass,
-.evo_panel__register,
-.evo_panel__activation {
+.panel-default-remove {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.evo_panel__login .skin-form,
+.evo_panel__lostpass .skin-form,
+.evo_panel__register .skin-form {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.evo_panel__login .skin-form .panel-heading,
+.evo_panel__lostpass .skin-form .panel-heading,
+.evo_panel__register .skin-form .panel-heading {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.evo_panel__login .skin-form .panel-heading h3,
+.evo_panel__lostpass .skin-form .panel-heading h3,
+.evo_panel__register .skin-form .panel-heading h3 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.evo_panel__login .skin-form .panel-body,
+.evo_panel__lostpass .skin-form .panel-body,
+.evo_panel__register .skin-form .panel-body {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.evo_panel__login .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .form-group,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .form-group,
+.evo_panel__register .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .form-group,
+.evo_panel__login .skin-form .panel-body .evo_form__register .comment-form .form-group,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__register .comment-form .form-group,
+.evo_panel__register .skin-form .panel-body .evo_form__register .comment-form .form-group {
+  float: none;
+  display: block;
   min-width: 290px;
-  margin: 1.5em auto auto;
-}
-.evo_panel__login .panel,
-.evo_panel__lostpass .panel,
-.evo_panel__register .panel,
-.evo_panel__activation .panel {
-  margin: 5px 0;
-}
-.evo_panel__login .panel-body,
-.evo_panel__lostpass .panel-body,
-.evo_panel__register .panel-body,
-.evo_panel__activation .panel-body {
-  padding-top: 20px;
-  padding-bottom: 0;
-}
-.evo_panel__login {
   max-width: 400px;
 }
-.evo_panel__lostpass {
-  max-width: 480px;
+.evo_panel__login .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .form-group div.control input,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .form-group div.control input,
+.evo_panel__register .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .form-group div.control input,
+.evo_panel__login .skin-form .panel-body .evo_form__register .comment-form .form-group div.control input,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__register .comment-form .form-group div.control input,
+.evo_panel__register .skin-form .panel-body .evo_form__register .comment-form .form-group div.control input {
+  padding: 20px 15px;
+  border-radius: 2px;
+  box-shadow: none;
 }
-.evo_panel__lostpass #ffield_x label {
-  display: none;
+.evo_panel__login .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons input.btn-success,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons input.btn-success,
+.evo_panel__register .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons input.btn-success,
+.evo_panel__login .skin-form .panel-body .evo_form__register .comment-form .control-buttons input.btn-success,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__register .comment-form .control-buttons input.btn-success,
+.evo_panel__register .skin-form .panel-body .evo_form__register .comment-form .control-buttons input.btn-success,
+.evo_panel__login .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons a.btn-primary,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons a.btn-primary,
+.evo_panel__register .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons a.btn-primary,
+.evo_panel__login .skin-form .panel-body .evo_form__register .comment-form .control-buttons a.btn-primary,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__register .comment-form .control-buttons a.btn-primary,
+.evo_panel__register .skin-form .panel-body .evo_form__register .comment-form .control-buttons a.btn-primary {
+  display: block;
+  float: left !important;
+  margin: 0 10px 0 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  padding: 12px 15px;
+  font-size: 16px;
 }
-.evo_panel__activation {
-  max-width: 530px;
+.evo_panel__login .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons input.btn-primary,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons input.btn-primary,
+.evo_panel__register .skin-form .panel-body .evo_form__login.form-horizontal .comment-form .control-buttons input.btn-primary,
+.evo_panel__login .skin-form .panel-body .evo_form__register .comment-form .control-buttons input.btn-primary,
+.evo_panel__lostpass .skin-form .panel-body .evo_form__register .comment-form .control-buttons input.btn-primary,
+.evo_panel__register .skin-form .panel-body .evo_form__register .comment-form .control-buttons input.btn-primary {
+  padding: 12px 15px;
+  font-size: 16px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.evo_panel__activation #activateinfo_form .control-buttons {
+.evo_panel__login .evo_login_dialog_standard_link,
+.evo_panel__lostpass .evo_login_dialog_standard_link,
+.evo_panel__register .evo_login_dialog_standard_link,
+.evo_panel__login .evo_login_dialog_footer,
+.evo_panel__lostpass .evo_login_dialog_footer,
+.evo_panel__register .evo_login_dialog_footer {
   text-align: left;
-}
-.evo_panel__register {
-  max-width: 580px;
-}
-.evo_panel__register .control-buttons {
-  text-align: left;
-}
-.evo_panel__register.register-disabled {
-  width: 350px;
-}
-.evo_panel__register .form-control#country,
-.evo_panel__register .form-control#u {
-  width: 100%;
-}
-.evo_form__login_links {
-  padding: 0 5px;
-  font-size: 92%;
+  margin-left: 0;
+  margin-right: 0;
 }
 .evo_form__login fieldset {
   margin-bottom: 20px;
@@ -762,7 +857,47 @@ div.bSideItem h4 {
 .evo_form__login .btn {
   margin-top: 5px;
 }
-#login_form .control-buttons {
+.evo_form__login_links {
+  padding: 0 5px;
+  font-size: 92%;
+}
+.evo_panel__lostpass .control-buttons {
+  margin-bottom: 20px;
+}
+.evo_panel__lostpass #ffield_x label {
+  display: none;
+}
+.evo_panel__lostpass div.fieldset {
+  font-size: 16px;
+}
+.evo_panel__register .control-buttons {
+  text-align: left;
+}
+.evo_panel__register.register-disabled {
+  width: 350px;
+}
+.evo_panel__register .form-control#country,
+.evo_panel__register .form-control#u {
+  width: 100%;
+}
+.evo_panel__register .evo_form__register .form-group {
+  float: none;
+  width: 100%;
+}
+.evo_panel__register .evo_form__register .form-group div.controls input.wide_input {
+  max-width: 400px;
+}
+.evo_panel__activation {
+  margin: 1.5em auto auto;
+}
+.evo_panel__activation .panel {
+  margin: 5px 0;
+}
+.evo_panel__activation .panel-body {
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+.evo_panel__activation #activateinfo_form .control-buttons {
   text-align: left;
 }
 .standard_login_link {
@@ -962,10 +1097,6 @@ div.widget_core_coll_avatar img {
 .evo_container__sidebar2 {
   padding: 0 20px;
 }
-.evo_container__sidebar .evo_widget:nth-child(1) div > h4,
-.evo_container__sidebar2 .evo_widget:nth-child(1) div > h4 {
-  margin-top: 0 !important;
-}
 .evo_container__sidebar .widget_core_coll_post_list ul li a,
 .evo_container__sidebar2 .widget_core_coll_post_list ul li a,
 .evo_container__sidebar .widget_core_coll_comment_list ul li a,
@@ -1092,6 +1223,21 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
 .disp_help main p {
   font-size: 16px;
 }
+.disp_mediaidx .mediaidx-item--wrapper {
+  text-align: center;
+}
+.disp_mediaidx .mediaidx-item--wrapper .mediaidx-item {
+  display: inline-block;
+  margin: 22px;
+}
+.disp_404 h2,
+.disp_postidx main h2 {
+  margin-bottom: 30px;
+}
+.disp_404 p,
+.disp_postidx main p {
+  font-size: 16px;
+}
 @media (min-width: 768px) {
   .evo_post .evo_post__full .evo_post__full_text .videoblock,
   .evo_intro_post .evo_post__full .evo_post__full_text .videoblock,
@@ -1116,10 +1262,12 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
   .navbar-nav.evo_container__menu .ufld_icon_links a {
     background-color: transparent;
   }
-  .disp_posts .grid .grid-item.two-cols {
+  .disp_posts .grid .grid-item.two-cols,
+  .disp_mediaidx .grid .grid-item.two-cols {
     width: 50%;
   }
-  .disp_posts .grid .grid-item.three-cols {
+  .disp_posts .disp_posts .grid .grid-item.three-cols,
+  .disp_mediaidx .disp_posts .grid .grid-item.three-cols {
     width: 50%;
   }
 }
@@ -1148,12 +1296,30 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
     width: 100%;
     height: auto !important;
   }
+  .disp_mediaidx .mediaidx-item--wrapper .mediaidx-item {
+    margin: 10px 0px;
+    display: block;
+  }
 }
 @media (max-width: 992px) {
-  .navbar-nav.evo_container__menu .ufld_icon_links {
+  .evo_container__sidebar,
+  .evo_container__sidebar2 {
+    margin-top: 80px;
+  }
+  .evo_container__sidebar .widget_plugin_evo_Calr table,
+  .evo_container__sidebar2 .widget_plugin_evo_Calr table {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .evo_panel__login .skin-form .panel-heading h3 {
+    font-size: 18px;
+  }
+}
+@media (max-width: 1199px) {
+  .navbar-header .ufld_icon_links {
     width: 54px;
   }
-  .navbar-nav.evo_container__menu .ufld_icon_links:before {
+  .navbar-header .ufld_icon_links:before {
     font-family: FontAwesome;
     display: inline-block;
     content: '\f1e0';
@@ -1166,25 +1332,21 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
     -webkit-transition-timing-function: ease-in-out;
     transition-timing-function: ease-in-out;
   }
-  .navbar-nav.evo_container__menu .ufld_icon_links:hover:before {
+  .navbar-header .ufld_icon_links:hover:before {
     cursor: pointer;
     color: #fff;
   }
-  .navbar-nav.evo_container__menu .ufld_icon_links a {
+  .navbar-header .ufld_icon_links a {
     display: none;
     z-index: 1009;
   }
-  .navbar-nav.evo_container__menu .ufld_icon_links a.drop-down-social {
+  .navbar-header .ufld_icon_links a.drop-down-social {
     display: block;
     width: 55px;
   }
-  .evo_container__sidebar,
-  .evo_container__sidebar2 {
-    margin-top: 80px;
-  }
-  .evo_container__sidebar .widget_plugin_evo_Calr table,
-  .evo_container__sidebar2 .widget_plugin_evo_Calr table {
-    max-width: 320px;
-    margin: 0 auto;
-  }
+  /*.navbar-header {
+		.header-social-toggle {
+			display: block;
+		}
+	}*/
 }

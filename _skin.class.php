@@ -91,6 +91,10 @@ class ego_Skin extends Skin
 	 */
 	function get_param_definitions( $params )
 	{
+		
+		// Load to use function get_available_thumb_sizes()
+		load_funcs( 'files/model/_image.funcs.php' );
+		
 		$r = array_merge( array(
 				'section_layout_start' => array(
 					'layout' => 'begin_fieldset',
@@ -167,6 +171,12 @@ class ego_Skin extends Skin
 					'nav_search' => array(
 						'label' => T_('Navigation Search Field'),
 						'note' => T_('Check to enable a skin-specific search field in navigation menu.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'nav_social' => array(
+						'label' => T_('Navigation Social Links'),
+						'note' => T_('Check to enable a special social links widget in the navigation.'),
 						'defaultvalue' => 1,
 						'type' => 'checkbox',
 					),
@@ -372,6 +382,23 @@ Set the button destination in the back-office:",
 				'single_disp_end' => array(
 					'layout' => 'end_fieldset',
 				),
+				
+				
+				// Mediaidx disp customizations
+				'mediaidx_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Media Post Options')
+				),
+				   'mediaidx_thumb_size' => array(
+						'label'        => T_('Thumbnail size for media index'),
+						'note'         => '',
+						'defaultvalue' => 'fit-320x320',
+						'options'      => get_available_thumb_sizes(),
+						'type'         => 'select',
+					),
+				'mediaidx_end' => array(
+					'layout' => 'end_fieldset',
+				),
 
 
 				// Footer layout customzation
@@ -397,7 +424,7 @@ Set the button destination in the back-office:",
 						'defaultvalue'  => '#fff',
 						'type'          => 'color',
 					),
-				'single_disp_end' => array(
+				'footer_end' => array(
 					'layout' => 'end_fieldset',
 				),
 				
@@ -531,8 +558,8 @@ Set the button destination in the back-office:",
 		// Skin specific initializations:
 		require_js( $this->get_url().'js/scripts.js' );
 		
-		// Include Masonry Grind for Posts Disp
-		if ( $disp == 'posts' ) {
+		// Include Masonry Grind for Posts and Mediaidx disps
+		if ( in_array ( $disp, array( 'posts', 'mediaidx' ) ) ) {
 			require_js( $this->get_url() . 'js/masonry.pkgd.min.js' );
 			add_js_headline("
 				jQuery( document ).ready( function($) {
@@ -564,18 +591,25 @@ Set the button destination in the back-office:",
 			*/
 			if ( $links_color = $this->get_setting( 'links_color' ) ) {
 				$custom_css .= '.container.main-page-content a,
-				#submit_preview_buttons_wrapper .preview,
-				#submit_preview_buttons_wrapper .submit:hover,
-				.filter-submit
+				#submit_preview_buttons_wrapper .preview, #submit_preview_buttons_wrapper .submit:hover,
+				.filter-submit,
+				.disp_login .control-buttons input.btn-success, .disp_login .control-buttons a.btn-primary:hover,
+				.disp_lostpassword .control-buttons input.btn-primary:hover,
+				.disp_register .control-buttons input.btn-primary:hover
 				{ color: '. $links_color ." }\n";
+				
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a:hover,
 				.evo_post__categories a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a,
 				#submit_preview_buttons_wrapper .preview:hover,
 				.results .fieldset_title .action_icon:hover,
-				.filter-submit:hover
+				.filter-submit:hover, .form_add_contacts .SaveButton,
+				.disp_login .control-buttons input.btn-success:hover, .disp_login .control-buttons a.btn-primary,
+				.disp_lostpassword .control-buttons input.btn-primary,
+				.disp_register .control-buttons input.btn-primary
 				{ border: 1px solid '. $links_color ." }\n";
+				
 				$custom_css .= '
 				div.compact_search_form .search_submit,
 				.extra-section-btn-wrapper a:hover,
@@ -588,8 +622,13 @@ Set the button destination in the back-office:",
 				#submit_preview_buttons_wrapper .submit,
 				.evo_comment__meta_info .badge-meta,
 				.results .fieldset_title .action_icon:hover,
-				.filter-submit:hover
+				.filter-submit:hover,
+				.form_add_contacts .SaveButton, .disp_contacts .filter-submit:hover,
+				.disp_login .control-buttons a.btn-primary,
+				.disp_lostpassword .control-buttons input.btn-primary,
+				.disp_register .control-buttons input.btn-primary
 				{ background-color: '. $links_color ." }\n";
+				
 				$custom_css .= '
 				div.compact_search_form .search_submit,
 				.extra-section-btn-wrapper a,
@@ -597,8 +636,11 @@ Set the button destination in the back-office:",
 				.pagination>.active>span,
 				.pagination>.active>span:hover,
 				.pagination>li>a:hover,
-				#submit_preview_buttons_wrapper .submit
+				#submit_preview_buttons_wrapper .submit,
+				.form_add_contacts .SaveButton,
+				div.controls input:focus, div.form-control input:focus, textarea.form-control:focus, #login_form input:focus:invalid:focus, #login_form select:focus:invalid:focus, #login_form textarea:focus:invalid:focus
 				{ border-color: '. $links_color ." }\n";
+				
 				$custom_css .= '.evo_featured_post { border-left: 5px solid '. $links_color ." }\n";
 				
 				// Fix for Gender colors settings
@@ -609,13 +651,23 @@ Set the button destination in the back-office:",
 			}
 			
 			if ( $site_bg_color = $this->get_setting( 'site_bg_color' ) ) {
-				$custom_css .= '#skin_wrapper { background-color: '. $site_bg_color ." }\n";
+				$custom_css .= '#skin_wrapper,
+				.disp_contacts .filter-submit,
+				.disp_login .control-buttons input.btn-success, .disp_login .control-buttons a.btn-primary:hover,
+				.disp_lostpassword .control-buttons input.btn-primary:hover,
+				.disp_register .control-buttons input.btn-primary:hover
+				{ background-color: '. $site_bg_color ." }\n";
+				
 				$custom_css .= '
 				.extra-section-btn-wrapper a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
 				.pagination>li>a:hover,
 				.back-to-top, .back-to-top:hover, .back-to-top:active, .back-to-top:focus, .back-to-top:visited,
-				.results .fieldset_title .action_icon:hover, .filter-submit:hover
+				.results .fieldset_title .action_icon:hover, .filter-submit:hover,
+				.form_add_contacts .SaveButton,
+				.disp_login .control-buttons a.btn-primary,
+				.disp_lostpassword .control-buttons input.btn-primary,
+				.disp_register .control-buttons input.btn-primary
 				{ color: '. $site_bg_color ." }\n";
 			}
 			
@@ -630,10 +682,14 @@ Set the button destination in the back-office:",
 				.compact_search_form input.search_field,
 				.widget_plugin_evo_Arch ul li, .arcdir_list_wrapper ul li
 				{ border-bottom: 1px solid '. $site_borders ." }\n";
+				
 				$custom_css .= 'nav.navbar div.ufld_icon_links a,
 				.navbar-nav.evo_container__menu .ufld_icon_links:before,
-				.header-search-toggle
+				.header-search-toggle,
+				.navbar-toggle-hamb,
+				.header-social-toggle .ufld_icon_links:before
 				{ border-left: 1px solid '. $site_borders ." }\n";
+				
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a,
 				.evo_post header .categories-icon, .evo_featured_post .categories-icon,
@@ -645,13 +701,16 @@ Set the button destination in the back-office:",
 				.evo_comment,
 				.special_pager_layout li a,
 				.results .fieldset_title .action_icon,
-				.filter-submit
+				.filter-submit,
+				.disp_login .control-buttons input.btn-success
 				{ border: 1px solid '. $site_borders ." }\n";
+				
 				$custom_css .= '
 				.widget_plugin_evo_Calr .bCalendarTable th,
 				.widget_plugin_evo_Calr .bCalendarTable td,
 				.navbar-nav.evo_container__menu .ufld_icon_links a.drop-down-social
 				{ border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders ." }\n";
+				
 				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
 				$custom_css .= '#bCalendarToday, .special_pager_layout li a:hover, .results .fieldset_title .action_icon, .filter-submit { background-color: '. $site_borders ." }\n";
 				$custom_css .= 'blockquote { border-color: '. $site_borders ." }\n";
@@ -676,7 +735,7 @@ Set the button destination in the back-office:",
 			
 			if ( $nav_hamb_menu = $this->get_setting( 'nav_hamb_menu' ) ) {
 				$custom_css .= '@media (max-width: '. $nav_hamb_menu ."px) {
-				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important;}.navbar-nav {float: none!important;margin-top: 7.5px;}.navbar-nav>li {float: none;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}
+				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important;}.navbar-nav {float: none!important;margin-top: 7.5px;}.navbar-nav>li {float: none;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}.evo_container__menu .header-search-toggle{display: none}
 				}\n";
 			}
 			
@@ -716,6 +775,19 @@ Set the button destination in the back-office:",
 				if ( $sp_sw_f_col = $this->get_setting( 'sp_sw_f_col' ) ) {
 					$custom_css .= 'footer.sitewide_footer, footer.sitewide_footer a, footer.sitewide_footer a:hover { color: '. $sp_sw_f_col ." }\n";
 				}
+			}
+
+	
+			/**
+			* ============================================================================
+			* Sidebar widgets margin-top
+			* ============================================================================
+			*/
+			if ( $this->get_setting( 'sidebar2_single' ) == false ) {
+				// if Sidebar2 is NOT reserved for disp=single only, then:
+				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
+			} else {
+				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4, .evo_container__sidebar2 .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
 			}
 	
 		

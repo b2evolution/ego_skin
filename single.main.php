@@ -492,6 +492,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		?>
 		</div>
 
+		<div class="clearfix"></div>
 		<p class="center">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):

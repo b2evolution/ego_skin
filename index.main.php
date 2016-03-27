@@ -40,25 +40,57 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 <nav class="navbar">				
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+			<button type="button" class="navbar-toggle navbar-toggle-hamb collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
+				if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
+					<div class="navbar-toggle header-search-toggle">
+						<i class="fa fa-search search-field-toggle"></i>
+					</div>
+			<?php } // ---------------------- END OF "Menu" SEARCH TOGGLER ---------------------- ?>
+			
+			<?php // ------------------------- "Menu" SOCIAL LINKS --------------------------
+				if ( $Skin->get_setting( 'nav_social' ) == true ) { 
+					skin_widget( array(
+					// CODE for the widget:
+					'widget'              => 'user_links',
+					// Optional display params
+					'block_start'         => '<div class="evo_widget $wi_class$ navbar-toggle header-social-toggle">',
+					'block_end'           => '</div>',
+					'block_display_title' => false,
+				) );
+				}
+				  // ---------------------- END OF "Menu" SOCIAL LINKS ---------------------- ?>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
 			<ul class="navbar-nav evo_container evo_container__menu">
-			
+
 				<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
 					if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
 						<div class="header-search-toggle">
 							<i class="fa fa-search search-field-toggle"></i>
 						</div>
 				<?php } // ---------------------- END OF "Menu" SEARCH TOGGLER ---------------------- ?>
-				
+
+				<?php // ------------------------- "Menu" SOCIAL LINKS --------------------------
+					if ( $Skin->get_setting( 'nav_social' ) == true ) { 
+						skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'user_links',
+						// Optional display params
+						'block_start'         => '<div class="evo_widget $wi_class$ header-social-toggle visible-lg">',
+						'block_end'           => '</div>',
+						'block_display_title' => false,
+					) );
+					}
+					  // ---------------------- END OF "Menu" SOCIAL LINKS ---------------------- ?>
+
 				<?php
 					// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
 					// Display container and contents:
@@ -151,6 +183,8 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'display_edit_links'=> false,
 					'catdir_text' => T_('Categories'),
 					'arcdir_text' => T_('Archives'),
+					'contacts_text' => T_(''),
+					'search_text' => T_(''),
 				) );
 			// ----------------------------- END OF REQUEST TITLE ----------------------------
 		?>
@@ -291,6 +325,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		?>
 		</div>
 
+		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false ) { ?>
 		<div class="evo_container evo_container__sidebar2">
 		<?php
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
@@ -328,6 +363,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
 		</div>
+		<?php } // if Sidebar2 Single option not selected ?>
 	</aside><!-- .col -->
 	<?php }// if visible sidebar ?>
 
@@ -351,6 +387,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		?>
 		</div>
 
+		<div class="clearfix"></div>
 		<p class="center">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):

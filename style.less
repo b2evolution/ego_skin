@@ -28,6 +28,33 @@ body {
 	transition-duration: 0.1s;
 }
 
+// Fixed 
+#evo_toolbar {
+	-webkit-backface-visibility:hidden;
+	-webkit-transform: translateZ(0);
+}
+
+// Removing default outline
+textarea.form-control:focus,
+#login_form input:focus:invalid:focus,
+#login_form select:focus:invalid:focus,
+#login_form textarea:focus:invalid:focus,
+div.control input:focus  {
+	outline: 0;
+	box-shadow: none;
+}
+
+// Removing default :focus layout
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus, .btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+    outline: 0;
+    outline-offset: 0;
+    box-shadow: none;
+}
+
 
 
 // ****************************************************************************
@@ -68,7 +95,15 @@ body {
 			text-decoration: underline;
 		}
 	}
-	
+}
+
+.navbar-nav.evo_container__menu, .navbar-header {
+	.navbar-toggle-hamb {
+		padding: 21px 16px;
+		margin: 0;
+		border-top: 0; border-right: 0; border-bottom: 0;
+		border-radius: 0;
+	}
 	// User links in menu
 	.ufld_icon_links {
 		height: 54px;
@@ -112,27 +147,36 @@ body {
 			}
 		}
 	}
+}
 	
-	// Header search section toggler
-	.header-search-toggle {
-		float: right;
-		i {
-			padding: 20px;
-			
-			.transition-0.1s;
-			-webkit-transition-property: transform;
-			transition-property: transform;
-			-webkit-transition-timing-function: ease-in-out;
-			transition-timing-function: ease-in-out;
-			
-			&:hover {
-				cursor: pointer;
-				-webkit-transform: scale(1.4);
-				transform: scale(1.4);
-			}
+// Header search section toggler
+.header-search-toggle {
+	float: right;
+	padding: 0;
+	margin: 0;
+	i {
+		padding: 20px;
+
+		.transition-0.1s;
+		-webkit-transition-property: transform;
+		transition-property: transform;
+		-webkit-transition-timing-function: ease-in-out;
+		transition-timing-function: ease-in-out;
+
+		&:hover {
+			cursor: pointer;
+			-webkit-transform: scale(1.4);
+			transform: scale(1.4);
 		}
 	}
 }
+
+// Header social button toggler
+.header-social-toggle {
+	padding: 0;
+	margin: 0;
+}
+
 // Top Search Field Layout
 .header-main-search-field {
 	display: none;
@@ -216,10 +260,7 @@ body {
 	}
 	.field_login_btn {
 		.panel {
-			margin: 0;
-			border: none;
-			border-radius: 0;
-			box-shadow: none;
+			.panel-default-remove;
 			.panel-body {
 				padding-left: 0;
 				padding-right: 0;
@@ -554,7 +595,6 @@ textarea.message_text {
 // Masonry Posts layout
 .disp_posts .grid-item {
 	&.two-cols, &.three-cols {
-		//float: left;
 		padding: 0 15px;
 		article {
 			margin-bottom: 15px;
@@ -758,52 +798,78 @@ div.bSideItem {
 	.control-buttons, div.input {
 		padding: 0;
 		width: 100%;
-		text-align: center;
 	}
 }
-.evo_panel__login, .evo_panel__lostpass, .evo_panel__register, .evo_panel__activation {
-	min-width: 290px;
-	margin: 1.5em auto auto;
-	.panel {
-		margin: 5px 0;
-	}
-	.panel-body {
-		padding-top: 20px;
-		padding-bottom: 0;
-	}
+
+
+
+// ****************************************************************************
+// Disp login, Disp lostpass, Disp register
+// ****************************************************************************
+
+.panel-default-remove {
+	padding: 0;
+	border: 0;
+	box-shadow: none;
+	border-radius: 0;
+	background: transparent;
 }
-.evo_panel__login {
-	max-width: 400px;
-}
-.evo_panel__lostpass {
-	max-width: 480px;
-	#ffield_x label {
-		display: none;
-	}
-}
-.evo_panel__activation {
-	max-width: 530px;
-	#activateinfo_form .control-buttons{
-		text-align: left;
-	}
-}
-.evo_panel__register {
-	max-width: 580px;
-	.control-buttons{
-		text-align: left;
-	}
-	&.register-disabled {
-		width: 350px;
-	}
-	.form-control {
-		&#country, &#u {
-			width: 100%;
+
+.evo_panel__login, .evo_panel__lostpass, .evo_panel__register {
+	.skin-form {
+		.panel-default-remove;
+		
+		.panel-heading {
+			.panel-default-remove;
+			h3 {
+				font-size: 32px;
+				margin-bottom: 30px;
+			}
+		}
+		
+		.panel-body {
+			.panel-default-remove;
+			
+			.evo_form__login.form-horizontal, .evo_form__register {
+				.comment-form {
+					.form-group {
+						float: none;
+						display: block;
+						min-width: 290px;
+						max-width: 400px;
+						
+						div.control input {
+							padding: 20px 15px;
+							border-radius: 2px;
+							box-shadow: none;
+						}
+					}
+					.control-buttons {
+						input.btn-success, a.btn-primary {
+							display: block;
+							float: left !important;
+							margin: 0 10px 0 0;
+							
+							-webkit-transition: all 0.3s ease-in-out;
+							transition: all 0.3s ease-in-out;
+							padding: 12px 15px;
+							font-size: 16px;
+						}
+						input.btn-primary {
+							padding: 12px 15px;
+							font-size: 16px;
+							-webkit-transition: all 0.3s ease-in-out;
+							transition: all 0.3s ease-in-out;
+						}
+					}
+				}
+			}
 		}
 	}
-}
-.evo_form__login_links {
-	padding: 0 5px;
-	font-size: 92%;
+	.evo_login_dialog_standard_link, .evo_login_dialog_footer {
+		text-align: left;
+		margin-left: 0; margin-right: 0;
+	}
 }
 .evo_form__login {
 	fieldset {
@@ -824,8 +890,58 @@ div.bSideItem {
 		margin-top: 5px;
 	}
 }
-#login_form {
+.evo_form__login_links {
+	padding: 0 5px;
+	font-size: 92%;
+}
+.evo_panel__lostpass {
 	.control-buttons {
+		margin-bottom: 20px;
+	}
+	#ffield_x label {
+		display: none;
+	}
+	div.fieldset {
+		font-size: 16px;
+	}
+}
+.evo_panel__register {
+	.control-buttons{
+		text-align: left;
+	}
+	&.register-disabled {
+		width: 350px;
+	}
+	.form-control {
+		&#country, &#u {
+			width: 100%;
+		}
+	}
+	.evo_form__register .form-group {
+		float: none;
+		width: 100%;
+		
+		div.controls input.wide_input {
+			max-width: 400px;
+		}
+	}
+}
+
+
+
+.evo_panel__activation {
+	margin: 1.5em auto auto;
+	.panel {
+		margin: 5px 0;
+	}
+	.panel-body {
+		padding-top: 20px;
+		padding-bottom: 0;
+	}
+}
+
+.evo_panel__activation {
+	#activateinfo_form .control-buttons{
 		text-align: left;
 	}
 }
@@ -836,6 +952,10 @@ div.bSideItem {
 .form_footer_notes {
 	margin-top: 0;
 }
+
+// *****************************************************************************
+
+
 
 // Pagination
 .pagination {
@@ -867,16 +987,6 @@ footer.row {
 		margin-bottom: 30px;
 	}
 }
-
-
-
-
-// ****************************************************************************
-// Footer section
-// ****************************************************************************
-
-
-
 
 
 
@@ -1078,14 +1188,6 @@ div.widget_core_coll_avatar {
 
 // Sidebar widgets
 .evo_container__sidebar, .evo_container__sidebar2 {
-
-	// No margin-top on the first widget title
-	.evo_widget:nth-child(1) {
-		div > h4 {
-			margin-top: 0 !important;
-		}
-	}
-
 	padding: 0 20px;
 	.widget_core_coll_post_list, 
 	.widget_core_coll_comment_list, 
@@ -1176,6 +1278,24 @@ p.tag_cloud a {
 // Disp mediaidx module
 // ****************************************************************************
 @import "less/_mediaidx.disp.less";
+
+// ****************************************************************************
+// Disp postidx
+// ****************************************************************************
+
+
+// ****************************************************************************
+// Disp error 404 & Disp postidx
+// ****************************************************************************
+.disp_404, .disp_postidx
+main {
+	h2 {
+		margin-bottom: 30px;
+	}
+	p {
+		font-size: 16px;
+	}
+}
 
 // ****************************************************************************
 // Responsive layout module

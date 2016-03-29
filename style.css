@@ -605,6 +605,12 @@ textarea.message_text {
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
 }
+.disp_single .evo_comment__meta_info a {
+  border-radius: 3px;
+  background-color: transparent;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
 .comments-wrapper,
 #feedbacks .alert.alert-info {
   margin-top: 80px;
@@ -1237,6 +1243,131 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
 .disp_404 p,
 .disp_postidx main p {
   font-size: 16px;
+}
+.disp_search .widget_core_coll_search_form .extended_search_form {
+  max-width: 100%;
+}
+.disp_search .widget_core_coll_search_form .extended_search_form .input-group {
+  width: 100%;
+}
+.disp_search .widget_core_coll_search_form .extended_search_form .input-group .search_field {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  box-shadow: none;
+  outline: 0;
+  text-align: center;
+  font-size: 26px;
+  height: 100%;
+  padding: 20px 5px;
+}
+.disp_search .widget_core_coll_search_form .extended_search_form .input-group span.input-group-btn {
+  display: none;
+}
+.search_result {
+  padding: 0;
+  margin-bottom: 80px;
+}
+.search_result .search_result_score {
+  float: none;
+  display: inline-block;
+  padding: 15px;
+  font-size: 100%;
+  line-height: 27px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  width: auto;
+}
+.search_result .search_content_wrap {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7em;
+}
+.disp_user .profile_content a:hover {
+  background-color: transparent;
+}
+.disp_user .profile_content .profile_column_right fieldset.fieldset legend.panel-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  padding-bottom: 5px;
+  font-weight: bold;
+  margin: 50px 0 30px;
+}
+.disp_user .profile_content .profile_column_left .profile_buttons a button.btn {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.disp_posts.detail_posts-cat main > h2,
+.disp_posts.detail_posts-date main > h2,
+.disp_posts.detail_posts-tag main > h2,
+.disp_posts.detail_posts-subcat main > h2,
+.disp_posts.detail_posts-filtered main > h2 {
+  margin-bottom: 30px;
+}
+.disp_msgform main .skin-form {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.disp_msgform main .skin-form .panel-heading {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.disp_msgform main .skin-form .panel-heading h3 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.disp_msgform main .skin-form .panel-body {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.disp_msgform main .skin-form .panel-body .form-group {
+  float: none;
+  display: block;
+}
+.disp_msgform main .skin-form .panel-body .form-group .controls input.submit {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 3px;
+}
+.disp_threads.detail_msgform main .comment-form {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.disp_threads.detail_msgform main .comment-form .panel-heading {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+.disp_threads.detail_msgform main .comment-form .panel-heading h3 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.disp_threads.detail_msgform main .comment-form .form-group {
+  float: none;
+  display: block;
+  width: 100%;
+}
+.disp_threads.detail_msgform main .comment-form .form-group .controls input.submit {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 3px;
 }
 @media (min-width: 768px) {
   .evo_post .evo_post__full .evo_post__full_text .videoblock,

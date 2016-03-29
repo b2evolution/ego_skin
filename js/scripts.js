@@ -15,6 +15,10 @@ jQuery(document).ready(function() {
 			jQuery('.header-main-search-field').fadeOut(400);
 		}
 	});
+	
+	/* Disp search search field placeholder
+	*********************************************************/
+	jQuery( ".disp_search .extended_search_form .search_field" ).attr("placeholder", "Type in and hit enter");
 
 	/* Header Social Section
 	*********************************************************/

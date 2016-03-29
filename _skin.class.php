@@ -595,7 +595,9 @@ Set the button destination in the back-office:",
 				.filter-submit,
 				.disp_login .control-buttons input.btn-success, .disp_login .control-buttons a.btn-primary:hover,
 				.disp_lostpassword .control-buttons input.btn-primary:hover,
-				.disp_register .control-buttons input.btn-primary:hover
+				.disp_register .control-buttons input.btn-primary:hover,
+				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn,
+				.disp_msgform main .comment-form input.submit:hover
 				{ color: '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -607,7 +609,9 @@ Set the button destination in the back-office:",
 				.filter-submit:hover, .form_add_contacts .SaveButton,
 				.disp_login .control-buttons input.btn-success:hover, .disp_login .control-buttons a.btn-primary,
 				.disp_lostpassword .control-buttons input.btn-primary,
-				.disp_register .control-buttons input.btn-primary
+				.disp_register .control-buttons input.btn-primary,
+				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
+				.disp_msgform main .comment-form input.submit
 				{ border: 1px solid '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -626,7 +630,10 @@ Set the button destination in the back-office:",
 				.form_add_contacts .SaveButton, .disp_contacts .filter-submit:hover,
 				.disp_login .control-buttons a.btn-primary,
 				.disp_lostpassword .control-buttons input.btn-primary,
-				.disp_register .control-buttons input.btn-primary
+				.disp_register .control-buttons input.btn-primary,
+				.search_result_score,
+				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
+				.disp_msgform main .comment-form input.submit
 				{ background-color: '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -655,7 +662,8 @@ Set the button destination in the back-office:",
 				.disp_contacts .filter-submit,
 				.disp_login .control-buttons input.btn-success, .disp_login .control-buttons a.btn-primary:hover,
 				.disp_lostpassword .control-buttons input.btn-primary:hover,
-				.disp_register .control-buttons input.btn-primary:hover
+				.disp_register .control-buttons input.btn-primary:hover,
+				.disp_msgform main .comment-form input.submit:hover
 				{ background-color: '. $site_bg_color ." }\n";
 				
 				$custom_css .= '
@@ -667,7 +675,10 @@ Set the button destination in the back-office:",
 				.form_add_contacts .SaveButton,
 				.disp_login .control-buttons a.btn-primary,
 				.disp_lostpassword .control-buttons input.btn-primary,
-				.disp_register .control-buttons input.btn-primary
+				.disp_register .control-buttons input.btn-primary,
+				.search_result_score,
+				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
+				.disp_msgform main .comment-form input.submit
 				{ color: '. $site_bg_color ." }\n";
 			}
 			
@@ -680,7 +691,8 @@ Set the button destination in the back-office:",
 				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
 				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes,
 				.compact_search_form input.search_field,
-				.widget_plugin_evo_Arch ul li, .arcdir_list_wrapper ul li
+				.widget_plugin_evo_Arch ul li, .arcdir_list_wrapper ul li,
+				.disp_user .profile_content .profile_column_right fieldset.fieldset legend.panel-title
 				{ border-bottom: 1px solid '. $site_borders ." }\n";
 				
 				$custom_css .= 'nav.navbar div.ufld_icon_links a,
@@ -712,10 +724,24 @@ Set the button destination in the back-office:",
 				{ border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders ." }\n";
 				
 				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
-				$custom_css .= '#bCalendarToday, .special_pager_layout li a:hover, .results .fieldset_title .action_icon, .filter-submit { background-color: '. $site_borders ." }\n";
-				$custom_css .= 'blockquote { border-color: '. $site_borders ." }\n";
+				
+				$custom_css .= '#bCalendarToday,
+				.special_pager_layout li a:hover,
+				.results .fieldset_title .action_icon,
+				.filter-submit,
+				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn,
+				.disp_single .evo_comment__meta_info a:hover
+				{ background-color: '. $site_borders ." }\n";
+				
+				$custom_css .= 'blockquote,
+				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn,
+				.disp_usercomments .results table.table th, .disp_useritems .results table.table th,
+				.disp_single .evo_comment__meta_info a
+				{ border-color: '. $site_borders ." }\n";
+				
 				$custom_css .= '.evo_comment_avatar img { border: 3px solid '. $site_borders ." }\n";
 				$custom_css .= '.comment-form--title { border-top: 3px solid '. $site_borders ." }\n";
+				$custom_css .= '.disp_search .widget_core_coll_search_form .extended_search_form .search_field { border-bottom: 2px solid '. $site_borders ." }\n";
 			}
 		
 		
@@ -1008,18 +1034,18 @@ Set the button destination in the back-office:",
 					'formend'        => '',
 					'title_fmt'      => '<span style="float:right">$global_icons$</span><h2>$title$</h2>'."\n",
 					'no_title_fmt'   => '<span style="float:right">$global_icons$</span>'."\n",
-					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="fieldset_wrapper_$id$"><fieldset $fieldset_attribs$><div class="panel panel-default">'."\n"
-															.'<legend class="panel-heading" $title_attribs$>$fieldset_title$</legend><div class="panel-body $class$">'."\n",
+					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="fieldset_wrapper_$id$"><fieldset $fieldset_attribs$><div class="">'."\n"
+															.'<legend class="panel-title" $title_attribs$>$fieldset_title$</legend><div class="$class$">'."\n",
 					'fieldset_end'   => '</div></div></fieldset></div>'."\n",
 					'fieldstart'     => '<div class="form-group fixedform-group" $ID$>'."\n",
 					'fieldend'       => "</div>\n\n",
-					'labelclass'     => 'control-label fixedform-label',
+					'labelclass'     => '',
 					'labelstart'     => '',
 					'labelend'       => "\n",
 					'labelempty'     => '<label class="control-label fixedform-label"></label>',
-					'inputstart'     => '<div class="controls fixedform-controls">',
+					'inputstart'     => '<div class="">',
 					'inputend'       => "</div>\n",
-					'infostart'      => '<div class="controls fixedform-controls"><div class="form-control-static">',
+					'infostart'      => '<div class=""><div class="">',
 					'infoend'        => "</div></div>\n",
 					'buttonsstart'   => '<div class="form-group"><div class="control-buttons fixedform-controls">',
 					'buttonsend'     => "</div></div>\n\n",

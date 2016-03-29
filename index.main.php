@@ -185,6 +185,9 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'arcdir_text' => T_('Archives'),
 					'contacts_text' => T_(''),
 					'search_text' => T_(''),
+					'messages_text' => T_('Contact us:'),
+					'usercomments_text' => T_(''),
+					'useritems_text' => T_(''),
 				) );
 			// ----------------------------- END OF REQUEST TITLE ----------------------------
 		?>
@@ -270,7 +273,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'featured_intro_before' => '<div class="intro_background_image"></div>',
 					'featured_intro_after'  => '',
 					// Form "Sending a message"
-					'msgform_form_title' => T_('Sending a message'),
+					'msgform_form_title' => T_('Contact us:'),
 				) );
 			// Note: you can customize any of the sub templates included here by
 			// copying the matching php file into your skin directory.

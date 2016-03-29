@@ -639,6 +639,14 @@ textarea.message_text {
 	}
 }
 
+// Disp single add meta comments button
+.disp_single .evo_comment__meta_info a {
+	border-radius: 3px;
+	background-color: transparent;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
 
 
 // ****************************************************************************
@@ -1294,6 +1302,118 @@ main {
 	}
 	p {
 		font-size: 16px;
+	}
+}
+
+// ****************************************************************************
+// Disp search module
+// ****************************************************************************
+@import "less/_search.disp.less";
+
+// ****************************************************************************
+// Disp user
+// ****************************************************************************
+.disp_user {
+	.profile_content {
+		a:hover {
+			background-color: transparent;
+		}
+		.profile_column_right {
+			fieldset.fieldset legend.panel-title {
+				font-size: 16px;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				text-align: center;
+				padding-bottom: 5px;
+				font-weight: bold;
+				margin: 50px 0 30px;
+			}
+		}
+		.profile_column_left {
+			.profile_buttons a button.btn {
+				-webkit-transition: all 0.3s ease-in-out;
+				transition: all 0.3s ease-in-out;
+			}
+		}
+	}
+}
+
+// ****************************************************************************
+// Disp posts-cat, Disp posts-date, Disp posts-tag, Disp posts-subcat, Disp posts-filtered
+// ****************************************************************************
+.disp_posts {
+	&.detail_posts-cat, &.detail_posts-date, &.detail_posts-tag, &.detail_posts-subcat, &.detail_posts-filtered {
+		main {
+			> h2 {
+				margin-bottom: 30px;
+			}
+		}
+	}
+}
+
+// ****************************************************************************
+// Disp msgform
+// ****************************************************************************
+.disp_msgform {
+	main .skin-form {
+		.panel-default-remove;
+		
+		.panel-heading {
+			.panel-default-remove;
+			h3 {
+				font-size: 32px;
+				margin-bottom: 30px;
+			}
+		}
+		
+		.panel-body {
+			.panel-default-remove;
+			
+			.form-group {
+				float: none;
+				display: block;
+				
+				.controls {
+					input.submit {
+						-webkit-transition: all 0.3s ease-in-out;
+						transition: all 0.3s ease-in-out;
+						border-radius: 3px;
+					}
+				}
+			}
+		}
+	}
+}
+
+// ****************************************************************************
+// Disp msgform
+// ****************************************************************************
+.disp_threads.detail_msgform {
+	main .comment-form {
+		.panel-default-remove;
+		
+		.panel-heading {
+			.panel-default-remove;
+			h3 {
+				font-size: 32px;
+				margin-bottom: 30px;
+			}
+		}
+
+			.form-group {
+				float: none;
+				display: block;
+				width: 100%;
+				
+				.controls {
+					input.submit {
+						-webkit-transition: all 0.3s ease-in-out;
+						transition: all 0.3s ease-in-out;
+						border-radius: 3px;
+					}
+				}
+			}
+
 	}
 }
 

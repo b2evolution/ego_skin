@@ -46,6 +46,17 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			
+				<?php // ------------------------- "Menu" Collection title --------------------------
+					skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'coll_title',
+						// Optional display params
+						'block_start'         => '<div class="navbar-brand">',
+						'block_end'           => '</div>',
+						'item_class'           => 'navbar-brand',
+					) );
+					  // ---------------------- END OF "Menu" Collection title ---------------------- ?>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->

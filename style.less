@@ -79,7 +79,7 @@ div.control input:focus  {
 	}
 }
 .navbar-nav.evo_container__menu {
-	width: 100%;
+	// width: 100%;
 	li {
 		margin-top: 17px;
 		list-style-type: none;
@@ -98,6 +98,23 @@ div.control input:focus  {
 }
 
 .navbar-nav.evo_container__menu, .navbar-header {
+	.navbar-brand {
+		height: 0;
+		padding: 0;
+		float: none !important;
+		h3 {
+			margin: 10px 0 0 15px;
+			a {
+				border: 0 !important;
+				margin: 0 15px 0 0 !important;
+				letter-spacing: -0.15px;
+				font-size: 14px;
+				padding: 20px 0;
+				text-transform: uppercase;
+				font-weight: 900;
+			}
+		}
+	}
 	.navbar-toggle-hamb {
 		padding: 21px 16px;
 		margin: 0;
@@ -151,7 +168,8 @@ div.control input:focus  {
 	
 // Header search section toggler
 .header-search-toggle {
-	float: right;
+	position: absolute;
+	right: 0;
 	padding: 0;
 	margin: 0;
 	i {
@@ -721,9 +739,10 @@ textarea.message_text {
 	}
 
 	.form-control {
-		padding: 20px 15px;
+		padding: 12px 15px;
 		border-radius: 2px;
 		box-shadow: none;
+		height: auto;
 	}
 
 	#submit_preview_buttons_wrapper { // Submit and preview buttons background-color on hover remove

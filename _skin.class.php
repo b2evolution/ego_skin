@@ -619,8 +619,8 @@ Set the button destination in the back-office:",
 				.extra-section-btn-wrapper a:hover,
 				.navbar-nav.evo_container__menu .ufld_icon_links:hover:before,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
-				.pagination>.active>span,
-				.pagination>.active>span:hover,
+				.pagination>.active>a,
+				.pagination>.active>a:hover,
 				.pagination>li>a:hover,
 				.back-to-top,
 				#submit_preview_buttons_wrapper .submit,
@@ -669,7 +669,7 @@ Set the button destination in the back-office:",
 				$custom_css .= '
 				.extra-section-btn-wrapper a:hover,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
-				.pagination>li>a:hover,
+				.pagination>li>a:hover, .pagination>.active>a, .pagination>.active>a:hover,
 				.back-to-top, .back-to-top:hover, .back-to-top:active, .back-to-top:focus, .back-to-top:visited,
 				.results .fieldset_title .action_icon:hover, .filter-submit:hover,
 				.form_add_contacts .SaveButton,
@@ -761,7 +761,7 @@ Set the button destination in the back-office:",
 			
 			if ( $nav_hamb_menu = $this->get_setting( 'nav_hamb_menu' ) ) {
 				$custom_css .= '@media (max-width: '. $nav_hamb_menu ."px) {
-				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important;}.navbar-nav {float: none!important;margin-top: 7.5px;}.navbar-nav>li {float: none;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}.evo_container__menu .header-search-toggle{display: none}
+				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important;margin-bottom: 17px;}.navbar-nav {float: none!important;margin-top: 7.5px;overflow: hidden;}.navbar-nav>li {float: none;margin-left: 15px;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}.evo_container__menu .header-search-toggle{display: none}
 				}\n";
 			}
 			

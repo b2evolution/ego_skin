@@ -13,7 +13,7 @@
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
-global $Item, $Skin;
+global $Item, $Skin, $app_version;
 
 // Default params:
 $params = array_merge( array(
@@ -313,6 +313,8 @@ echo '">'; // Beginning of post display
 	?>
 
 	<?php
+	 if( evo_version_compare( $app_version, '6.7' ) > 0 )
+   {
 		// ------------------ WORKFLOW PROPERTIES INCLUDED HERE ------------------
 		skin_include( '_item_workflow.inc.php' );
 		// ---------------------- END OF WORKFLOW PROPERTIES ---------------------
@@ -325,6 +327,8 @@ echo '">'; // Beginning of post display
 				'comment_end'           => '</article>',
 			) );
 		// ---------------------- END OF META COMMENTS ---------------------
+		
+   }
 	?>
 
 	<?php

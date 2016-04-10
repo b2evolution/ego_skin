@@ -64,7 +64,7 @@ echo '">'; // Beginning of post display
 	<?php
 		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
 
-		if( ! $Item->is_intro() ) {
+		if( ! $Item->is_intro() && $disp != 'page' ) {
 			if ( $Skin->get_setting( 'posts_format' ) != 'masonry' || empty($Item->get_cover_image_url()) ) { ?>
 			<div class="evo_post__categories"><i class="fa fa-folder-open categories-icon <?php if ( $disp == 'posts' && $Skin->get_setting( 'posts_format' ) == 'simple' ) { echo 'hidden'; } ?>"></i>
 		<?php // Categories
@@ -76,6 +76,8 @@ echo '">'; // Beginning of post display
 				'include_other'   => true,
 				'include_external'=> true,
 				'link_categories' => true,
+				'before_external' => '',   // string fo display before EXTERNAL categories
+				'after_external'  => '',  
 			) );
 			}
 		}
@@ -312,24 +314,26 @@ echo '">'; // Beginning of post display
 		// ---------------------- END OF FEEDBACK (COMMENTS/TRACKBACKS) ---------------------
 	?>
 
-	<?php
-	 if( evo_version_compare( $app_version, '6.7' ) > 0 )
-   {
-		// ------------------ WORKFLOW PROPERTIES INCLUDED HERE ------------------
-		skin_include( '_item_workflow.inc.php' );
-		// ---------------------- END OF WORKFLOW PROPERTIES ---------------------
-	?>
+    <?php
+    if( evo_version_compare( $app_version, '6.7' ) >= 0 )
+    {    // We are running at least b2evo 6.7, so we can include this file:
+        // ------------------ WORKFLOW PROPERTIES INCLUDED HERE ------------------
+        skin_include( '_item_workflow.inc.php' );
+        // ---------------------- END OF WORKFLOW PROPERTIES ---------------------
+    }
+    ?>
 
-	<?php
-		// ------------------ META COMMENTS INCLUDED HERE ------------------
-		skin_include( '_item_meta_comments.inc.php', array(
-				'comment_start'         => '<article class="evo_comment evo_comment__meta panel panel-default">',
-				'comment_end'           => '</article>',
-			) );
-		// ---------------------- END OF META COMMENTS ---------------------
-		
-   }
-	?>
+    <?php
+    if( evo_version_compare( $app_version, '6.7' ) >= 0 )
+    {    // We are running at least b2evo 6.7, so we can include this file:
+        // ------------------ META COMMENTS INCLUDED HERE ------------------
+        skin_include( '_item_meta_comments.inc.php', array(
+                'comment_start'         => '<article class="evo_comment evo_comment__meta panel panel-default">',
+                'comment_end'           => '</article>',
+            ) );
+        // ---------------------- END OF META COMMENTS ---------------------
+    }
+    ?>
 
 	<?php
 		locale_restore_previous();	// Restore previous locale (Blog locale)

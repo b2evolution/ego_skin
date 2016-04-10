@@ -40,12 +40,48 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 <nav class="navbar">				
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+			<button type="button" class="navbar-toggle navbar-toggle-hamb collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			
+				<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
+					if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
+						<div class="navbar-toggle header-search-toggle">
+							<i class="fa fa-search search-field-toggle"></i>
+						</div>
+				<?php } // ---------------------- END OF "Menu" SEARCH TOGGLER ---------------------- ?>
+				
+				<?php // ------------------------- "Menu" SOCIAL LINKS --------------------------
+					if ( $Skin->get_setting( 'nav_social' ) == true ) { 
+						skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'user_links',
+						// Optional display params
+						'block_start'         => '<div class="evo_widget $wi_class$ navbar-toggle header-social-toggle">',
+						'block_end'           => '</div>',
+						'block_display_title' => false,
+					) );
+					}
+				  // ---------------------- END OF "Menu" SOCIAL LINKS ---------------------- 
+				  ?>
+			
+				<?php 
+				// ------------------------- "Menu" Collection title --------------------------
+					skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'coll_title',
+						// Optional display params
+						'block_start'         => '<div class="navbar-brand">',
+						'block_end'           => '</div>',
+						'item_class'           => 'navbar-brand',
+					) );
+				// ---------------------- END OF "Menu" Collection title ---------------------- 
+				?>
+				
+				
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,6 +94,19 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 							<i class="fa fa-search search-field-toggle"></i>
 						</div>
 				<?php } // ---------------------- END OF "Menu" SEARCH TOGGLER ---------------------- ?>
+
+				<?php // ------------------------- "Menu" SOCIAL LINKS --------------------------
+					if ( $Skin->get_setting( 'nav_social' ) == true ) { 
+						skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'user_links',
+						// Optional display params
+						'block_start'         => '<div class="evo_widget $wi_class$ menu-social-toggle">',
+						'block_end'           => '</div>',
+						'block_display_title' => false,
+					) );
+					}
+					  // ---------------------- END OF "Menu" SOCIAL LINKS ---------------------- ?>
 				
 				<?php
 					// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------

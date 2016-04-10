@@ -34,16 +34,6 @@ if( isset( $thumbnail_sizes[ $params['mediaidx_thumb_size'] ] ) )
 		.'height:'.$thumbnail_sizes[ $params['mediaidx_thumb_size'] ][2].'px"';
 }
 
-// Customizable settings
-$mediaidx_grid = $Skin->get_setting( 'mediaidx_grid' );
-$grid = "";
-if ( $mediaidx_grid == 'one_column' ) {
-   $grid = "one";
-} else if ( $mediaidx_grid == 'three_column' ) {
-   $grid = 'three';
-}
-
-
 // --------------------------------- START OF MEDIA INDEX --------------------------------
 skin_widget( array(
 		// CODE for the widget:
@@ -56,7 +46,7 @@ skin_widget( array(
 		'thumb_layout' => 'list',
 		'list_start' => '<div class="mediaidx-item--wrapper">',
 		'list_end' => '</div>',
-	    'item_start' => '<div class="mediaidx-item">',
+	    'item_start' => '<div class="mediaidx-item" style=" '. $photocell_styles .'">',
 		'item_end' => '</div>',
 		'order_by' => $Blog->get_setting('orderby'),
 		'order_dir' => $Blog->get_setting('orderdir'),

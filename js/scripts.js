@@ -18,12 +18,12 @@ jQuery(document).ready(function() {
 	
 	/* Disp search search field placeholder
 	*********************************************************/
-	jQuery( ".disp_search .extended_search_form .search_field" ).attr("placeholder", "Type in and hit enter");
+	jQuery( ".disp_search .extended_search_form .search_field, .disp_front .compact_search_form .search_field" ).attr("placeholder", "Type in and hit enter");
 
 	/* Header Social Section
 	*********************************************************/
 	jQuery('.ufld_icon_links').click(function() {
-		// When < 992px, social in header becomes drop-down
+		// Social in header becomes drop-down
 		$( '.ufld_icon_links a' ).toggleClass(' drop-down-social');
 	});
 	

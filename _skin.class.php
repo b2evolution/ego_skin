@@ -124,19 +124,19 @@ class ego_Skin extends Skin
 					),
 					'links_color' => array(
 						'label'        => T_('Links Color Schemes'),
-						'note'         => T_('Default links color schemes is #096.'),
+						'note'         => T_('Default links color schemes is #096. This color is used for links, buttons, hover and active classes.'),
 						'defaultvalue' => '#096',
 						'type'         => 'color',
 					),
 					'site_bg_color' => array(
-						'label'         => T_('Site background color'),
-						'note'          => T_('Default color is #fff.'),
+						'label'         => T_('Color scheme supporting color'),
+						'note'          => T_('Default supporting color is #fff. This color appears as the second color scheme combination and is used as a supporting color for links and page sections.'),
 						'defaultvalue'  => '#fff',
 						'type'          => 'color',
 					),
 					'site_borders' => array(
-						'label'         => T_('Borders color on site'),
-						'note'          => T_('Default color is #eee. If you wan\'t to remove borders, simply set their color the same as the background color.'),
+						'label'         => T_('Color scheme second supporting color'),
+						'note'          => T_('Default color is #eee. This color is used as a third color color used for the custom site color scheme. It is mostly used for borders on elements.'),
 						'defaultvalue'  => '#eee',
 						'type'          => 'color',
 					),
@@ -387,7 +387,7 @@ Set the button destination in the back-office:",
 				// Mediaidx disp customizations
 				'mediaidx_start' => array(
 					'layout' => 'begin_fieldset',
-					'label'  => T_('Media Post Options')
+					'label'  => T_('Media Page Options')
 				),
 				   'mediaidx_thumb_size' => array(
 						'label'        => T_('Thumbnail size for media index'),
@@ -516,11 +516,9 @@ Set the button destination in the back-office:",
 						'note' => '',
 						'type' => 'checklist',
 						'options' => array(
-							array( 'header',   sprintf( T_('"%s" container'), NT_('Header') ),    1 ),
-							array( 'page_top', sprintf( T_('"%s" container'), NT_('Page Top') ),  1 ),
-							array( 'menu',     sprintf( T_('"%s" container'), NT_('Menu') ),      0 ),
-							array( 'sidebar',  sprintf( T_('"%s" container'), NT_('Sidebar') ),   0 ),
-							array( 'sidebar2', sprintf( T_('"%s" container'), NT_('Sidebar 2') ), 0 ),
+							array( 'menu',     sprintf( T_('"%s" container'), NT_('Menu') ),      1 ),
+							array( 'sidebar',  sprintf( T_('"%s" container'), NT_('Sidebar') ),   1 ),
+							array( 'sidebar2', sprintf( T_('"%s" container'), NT_('Sidebar 2') ), 1 ),
 							array( 'footer',   sprintf( T_('"%s" container'), NT_('Footer') ),    1 ) ),
 						),
 				'section_access_end' => array(
@@ -597,7 +595,11 @@ Set the button destination in the back-office:",
 				.disp_lostpassword .control-buttons input.btn-primary:hover,
 				.disp_register .control-buttons input.btn-primary:hover,
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn,
-				.disp_msgform main .comment-form input.submit:hover
+				.disp_msgform main .comment-form input.submit:hover,
+				.navbar-brand h3 a,
+				.disp_access_denied .control-buttons input.btn-success,
+				.disp_access_requires_login .control-buttons input.btn-success, .disp_access_requires_login .control-buttons a.btn-primary:hover,
+				.disp_threads.detail_msgform main .comment-form .btn-info, .disp_threads.detail_msgform main .comment-form .btn-primary:hover
 				{ color: '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -611,7 +613,9 @@ Set the button destination in the back-office:",
 				.disp_lostpassword .control-buttons input.btn-primary,
 				.disp_register .control-buttons input.btn-primary,
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
-				.disp_msgform main .comment-form input.submit
+				.disp_threads.detail_msgform main .comment-form input.submit,
+				.disp_access_requires_login .control-buttons input.btn-success:hover, .disp_access_requires_login .control-buttons a.btn-primary,
+				.disp_threads.detail_msgform main .comment-form .btn-info:hover, .disp_threads.detail_msgform main .comment-form .btn-primary
 				{ border: 1px solid '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -619,9 +623,7 @@ Set the button destination in the back-office:",
 				.extra-section-btn-wrapper a:hover,
 				.navbar-nav.evo_container__menu .ufld_icon_links:hover:before,
 				.evo_post__full .evo_post__full_text .evo_post_more_link a:hover,
-				.pagination>.active>a,
-				.pagination>.active>a:hover,
-				.pagination>li>a:hover,
+				.pagination>.active>a, .pagination>.active>a:hover,	.pagination>li>a:hover,	.pagination>.active>span, .pagination>.active>span:hover,
 				.back-to-top,
 				#submit_preview_buttons_wrapper .submit,
 				.evo_comment__meta_info .badge-meta,
@@ -630,18 +632,21 @@ Set the button destination in the back-office:",
 				.form_add_contacts .SaveButton, .disp_contacts .filter-submit:hover,
 				.disp_login .control-buttons a.btn-primary,
 				.disp_lostpassword .control-buttons input.btn-primary,
+				.disp_access_requires_login .control-buttons a.btn-primary,
 				.disp_register .control-buttons input.btn-primary,
 				.search_result_score,
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
-				.disp_msgform main .comment-form input.submit
+				.disp_threads.detail_msgform main .comment-form input.submit,
+				.header-social-toggle .ufld_icon_links:hover:before,
+				.disp_threads.detail_msgform main .comment-form .btn-primary
 				{ background-color: '. $links_color ." }\n";
 				
 				$custom_css .= '
 				div.compact_search_form .search_submit,
 				.extra-section-btn-wrapper a,
 				p.tag_cloud a:hover,
-				.pagination>.active>span,
-				.pagination>.active>span:hover,
+				.pagination>.active>span, .pagination>.active>span:hover,
+				.pagination>.active>a,
 				.pagination>li>a:hover,
 				#submit_preview_buttons_wrapper .submit,
 				.form_add_contacts .SaveButton,
@@ -658,12 +663,15 @@ Set the button destination in the back-office:",
 			}
 			
 			if ( $site_bg_color = $this->get_setting( 'site_bg_color' ) ) {
-				$custom_css .= '#skin_wrapper,
+				$custom_css .= '
 				.disp_contacts .filter-submit,
 				.disp_login .control-buttons input.btn-success, .disp_login .control-buttons a.btn-primary:hover,
 				.disp_lostpassword .control-buttons input.btn-primary:hover,
+				.disp_access_requires_login .control-buttons input.btn-success, .disp_access_requires_login .control-buttons a.btn-primary:hover,
 				.disp_register .control-buttons input.btn-primary:hover,
-				.disp_msgform main .comment-form input.submit:hover
+				.disp_msgform main .comment-form input.submit:hover,
+				.navbar-header .ufld_icon_links a, .navbar-nav .ufld_icon_links a,
+				.disp_threads.detail_msgform main .comment-form .btn-primary:hover, .disp_threads.detail_msgform main .comment-form .btn-info
 				{ background-color: '. $site_bg_color ." }\n";
 				
 				$custom_css .= '
@@ -676,6 +684,7 @@ Set the button destination in the back-office:",
 				.disp_login .control-buttons a.btn-primary,
 				.disp_lostpassword .control-buttons input.btn-primary,
 				.disp_register .control-buttons input.btn-primary,
+				.disp_access_requires_login .control-buttons a.btn-primary,
 				.search_result_score,
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
 				.disp_msgform main .comment-form input.submit
@@ -720,7 +729,7 @@ Set the button destination in the back-office:",
 				$custom_css .= '
 				.widget_plugin_evo_Calr .bCalendarTable th,
 				.widget_plugin_evo_Calr .bCalendarTable td,
-				.navbar-nav.evo_container__menu .ufld_icon_links a.drop-down-social
+				.navbar-nav.evo_container__menu .ufld_icon_links a.drop-down-social, .header-social-toggle a
 				{ border-right: 1px solid '. $site_borders .'; border-bottom: 1px solid '. $site_borders ." }\n";
 				
 				$custom_css .= '.widget_plugin_evo_Calr .bCalendarTable { border-left: 1px solid '. $site_borders .'; border-top: 1px solid '. $site_borders ." }\n";
@@ -736,7 +745,9 @@ Set the button destination in the back-office:",
 				$custom_css .= 'blockquote,
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn,
 				.disp_usercomments .results table.table th, .disp_useritems .results table.table th,
-				.disp_single .evo_comment__meta_info a
+				.disp_single .evo_comment__meta_info a,
+				.disp_access_requires_login .control-buttons input.btn-success,
+				.disp_threads.detail_msgform main .comment-form .btn-info
 				{ border-color: '. $site_borders ." }\n";
 				
 				$custom_css .= '.evo_comment_avatar img { border: 3px solid '. $site_borders ." }\n";
@@ -751,17 +762,31 @@ Set the button destination in the back-office:",
 			* ============================================================================
 			*/
 			if ( $menu_bg_color = $this->get_setting( 'menu_bg_color' ) ) {
-				$custom_css .= '.collapse.navbar-collapse, .header-main-search-field .search_field, .ufld_icon_links a.drop-down-social { background-color: '. $menu_bg_color ." }\n";
+				$custom_css .= '.collapse.navbar-collapse,
+				.header-main-search-field .search_field,
+				.ufld_icon_links a.drop-down-social,
+				.navbar,
+				.navbar-nav.evo_container__menu .ufld_icon_links a
+				{ background-color: '. $menu_bg_color ." }\n";
 			}
 			
 			if ( $menu_a_color = $this->get_setting( 'menu_a_color' ) ) {
-				$custom_css .= '.evo_container__menu li a, .navbar-nav.evo_container__menu .ufld_icon_links a { color: '. $menu_a_color ." }\n";
+				$custom_css .= '.evo_container__menu li a, .navbar-nav.evo_container__menu .ufld_icon_links a, .navbar-header .ufld_icon_links a { color: '. $menu_a_color ." }\n";
 				$custom_css .= '.navbar-header span.icon-bar { background-color: '. $menu_a_color ." }\n";
+			}
+			
+			if ( $nav_social = $this->get_setting( 'nav_social' ) == true ) {
+				$custom_css .= '.menu-social-toggle { position: absolute '." }\n";
+				if ( $nav_search = $this->get_setting( 'nav_search' ) == true ) {
+					$custom_css .= '.menu-social-toggle { right: 54px '." }\n";
+				} else {
+					$custom_css .= '.menu-social-toggle { right: 0 '." }\n";
+				}
 			}
 			
 			if ( $nav_hamb_menu = $this->get_setting( 'nav_hamb_menu' ) ) {
 				$custom_css .= '@media (max-width: '. $nav_hamb_menu ."px) {
-				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important;margin-bottom: 17px;}.navbar-nav {float: none!important;margin-top: 7.5px;overflow: hidden;}.navbar-nav>li {float: none;margin-left: 15px;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}.evo_container__menu .header-search-toggle{display: none}
+				   .navbar-header {float: none;}.navbar-left,.navbar-right {float: none !important;}.navbar-toggle {display: block;}.navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}.navbar-fixed-top {top: 0;border-width: 0 0 1px;}.navbar-collapse.collapse {display: none!important}.navbar-nav {float: none!important;margin-top: 7.5px;overflow: hidden;}.navbar-nav>li {float: none;margin-left: 15px;}.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}.collapse.in{display:block !important;}.evo_container__menu .header-search-toggle{display: none}.header-search-toggle{position: relative !important}.menu-social-toggle{display: none}.navbar-collapse{border-top: 1px solid ". $site_borders ."}.navbar-nav.evo_container__menu li:last-child{margin-bottom: 17px;}
 				}\n";
 			}
 			
@@ -1130,7 +1155,7 @@ Set the button destination in the back-office:",
 	/**
 	 * Check if we can display a widget container
 	 *
-	 * @param string Widget container key: 'header', 'page_top', 'menu', 'sidebar', 'sidebar2', 'footer'
+	 * @param string Widget container key: 'menu', 'sidebar', 'sidebar2', 'footer'
 	 * @param string Skin setting name
 	 * @return boolean TRUE to display
 	 */

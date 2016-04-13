@@ -118,6 +118,10 @@
 			display: block;
 		}
 	}
+	
+	.header-main-search-field div.compact_search_form input.search_field {
+		font-size: 26px;
+	}
 }
 
 @media (max-width: 992px) {
@@ -137,5 +141,14 @@
 @media (max-width:1199px) {
 	.evo_post_title h2 {
 		font-size: 26px;
+	}
+
+	// Disp single when logged out - responsive form fields layout
+	.disp_single.anonymous {
+		.comment-form {
+			.form-group {
+				width: 100%;
+			}
+		}
 	}
 }

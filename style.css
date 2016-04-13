@@ -183,6 +183,10 @@ div.control input:focus {
   display: block;
   width: 55px;
 }
+.navbar-header .navbar-logo {
+  height: 54px;
+  padding: 0 10px 0 15px;
+}
 .header-search-toggle {
   position: absolute;
   right: 0;
@@ -658,6 +662,7 @@ textarea.message_text {
   letter-spacing: 0.2px;
 }
 .disp_single .spec_cover_image__header {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.77);
   padding: 15% 15px 0;
   display: table-cell;
   vertical-align: middle;
@@ -673,7 +678,7 @@ textarea.message_text {
 .pager.special_pager_layout {
   margin: 0 0 30px;
 }
-.pager.special_pager_layout li a {
+.pager.special_pager_layout sxcz li a {
   border-radius: 0;
   padding: 12px 14px;
   -webkit-transition-duration: 0.1s;
@@ -684,6 +689,9 @@ textarea.message_text {
   background-color: transparent;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+.disp_single.anonymous .evo_post_feedback_feed_msg {
+  margin-top: 80px;
 }
 .comments-wrapper,
 #feedbacks .alert.alert-info {
@@ -1426,6 +1434,9 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
   font-size: 16px;
   line-height: 1.7em;
 }
+.search_result img.avatar_before_login {
+  display: none;
+}
 .disp_user .profile_content a:hover {
   background-color: transparent;
 }
@@ -1590,6 +1601,9 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
   .disp_msgform.anonymous .controls input {
     display: block;
   }
+  .header-main-search-field div.compact_search_form input.search_field {
+    font-size: 26px;
+  }
 }
 @media (max-width: 992px) {
   .evo_container__sidebar,
@@ -1608,5 +1622,8 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
 @media (max-width: 1199px) {
   .evo_post_title h2 {
     font-size: 26px;
+  }
+  .disp_single.anonymous .comment-form .form-group {
+    width: 100%;
   }
 }

@@ -37,7 +37,6 @@ siteskin_include( '_site_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
 echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>";
 ?>
-
 <nav class="navbar">				
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -71,6 +70,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			
 				<?php 
 				// ------------------------- "Menu" Collection title --------------------------
+				if ( $Skin->get_setting( 'title_logo_w' ) == 'display_title' ) {
 					skin_widget( array(
 						// CODE for the widget:
 						'widget'              => 'coll_title',
@@ -79,11 +79,17 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 						'block_end'           => '</div>',
 						'item_class'           => 'navbar-brand',
 					) );
-				// ---------------------- END OF "Menu" Collection title ---------------------- 
+				// ------------------------- "Menu" Collection logo --------------------------
+				} else if ( $Skin->get_setting( 'title_logo_w' ) == 'display_logo' && !empty($Skin->get_setting( 'title_logo_w' )) ) {
+					$logo_w_path = $Skin->get_setting('logo_w_path');
+					echo '<div class="navbar-brand navbar-logo">';
+					echo '<a href="'.$baseurl.'"><img src="'.$skins_url.'/ego_skin/'.$logo_w_path.'" /></a>';
+					echo '</div>';
+				}
+				// ---------------------- END OF "Menu" Collection title/logo ---------------------- 
 				?>
 				
-				
-		</div>
+		</div><!-- /.navbar-header -->
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
@@ -132,6 +138,19 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			</ul>
 		</div><!-- .collapse -->
 </nav><!-- .row -->
+
+<?php
+	skin_widget( array(
+		// CODE for the widget:
+		'widget'              => 'coll_search_form',
+		// Optional display params
+		'block_start'         => '<div class="evo_widget $wi_class$ header-main-search-field">',
+		'block_end'           => '</div>',
+		'block_display_title' => false,
+		'search_submit_before' => '<span class="hidden">',
+		'search_submit_after'  => '</span>',
+	) );
+?>
 
          <!-- ================================= START OF MAIN AREA ================================== -->
          <div class="col-lg-12">

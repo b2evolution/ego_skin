@@ -33,97 +33,126 @@ skin_include( '_html_header.inc.php', array() );
 siteskin_include( '_site_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
 ?>
-
-
-<div class="container">
-
-
-<header class="row">
-
-	<div class="coll-xs-12 coll-sm-12 col-md-4 col-md-push-8">
-		<?php
-		if( $Skin->is_visible_container( 'page_top' ) )
-		{ // Display 'Page Top' widget container
-		?>
-		<div class="evo_container evo_container__page_top">
-		<?php
-			// ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
-			// Display container and contents:
-			skin_container( NT_('Page Top'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start'         => '<div class="evo_widget $wi_class$">',
-					'block_end'           => '</div>',
-					'block_display_title' => false,
-					'list_start'          => '<ul>',
-					'list_end'            => '</ul>',
-					'item_start'          => '<li>',
-					'item_end'            => '</li>',
-				) );
-			// ----------------------------- END OF "Page Top" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php } ?>
-	</div><!-- .col -->
-
-	<div class="coll-xs-12 col-sm-12 col-md-8 col-md-pull-4">
-		<?php
-		if( $Skin->is_visible_container( 'header' ) )
-		{ // Display 'Header' widget container
-		?>
-		<div class="evo_container evo_container__header">
-		<?php
-			// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
-			// Display container and contents:
-			skin_container( NT_('Header'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start'       => '<div class="evo_widget $wi_class$">',
-					'block_end'         => '</div>',
-					'block_title_start' => '<h1>',
-					'block_title_end'   => '</h1>',
-				) );
-			// ----------------------------- END OF "Header" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php } ?>
-	</div><!-- .col -->
-
-</header><!-- .row -->
-
-
 <?php
 if( $Skin->is_visible_container( 'menu' ) )
 { // Display 'Menu' widget container
 ?>
-<nav class="row">
+<nav class="navbar">				
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle navbar-toggle-hamb collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
+					if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
+						<div class="navbar-toggle header-search-toggle">
+							<i class="fa fa-search search-field-toggle"></i>
+						</div>
+				<?php } // ---------------------- END OF "Menu" SEARCH TOGGLER ---------------------- ?>
+				
+				<?php // ------------------------- "Menu" SOCIAL LINKS --------------------------
+					if ( $Skin->get_setting( 'nav_social' ) == true ) { 
+						skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'user_links',
+						// Optional display params
+						'block_start'         => '<div class="evo_widget $wi_class$ navbar-toggle header-social-toggle">',
+						'block_end'           => '</div>',
+						'block_display_title' => false,
+					) );
+					}
+				  // ---------------------- END OF "Menu" SOCIAL LINKS ---------------------- 
+				  ?>
+			
+				<?php 
+				// ------------------------- "Menu" Collection title --------------------------
+				if ( $Skin->get_setting( 'title_logo_w' ) == 'display_title' ) {
+					skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'coll_title',
+						// Optional display params
+						'block_start'         => '<div class="navbar-brand">',
+						'block_end'           => '</div>',
+						'item_class'           => 'navbar-brand',
+					) );
+				// ------------------------- "Menu" Collection logo --------------------------
+				} else if ( $Skin->get_setting( 'title_logo_w' ) == 'display_logo' && !empty($Skin->get_setting( 'title_logo_w' )) ) {
+					$logo_w_path = $Skin->get_setting('logo_w_path');
+					echo '<div class="navbar-brand navbar-logo">';
+					echo '<a href="'.$baseurl.'"><img src="'.$skins_url.'/ego_skin/'.$logo_w_path.'" /></a>';
+					echo '</div>';
+				}
+				// ---------------------- END OF "Menu" Collection title/logo ---------------------- 
+				?>
+				
+		</div><!-- /.navbar-header -->
 
-	<div class="col-md-12">
-		<ul class="nav nav-tabs evo_container evo_container__menu">
-		<?php
-			// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
-			// Display container and contents:
-			// Note: this container is designed to be a single <ul> list
-			skin_container( NT_('Menu'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start'         => '',
-					'block_end'           => '',
-					'block_display_title' => false,
-					'list_start'          => '',
-					'list_end'            => '',
-					'item_start'          => '<li class="evo_widget $wi_class$">',
-					'item_end'            => '</li>',
-					'item_selected_start' => '<li class="active evo_widget $wi_class$">',
-					'item_selected_end'   => '</li>',
-					'item_title_before'   => '',
-					'item_title_after'    => '',
-				) );
-			// ----------------------------- END OF "Menu" CONTAINER -----------------------------
-		?>
-		</ul>
-	</div><!-- .col -->
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="navbar-collapse-1">
+			<ul class="navbar-nav evo_container evo_container__menu">
+			
+				<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
+					if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
+						<div class="header-search-toggle">
+							<i class="fa fa-search search-field-toggle"></i>
+						</div>
+				<?php } // ---------------------- END OF "Menu" SEARCH TOGGLER ---------------------- ?>
 
+				<?php // ------------------------- "Menu" SOCIAL LINKS --------------------------
+					if ( $Skin->get_setting( 'nav_social' ) == true ) { 
+						skin_widget( array(
+						// CODE for the widget:
+						'widget'              => 'user_links',
+						// Optional display params
+						'block_start'         => '<div class="evo_widget $wi_class$ menu-social-toggle">',
+						'block_end'           => '</div>',
+						'block_display_title' => false,
+					) );
+					}
+					  // ---------------------- END OF "Menu" SOCIAL LINKS ---------------------- ?>
+				
+				<?php
+					// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
+					// Display container and contents:
+					// Note: this container is designed to be a single <ul> list
+					skin_container( NT_('Menu'), array(
+							// The following params will be used as defaults for widgets included in this container:
+							'block_start'         => '',
+							'block_end'           => '',
+							'block_display_title' => false,
+							'list_start'          => '',
+							'list_end'            => '',
+							'item_start'          => '<li class="evo_widget $wi_class$">',
+							'item_end'            => '</li>',
+							'item_selected_start' => '<li class="active evo_widget $wi_class$">',
+							'item_selected_end'   => '</li>',
+							'item_title_before'   => '',
+							'item_title_after'    => '',
+						) );
+					// ----------------------------- END OF "Menu" CONTAINER -----------------------------
+				?>
+			</ul>
+		</div><!-- .collapse -->
 </nav><!-- .row -->
-<?php } ?>
 
+<?php
+	skin_widget( array(
+		// CODE for the widget:
+		'widget'              => 'coll_search_form',
+		// Optional display params
+		'block_start'         => '<div class="evo_widget $wi_class$ header-main-search-field">',
+		'block_end'           => '</div>',
+		'block_display_title' => false,
+		'search_submit_before' => '<span class="hidden">',
+		'search_submit_after'  => '</span>',
+	) );
+?>
+<?php } ?>
+<div class="container main-page-content">
 
 <div class="row">
 	<div class="<?php echo $Skin->is_visible_sidebar( true ) ? $Skin->get_column_class() : 'col-md-12'; ?>">

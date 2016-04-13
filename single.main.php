@@ -96,6 +96,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			
 				<?php 
 				// ------------------------- "Menu" Collection title --------------------------
+				if ( $Skin->get_setting( 'title_logo_w' ) == 'display_title' ) {
 					skin_widget( array(
 						// CODE for the widget:
 						'widget'              => 'coll_title',
@@ -104,11 +105,17 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 						'block_end'           => '</div>',
 						'item_class'           => 'navbar-brand',
 					) );
-				// ---------------------- END OF "Menu" Collection title ---------------------- 
+				// ------------------------- "Menu" Collection logo --------------------------
+				} else if ( $Skin->get_setting( 'title_logo_w' ) == 'display_logo' && !empty($Skin->get_setting( 'title_logo_w' )) ) {
+					$logo_w_path = $Skin->get_setting('logo_w_path');
+					echo '<div class="navbar-brand navbar-logo">';
+					echo '<a href="'.$baseurl.'"><img src="'.$skins_url.'/ego_skin/'.$logo_w_path.'" /></a>';
+					echo '</div>';
+				}
+				// ---------------------- END OF "Menu" Collection title/logo ---------------------- 
 				?>
 				
-				
-		</div>
+		</div><!-- /.navbar-header -->
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">

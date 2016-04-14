@@ -5,6 +5,17 @@ Original skin post: [http://skins.b2evolution.net/ego-skin](http://skins.b2evolu
 
 ====
 
+### Interesting skin features:
+
+- Customizable layout (six different layouts);
+- Three-colors link scheme combination;
+- Three different news posts layout;
+- Customizable responsive menu;
+- Customizable media index item sizes;
+- Customizable footer layout.
+
+====
+
 ## Front page
 ![disp=front](skinshot_front.jpg)
 
@@ -13,14 +24,6 @@ Original skin post: [http://skins.b2evolution.net/ego-skin](http://skins.b2evolu
 
 ## Single post page
 ![disp=single](skinshot_single.jpg)
-
-====
-
-### Interesting skin features:
-
-- Customizable layout (six different layouts);
-- Three-colors link scheme combination;
-- Three different news posts layout;
 
 ====
 

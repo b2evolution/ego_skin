@@ -1,7 +1,7 @@
 # Ego Skin for b2evolution CMS v6
 
 **Ego** skin is made especially for b2evolution CMS and it is perfect for clean-type blogs. It is well organized and easy to customize from the back-office of the skin.
-Original skin post: [http://skins.b2evolution.net/ego-skin](http://skins.b2evolution.net/ego-skin)
+b2evolution site skin posting: [http://skins.b2evolution.net/ego-skin](http://skins.b2evolution.net/ego-skin)
 
 ====
 

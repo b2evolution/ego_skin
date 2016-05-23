@@ -143,7 +143,7 @@ class ego_Skin extends Skin
 					'title_logo_w' => array(
 						'label' => T_('Display logo/title'),
 						'note' => 'Decide whether you want to display blog title, logo or neither of both.',
-						'defaultvalue' => 'right_sidebar',
+						'defaultvalue' => 'display_logo',
 						'options' => array(
 							'display_logo'   => T_('Display logo'),
 							'display_title'  => T_('Display title'),
@@ -239,8 +239,7 @@ class ego_Skin extends Skin
 						'label' => T_('Intro text'),
 						'note' => T_('This is the introduction text that will appear in the disp=front. Type text or code in this field.'),
 						'defaultvalue' => "
-Welcome to Ego skin. Built specially for <a href='http://b2evolution.net/'>b2evolution</a>.<br/>
-Set the button destination in the back-office:",
+Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>b2evolution</a>.&nbsp;Set the button destination in the back-office:",
 						'type' => 'textarea',
 					),
 					'frsec_but_enable' => array(
@@ -414,6 +413,18 @@ Set the button destination in the back-office:",
 						'options'      => get_available_thumb_sizes(),
 						'type'         => 'select',
 					),
+				   'mediaidx_masonry' => array(
+						'label'    => T_('Masonry Columns'),
+						'note'     => '(Select the number of columns for displaying media items)',
+						'type'     => 'radio',
+						'options'  => array(
+							array( 'one', T_('1 Column') ),
+							array( 'two', T_('2 Columns') ),
+							array( 'three', T_('3 Columns') ),
+							array( 'fw_cols', T_('Full width') ),
+						),
+						'defaultvalue' => 'one',
+				   ),
 				'mediaidx_end' => array(
 					'layout' => 'end_fieldset',
 				),
@@ -424,6 +435,12 @@ Set the button destination in the back-office:",
 					'layout' => 'begin_fieldset',
 					'label'  => T_('Footer Settings')
 				),
+					'b2evo_credits' => array(
+						'label' => T_('b2evolution credits'),
+						'note' => T_('Please help us promote b2evolution and leave b2evolution credits on your website.'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
 					'spec_sw_footer' => array(
 						'label'         => T_('Special sitewide footer'),
 						'note'          => T_('Check to enable the special sitewide footer (cookies declaration) layout.'),
@@ -577,12 +594,14 @@ Set the button destination in the back-office:",
 		// Include Masonry Grind for Posts and Mediaidx disps
 		if ( in_array ( $disp, array( 'posts', 'mediaidx' ) ) ) {
 			require_js( $this->get_url() . 'js/masonry.pkgd.min.js' );
+			require_js( $this->get_url() . 'js/imagesloaded.pkgd.min.js' );
 			add_js_headline("
 				jQuery( document ).ready( function($) {
-					$('.grid').masonry({
-						// options
-						itemSelector: '.grid-item',
-						//columnWidth: 200
+					$('.grid').imagesLoaded().done( function( instance ) {
+						$('.grid').masonry({
+							// options
+							itemSelector: '.grid-item',
+						});
 					});
 				});
 			");
@@ -617,7 +636,9 @@ Set the button destination in the back-office:",
 				.navbar-brand h3 a,
 				.disp_access_denied .control-buttons input.btn-success,
 				.disp_access_requires_login .control-buttons input.btn-success, .disp_access_requires_login .control-buttons a.btn-primary:hover,
-				.disp_threads.detail_msgform main .comment-form .btn-info, .disp_threads.detail_msgform main .comment-form .btn-primary:hover
+				.disp_threads.detail_msgform main .comment-form .btn-info, .disp_threads.detail_msgform main .comment-form .btn-primary:hover,
+				.widget_core_org_members a.user_link:hover,
+				.widget_core_coll_subscription .btn:hover
 				{ color: '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -656,7 +677,8 @@ Set the button destination in the back-office:",
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
 				.disp_threads.detail_msgform main .comment-form input.submit,
 				.header-social-toggle .ufld_icon_links:hover:before,
-				.disp_threads.detail_msgform main .comment-form .btn-primary
+				.disp_threads.detail_msgform main .comment-form .btn-primary,
+				.widget_core_coll_subscription .btn
 				{ background-color: '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -668,7 +690,8 @@ Set the button destination in the back-office:",
 				.pagination>li>a:hover,
 				#submit_preview_buttons_wrapper .submit,
 				.form_add_contacts .SaveButton,
-				div.controls input:focus, div.form-control input:focus, textarea.form-control:focus, #login_form input:focus:invalid:focus, #login_form select:focus:invalid:focus, #login_form textarea:focus:invalid:focus
+				div.controls input:focus, div.form-control input:focus, textarea.form-control:focus, #login_form input:focus:invalid:focus, #login_form select:focus:invalid:focus, #login_form textarea:focus:invalid:focus,
+				.widget_core_coll_subscription .btn
 				{ border-color: '. $links_color ." }\n";
 				
 				$custom_css .= '.evo_featured_post { border-left: 5px solid '. $links_color ." }\n";
@@ -689,7 +712,8 @@ Set the button destination in the back-office:",
 				.disp_register .control-buttons input.btn-primary:hover,
 				.disp_msgform main .comment-form input.submit:hover,
 				.navbar-header .ufld_icon_links a, .navbar-nav .ufld_icon_links a,
-				.disp_threads.detail_msgform main .comment-form .btn-primary:hover, .disp_threads.detail_msgform main .comment-form .btn-info
+				.disp_threads.detail_msgform main .comment-form .btn-primary:hover, .disp_threads.detail_msgform main .comment-form .btn-info,
+				.widget_core_coll_subscription .btn:hover
 				{ background-color: '. $site_bg_color ." }\n";
 				
 				$custom_css .= '
@@ -705,7 +729,8 @@ Set the button destination in the back-office:",
 				.disp_access_requires_login .control-buttons a.btn-primary,
 				.search_result_score,
 				.disp_user .profile_content .profile_column_left .profile_buttons a button.btn:hover,
-				.disp_msgform main .comment-form input.submit
+				.disp_msgform main .comment-form input.submit,
+				#submit_preview_buttons_wrapper .submit
 				{ color: '. $site_bg_color ." }\n";
 			}
 			
@@ -715,6 +740,9 @@ Set the button destination in the back-office:",
 				.evo_widget h3, .evo_widget h4.panel-title,
 				.widget_core_coll_post_list ul li,
 				.widget_core_coll_comment_list ul li,
+				.widget_core_coll_featured_posts ul li,
+				.widget_core_coll_page_list ul li,
+				.widget_core_coll_related_post_list ul li,
 				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
 				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes,
 				.compact_search_form input.search_field,
@@ -857,6 +885,17 @@ Set the button destination in the back-office:",
 				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
 			} else {
 				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4, .evo_container__sidebar2 .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
+			}
+			
+			
+			/**
+			* ============================================================================
+			* Positioned at the end of the file because of the hover style - preventing 
+			* wrong style on non-hover color customization
+			* ============================================================================
+			*/
+			if ( $links_color = $this->get_setting( 'links_color' ) ) {
+				$custom_css .= '#submit_preview_buttons_wrapper .submit:hover { color: '. $links_color ." !important }\n";
 			}
 	
 		

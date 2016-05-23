@@ -302,7 +302,7 @@ echo '">'; // Beginning of post display
 	<?php
 		// ------------------ FEEDBACK (COMMENTS/TRACKBACKS) INCLUDED HERE ------------------
 		skin_include( '_item_feedback.inc.php', array_merge( array(
-				'before_section_title' => '<div class="clearfix"></div><h3 class="evo_comment__list_title">',
+				'before_section_title' => '<div class="clearfix"></div><h3 class="evo_comment__list_title hidden">',
 				'after_section_title'  => '</h3>',
 				'comment_title_before'  => '<div><h4 class="evo_comment_title panel-title">',
 				'comment_info_before'   => '<footer class="evo_comment_footer clear"><small>',

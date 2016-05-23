@@ -11,7 +11,7 @@ body {
 .main-page-content {
 	letter-spacing: 0.4px;
 	line-height: 1.6em;
-	margin: 70px auto 30px;
+	margin: 80px auto 30px;
 }
 
 // Content specfic styles on disp=front
@@ -278,7 +278,7 @@ div.control input:focus  {
 	font-size: 26px;
 	line-height: 1.6em;
 	text-align: center;
-	margin: 25px auto 70px;
+	margin: 25px auto 0;
 	
 	.extra-section-btn-wrapper {
 		margin-top: 50px;
@@ -306,86 +306,6 @@ div.control input:focus  {
 
 
 
-// Login widget form
-.widget_core_user_login {
-	#login_form {
-		.form-group {
-			margin: 0;
-		}
-		label {
-			text-align: left;
-			width: 160px;
-			padding-left: 0;
-		}
-		.controls {
-			padding: 0;
-			width: 100%;
-		}
-		.form_text_input.form-control {
-			width: 100%;
-		}
-	}
-	.submit {
-		font-size: 12px;
-	}
-	.field_login_btn {
-		.panel {
-			.panel-default-remove;
-			.panel-body {
-				padding-left: 0;
-				padding-right: 0;
-				padding-bottom: 0;
-				#submit_login_form {
-					margin-right: 10px;
-				}
-			}
-		}
-	}
-	.register_link {
-		display: block;
-		padding-top: 10px;
-	}
-}
-
-// Register widget form
-.widget_core_user_register {
-	#register_form {
-		.form-group {
-			margin: 0;
-		}
-		label {
-			text-align: left;
-			width: 160px;
-			padding-left: 0;
-		}
-		.controls {
-			padding: 0;
-			width: 100%;
-		}
-		.form_text_input.form-control {
-			width: 100%;
-		}
-	}
-	.submit {
-		font-size: 12px;
-	}
-	.field_register_btn {
-		.panel {
-			margin: 0;
-			border: none;
-			border-radius: 0;
-			box-shadow: none;
-			.panel-body {
-				padding-left: 0;
-				padding-right: 0;
-				padding-bottom: 0;
-				#submit_login_form {
-					margin-right: 10px;
-				}
-			}
-		}
-	}
-}
 
 // Profile tabs on ?disp=profile
 ul.profile_tabs {
@@ -467,6 +387,7 @@ label.control-label[for=post_title] {
 textarea.message_text {
 	width: 95%;
 }
+
 
 
 
@@ -667,6 +588,7 @@ textarea.message_text {
 	.grid {
 		margin-bottom: 4em;
 		.grid-item {
+			float: left;
 			&.two-cols, &.three-cols {
 				padding: 0 15px;
 				article {
@@ -711,7 +633,7 @@ textarea.message_text {
 // Disp single navigation
 .pager.special_pager_layout {
 	margin: 0 0 30px;
-sxcz	li a {
+	li a {
 		border-radius: 0;
 		padding: 12px 14px;
 		.transition-0.1s;
@@ -1069,11 +991,6 @@ div.action_messages, div.log_container {
 	margin: 0;
 }
 
-// This skin needs this for disp=posts to separate from lower pagination
-footer.row {
-	margin-top: 20px;
-}
-
 .evo_container__footer {
 	.widget_plugin_evo_Calr table.bCalendarTable {
 		min-width: 290px;
@@ -1132,6 +1049,14 @@ footer.row {
 		font-weight: bold;
 		margin: 80px 0 30px;
 	}
+	.evo_post_title {
+		h2 {
+			padding-top: 80px;
+		}
+		.btn-group {
+			padding-top: 65px;
+		}
+	}
 }
 
 // List widgets format
@@ -1139,7 +1064,10 @@ footer.row {
 .widget_core_coll_comment_list, // Recent comments
 .widget_core_coll_item_list, // Items list
 .widget_core_coll_xml_feeds, // XML Feeds
-.widget_plugin_evo_Arch { // Archives widget
+.widget_plugin_evo_Arch, // Archives widget
+.widget_core_coll_page_list, // Simple Page list widget
+.widget_core_coll_related_post_list, // Simple Related list widget
+.widget_core_coll_featured_posts { // Featured posts widget
 	ul {
 		margin: 0;
 		li {
@@ -1160,19 +1088,48 @@ footer.row {
 	}
 }
 
-// Leading arrows on widgets ONLY ON MAIN SECTION
+// Leading arrows on widgets ONLY ON MAIN SECTION *** AND WHEN LIST LAYOUT WITHOUT ANY CUSTOMIZATION ***
 main {
 	.widget_core_coll_post_list, // Recent posts
-	.widget_core_coll_item_list { // Items list
-		ul li a {
-			display: block;
-			&:after {
-				position: absolute;
-				content: "\f101";
-				right: 15px;
-				vertical-align: middle;
-				display: inline-block;
-				font-family: FontAwesome;
+	.widget_core_coll_featured_posts, // Featured posts
+	.widget_core_coll_page_list, // Simple Page list widget
+	.widget_core_coll_related_post_list, // Simple Related list widget
+	.widget_core_coll_item_list { // Universal item list
+		// Only when List layout
+		&.evo_layout_list {
+			// Only when no images included no excerpt and no teaser
+			&.evo_nopic.evo_noexcerpt.evo_noteaser {
+				ul li a {
+					display: block;
+					&:after {
+						position: absolute;
+						content: "\f101";
+						right: 15px;
+						vertical-align: middle;
+						display: inline-block;
+						font-family: FontAwesome;
+					}
+				}
+			}
+			// When images included
+			&.evo_1pic, &.evo_pics {
+				&.evo_noexcerpt, &.evo_noteaser {
+					ul li {
+						padding-bottom: 5px;
+					}
+				}
+				&.evo_withexcerpt, &.evo_withteaser {
+					ul li {
+						padding-bottom: 15px;
+					}
+				}
+			}
+			&.evo_nopic {
+				&.evo_withexcerpt, &.evo_withteaser {
+					ul li {
+						padding-bottom: 15px;
+					}
+				}
 			}
 		}
 	}
@@ -1220,20 +1177,25 @@ main {
 }
 
 // Category list widget
-.widget_core_coll_category_list ul li a {
-	padding: 12px;
-	line-height: 50px;
-	border-radius: 20px;
+.widget_core_coll_category_list ul {
+	ul {
+		margin: 0;
+	}
+	li a {
+		padding: 12px;
+		line-height: 50px;
+		border-radius: 20px;
 
-	-webkit-transform: translateZ(0);
-	transform: translateZ(0);
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	overflow: hidden;
-	.transition-0.1s;
-	&:hover {
-		text-decoration: none;
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		overflow: hidden;
+		.transition-0.1s;
+		&:hover {
+			text-decoration: none;
+		}
 	}
 }
 
@@ -1259,17 +1221,8 @@ main {
 
 // Organization members widget
 .widget_core_org_members {
-	.evo_org_member {
-		margin-top: 15px;
-		h3 {
-			margin: 25px 0 20px;
-		}
-		p.user_field {
-			height: auto !important;
-		}
-		img.img-responsive {
-			border-radius: 0 !important;
-		}
+	img {
+		border-radius: 4px !important;
 	}
 }
 
@@ -1334,8 +1287,160 @@ p.tag_cloud a {
 	border-radius: 0;
 }
 
+// Login widget form --- LOGGED OUT
+.widget_core_user_login {
+	#login_form {
+		.form-group {
+			margin: 0;
+			width: 100%;
+		}
+		.controls {
+			padding: 0;
+			width: 100%;
+		}
+		.form_text_input.form-control {
+			width: 100%;
+		}
+	}
+	.submit {
+		font-size: 16px;
+	}
+	.field_login_btn {
+		margin: 20px 0 0;
+		.panel {
+			.panel-default-remove;
+			.panel-body {
+				padding-left: 0;
+				padding-right: 0;
+				padding-bottom: 0;
+				#submit_login_form {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+	.register_link {
+		display: block;
+		padding-top: 10px;
+		font-weight: 400 !important;
+	}
+}
+
+// Login widget --- LOGGED IN
+.widget_core_user_login {
+	img {
+		border-radius: 3px;
+		margin-bottom: 10px;
+	}
+}
+
+// Register widget form
+.widget_core_user_register {
+	#register_form {
+		.form-group {
+			margin: 0;
+			width: 100%;
+		}
+		label {
+			text-align: left;
+			width: 160px;
+			padding-left: 0;
+		}
+		.controls {
+			padding: 0;
+			width: 100%;
+		}
+		.form_text_input.form-control {
+			width: 100%;
+		}
+	}
+	.submit {
+		font-size: 16px;
+	}
+	.field_register_btn {
+		margin-top: 20px;
+		.panel {
+			margin: 0;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			.panel-body {
+				padding-left: 0;
+				padding-right: 0;
+				padding-bottom: 0;
+				#submit_login_form {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}
+
+// Common navigation links and User tools widget
+.widget_core_coll_common_links,
+.widget_core_user_tools {
+	ul li a {
+		font-weight: 400;
+	}
+}
+
+// Subscribe to Updates widget
+.widget_core_coll_subscription {
+	.form-group {
+		width: 100%;
+	}
+	.btn {
+		padding: 12px 15px;
+		font-size: 16px;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
+}
+
+// Facebook like plugin
+.widget_plugin_evo_facebook {
+	iframe {
+		width: auto !important;
+	}
+}
 
 
+
+
+// ****************************************************************************
+//  Footer style
+// ****************************************************************************
+
+.evo_container__footer {
+	margin-top: 80px;
+}
+
+
+
+
+// --------- Universal item list widget & Recent posts widget --------- 
+@import "../../rsc/less/_universal_item_list_widget.module.less";
+// *********************** Custom module styles:
+div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_featured_posts.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_post_list.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_page_list.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_related_post_list.evo_1pic__special ul li .item_first_image_placeholder:before {
+    margin-top: 27px;
+}
+// --------------------------------------------------------------------
+
+// ------------------- Media Index widget -------------------- 
+@import "../../rsc/less/_coll_media_index_widget.module.less";
+// -----------------------------------------------------------
+
+// ----------- User Avatars (User List) widget ------------ 
+@import "../../rsc/less/_user_avatars_widget.module.less";
+// --------------------------------------------------------
+
+// ------------- Organization Members widget -------------
+@import "../../rsc/less/_org_members_widget.module.less";
+	// Override constants used in the module:
+	@widget_core_org_members-color: #333;
+	@widget_core_org_members-user-link-color: #000;
+	@widget_core_org_members-user-link-hover-color: #23527c;
+// -------------------------------------------------------
 
 // ****************************************************************************
 // Disp front

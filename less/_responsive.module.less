@@ -2,6 +2,20 @@
 // Responsive layout
 // ****************************************************************************
 
+// Masonry cols widths - initial
+.disp_posts, .disp_mediaidx {
+	.grid .grid-item {
+		&.two-cols {
+			width: 50%;
+		}
+	}
+	.disp_posts .grid .grid-item {
+		&.three-cols {
+			width: 33.333%;
+		}
+	}
+}
+
 @media (min-width: 768px) {
 	// Video link layout
 	.evo_post, .evo_intro_post, .evo_featured_post {
@@ -32,22 +46,8 @@
 	.navbar-nav.evo_container__menu .ufld_icon_links a {
 		background-color: transparent;
 	}
-	
-	// Masonry responsive layout
-	.disp_posts, .disp_mediaidx {
-		.grid .grid-item {
-			&.two-cols {
-				width: 50%;
-			}
-		}
-		.disp_posts .grid .grid-item {
-			&.three-cols {
-				width: 50%;
-			}
-		}
-	}
 }
-
+	
 @media (min-width: 1200px) {
 	.disp_posts {
 		.grid .grid-item {
@@ -102,6 +102,20 @@
 		}
 	}
 	
+	// Masonry responsive layout
+	.disp_posts, .disp_mediaidx {
+		.grid .grid-item {
+			&.two-cols {
+				width: 100%;
+			}
+		}
+		.disp_posts .grid .grid-item {
+			&.three-cols {
+				width: 100%;
+			}
+		}
+	}
+	
 	// Mediaidx foreach image wrapper
 	.disp_mediaidx .mediaidx-item--wrapper .mediaidx-item {
 		margin: 10px 0px;
@@ -121,20 +135,6 @@
 	
 	.header-main-search-field div.compact_search_form input.search_field {
 		font-size: 26px;
-	}
-}
-
-@media (max-width: 992px) {
-	.evo_container__sidebar, .evo_container__sidebar2 {
-		margin-top: 80px;
-		.widget_plugin_evo_Calr table {
-			max-width: 320px;
-			margin: 0 auto;
-		}
-	}
-	
-	.evo_panel__login .skin-form .panel-heading h3 {
-		font-size: 18px;
 	}
 }
 

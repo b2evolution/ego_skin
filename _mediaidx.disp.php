@@ -34,6 +34,16 @@ if( isset( $thumbnail_sizes[ $params['mediaidx_thumb_size'] ] ) )
 		.'height:'.$thumbnail_sizes[ $params['mediaidx_thumb_size'] ][2].'px"';
 }
 
+// Media Columns Count Masonry - Columns number
+$columns_count = '';
+if ( $Skin->get_setting( 'mediaidx_masonry' ) == 'two' ) {
+   $columns_count = 'two-cols';
+} else if ( $Skin->get_setting( 'mediaidx_masonry' ) == 'three' ) {
+   $columns_count = 'three-cols';
+} else if ( $Skin->get_setting( 'mediaidx_masonry' ) == 'fw_cols' ) {
+	
+}
+
 // --------------------------------- START OF MEDIA INDEX --------------------------------
 skin_widget( array(
 		// CODE for the widget:
@@ -44,9 +54,9 @@ skin_widget( array(
 		'block_display_title' => false,
 		'thumb_size' => $params['mediaidx_thumb_size'],
 		'thumb_layout' => 'list',
-		'list_start' => '<div class="mediaidx-item--wrapper">',
+		'list_start' => '<div class="grid">',
 		'list_end' => '</div>',
-	    'item_start' => '<div class="mediaidx-item" style=" '. $photocell_styles .'">',
+	    'item_start' => '<div class="grid-item '. $columns_count .'" style=" '. $photocell_styles .'">',
 		'item_end' => '</div>',
 		'order_by' => $Blog->get_setting('orderby'),
 		'order_dir' => $Blog->get_setting('orderdir'),

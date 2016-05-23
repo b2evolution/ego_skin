@@ -156,7 +156,13 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 <header class="row">
 
-	<div class="<?php echo $Skin->get_column_class_front(); ?>">
+	<div class="<?php
+					if ($Skin->get_setting('layout_front') != 'left_sidebar' &&
+					    $Skin->get_setting('layout_front') != 'right_sidebar') {
+						echo $Skin->get_column_class_front();
+					} else {
+						echo 'col-lg-12';
+					} ?>">
 		
 		<div class="evo_container evo_container__header center">
 		<?php
@@ -454,7 +460,8 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		</div>
 
 		<div class="clearfix"></div>
-		<p class="center">
+		
+		<p class="center small">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):
 				$Blog->footer_text( array(
@@ -491,19 +498,14 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 						'item_end'    => ' ',
 					) );
 			?>
+			
+			<?php 
+				// Please help us promote b2evolution and leave this note:
+				if ($Skin->get_setting('b2evo_credits')) {
+					echo '| Powered by <a href="http://www.b2evolution.net">b2evolution CMS</a>.';
+				}
+			?>
 		</p>
-
-		<?php
-			// Please help us promote b2evolution and leave this logo on your blog:
-			powered_by( array(
-					'block_start' => '<div class="powered_by">',
-					'block_end'   => '</div>',
-					// Check /rsc/img/ for other possible images -- Don't forget to change or remove width & height too
-					'img_url'     => '$rsc$img/powered-by-b2evolution-120t.gif',
-					'img_width'   => 120,
-					'img_height'  => 32,
-				) );
-		?>
 	</div><!-- .col -->
 	
 </footer><!-- .row -->

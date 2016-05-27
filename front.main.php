@@ -166,6 +166,14 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		
 		<div class="evo_container evo_container__header center">
 		<?php
+			
+			// ------------------------- MESSAGES GENERATED FROM ACTIONS -------------------------
+			messages( array(
+					'block_start' => '<div class="action_messages">',
+					'block_end'   => '</div>',
+				) );
+			// --------------------------------- END OF MESSAGES ---------------------------------
+				
 			// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
 			// Display container and contents:
 			skin_container( NT_('Header'), array(
@@ -213,7 +221,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		<!-- ================================= START OF MAIN AREA ================================== -->
 
 		<?php
-		if( ! in_array( $disp, array( 'login', 'lostpassword', 'register', 'activateinfo', 'access_requires_login' ) ) )
+		if( ! in_array( $disp, array( 'login', 'lostpassword', 'register', 'activateinfo', 'access_requires_login' ) ) && $Skin->get_setting( 'fr_sec_enable' ) == false )
 		{ // Don't display the messages here because they are displayed inside wrapper to have the same width as form
 			// ------------------------- MESSAGES GENERATED FROM ACTIONS -------------------------
 			messages( array(

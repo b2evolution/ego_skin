@@ -151,7 +151,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 		'search_submit_after'  => '</span>',
 	) );
 ?>
-<div class="container">
+<div class="container main-page-content">
 	<div class="row">
          <!-- ================================= START OF MAIN AREA ================================== -->
          <div class="col-lg-12">
@@ -231,7 +231,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
          </div><!-- .col -->
 	</div>
 </div>
-   <div class="container main-page-content">
+
 <footer class="row">
 
 	<!-- =================================== START OF FOOTER =================================== -->

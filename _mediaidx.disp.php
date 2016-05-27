@@ -40,8 +40,6 @@ if ( $Skin->get_setting( 'mediaidx_masonry' ) == 'two' ) {
    $columns_count = 'two-cols';
 } else if ( $Skin->get_setting( 'mediaidx_masonry' ) == 'three' ) {
    $columns_count = 'three-cols';
-} else if ( $Skin->get_setting( 'mediaidx_masonry' ) == 'fw_cols' ) {
-	
 }
 
 // --------------------------------- START OF MEDIA INDEX --------------------------------
@@ -56,11 +54,13 @@ skin_widget( array(
 		'thumb_layout' => 'list',
 		'list_start' => '<div class="grid">',
 		'list_end' => '</div>',
-	    'item_start' => '<div class="grid-item '. $columns_count .'" style=" '. $photocell_styles .'">',
-		'item_end' => '</div>',
+	    'item_start' => '<div class="grid-item '. $columns_count .'" style=" '. $photocell_styles .'"><div class="media_item">',
+		'item_end' => '</div></div>',
+		'disp_image_title'    => true,
+
 		'order_by' => $Blog->get_setting('orderby'),
 		'order_dir' => $Blog->get_setting('orderdir'),
-		'limit' => 100,
+		'limit' => 1000,
 	) );
 // ---------------------------------- END OF MEDIA INDEX ---------------------------------
 

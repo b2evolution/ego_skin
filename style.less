@@ -531,12 +531,19 @@ textarea.message_text {
 		vertical-align: middle;
 	}
 }
-.disp_single .evo_post_title h1 {
-	font-weight: 700;
-	display: table-cell;
-	margin: 0;
-	padding: 25px 0;
-	font-size: 46px;
+.disp_single {
+	.evo_post_title h1 {
+		font-weight: 700;
+		display: table-cell;
+		margin: 0;
+		padding: 25px 0;
+		font-size: 46px;
+	}
+}
+.disp_page, .disp_single {
+	.evo_comment__list_title {
+		font-size: 20px;
+	}
 }
 
 // Special Posts Simple Layout
@@ -650,7 +657,7 @@ textarea.message_text {
 
 // Disp single add comments feed when logged out
 .disp_single.anonymous .evo_post_feedback_feed_msg {
-	margin-top: 80px;
+	margin-top: 60px;
 }
 
 
@@ -660,8 +667,11 @@ textarea.message_text {
 // Comments Layout
 // ****************************************************************************
 
-.comments-wrapper, #feedbacks .alert.alert-info {
+.disp_comments .comments-wrapper, #feedbacks .alert.alert-info {
 	margin-top: 80px;
+}
+.comments-wrapper {
+	margin-top: 10px;
 }
 
 .evo_comment {
@@ -776,6 +786,9 @@ textarea.message_text {
 }
 .evo_post_comment_notification {
 	margin-top: 25px;
+	a {
+		padding: 0;
+	}
 }
 
 // ****************************************************************************
@@ -1088,7 +1101,32 @@ div.action_messages, div.log_container {
 	}
 }
 
-// Leading arrows on widgets ONLY ON MAIN SECTION *** AND WHEN LIST LAYOUT WITHOUT ANY CUSTOMIZATION ***
+.widget_core_coll_post_list, // Recent posts
+.widget_core_coll_featured_posts, // Featured posts
+.widget_core_coll_page_list, // Simple Page list widget
+.widget_core_coll_related_post_list, // Simple Related list widget
+.widget_core_coll_item_list { // Universal item list
+	// When images included
+	&.evo_1pic, &.evo_pics {
+		&.evo_noexcerpt, &.evo_noteaser {
+			ul li {
+				padding-bottom: 5px;
+			}
+		}
+		&.evo_withexcerpt, &.evo_withteaser {
+			ul li {
+				padding-bottom: 15px;
+			}
+		}
+	}
+	&.evo_nopic {
+		&.evo_withexcerpt, &.evo_withteaser {
+			ul li {
+				padding-bottom: 15px;
+			}
+		}
+	}
+}
 main {
 	.widget_core_coll_post_list, // Recent posts
 	.widget_core_coll_featured_posts, // Featured posts
@@ -1108,26 +1146,6 @@ main {
 						vertical-align: middle;
 						display: inline-block;
 						font-family: FontAwesome;
-					}
-				}
-			}
-			// When images included
-			&.evo_1pic, &.evo_pics {
-				&.evo_noexcerpt, &.evo_noteaser {
-					ul li {
-						padding-bottom: 5px;
-					}
-				}
-				&.evo_withexcerpt, &.evo_withteaser {
-					ul li {
-						padding-bottom: 15px;
-					}
-				}
-			}
-			&.evo_nopic {
-				&.evo_withexcerpt, &.evo_withteaser {
-					ul li {
-						padding-bottom: 15px;
 					}
 				}
 			}
@@ -1168,6 +1186,58 @@ main {
 	}
 }
 
+// Content hierarchy widget
+.widget_core_content_hierarchy {
+	ul {
+		margin: 0;
+		li {
+			// Level 0 - default style
+			padding: 12px 0;
+			list-style-type: none;
+			a {
+				letter-spacing: 0.3px;
+				font-weight: 400;
+				font-style: normal;
+				&:hover {
+					background-color: transparent !important;
+				}
+				span {
+					font-weight: 400 !important;
+				}
+			}
+		}
+		> ul {
+			// Level 1
+			li {
+				padding-left: 15px;
+				a:before {
+					padding-right: 5px;
+					font-family: FontAwesome;
+					content: '\f0d8';
+				}
+			}
+			ul {
+				// Level 2
+				li {
+					padding-left: 30px;
+				}
+				ul {
+					// Level 3
+					li {
+						padding-left: 30px;
+					}
+					ul {
+						// Level 4
+						li {
+							padding-left: 45px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 // XML Feeds div.notes
 .widget_core_coll_xml_feeds {
 	div.notes {
@@ -1177,24 +1247,30 @@ main {
 }
 
 // Category list widget
-.widget_core_coll_category_list ul {
-	ul {
-		margin: 0;
+.widget_core_coll_category_list {
+	h4 {
+		margin-top: 30px;
 	}
-	li a {
-		padding: 12px;
-		line-height: 50px;
-		border-radius: 20px;
+	ul {
+		li {
+			list-style: none !important;
+			margin-left: 0 !important;
+		}
+		> li a {
+			padding: 12px;
+			line-height: 50px;
+			border-radius: 20px;
 
-		-webkit-transform: translateZ(0);
-		transform: translateZ(0);
-		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-		-webkit-backface-visibility: hidden;
-		backface-visibility: hidden;
-		overflow: hidden;
-		.transition-0.1s;
-		&:hover {
-			text-decoration: none;
+			-webkit-transform: translateZ(0);
+			transform: translateZ(0);
+			box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+			overflow: hidden;
+			.transition-0.1s;
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 }
@@ -1238,26 +1314,25 @@ main {
 		}
 	}
 	
-	// XML Feeds widget in sidebar
-	.widget_core_coll_xml_feeds div.notes {
-		a {
-			font-size: 14px;
-		}
-	}
-	
 	// Calendar widget in sidebar
 	.widget_plugin_evo_Calr {
 		table {
 			width: 100%;
 		}
 	}
+}
 	
-	// Avatar widget
-	div.widget_core_coll_avatar {
-		text-align: left;
-		img {
-			border-radius: 50%;
-		}
+// XML Feeds widget in sidebar
+.widget_core_coll_xml_feeds div.notes {
+	a {
+		font-size: 14px;
+	}
+}
+	
+// Avatar widget
+div.widget_core_coll_avatar {
+	img {
+		border-radius: 4px;
 	}
 }
 
@@ -1549,9 +1624,28 @@ div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeho
 }
 
 // ****************************************************************************
-// Disp mediaidx module
+// Disp mediaidx
 // ****************************************************************************
-@import "less/_mediaidx.disp.less";
+.disp_mediaidx {
+	.grid {
+		text-align: center;
+		.grid-item {
+			padding: 15px;
+			img {
+				max-width: 100%;
+				max-height: 500px;
+				height: auto;
+			}
+			span.note {
+				color: #333;
+				display: block;
+				font-size: 14px;
+				font-weight: 700;
+				padding: 10px 0;
+			}
+		}
+	}
+}
 
 // ****************************************************************************
 // Disp postidx
@@ -1690,6 +1784,9 @@ main {
 
 	}
 }
+
+
+
 
 // ****************************************************************************
 // Responsive layout module

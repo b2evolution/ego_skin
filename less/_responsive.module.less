@@ -9,7 +9,7 @@
 			width: 50%;
 		}
 	}
-	.disp_posts .grid .grid-item {
+	.grid .grid-item {
 		&.three-cols {
 			width: 33.333%;
 		}
@@ -87,6 +87,38 @@
 	}
 }
 
+@media (max-width: 992px) {
+	.evo_container__sidebar, .evo_container__sidebar2 {
+		margin-top: 80px;
+		.widget_plugin_evo_Calr table {
+			max-width: 320px;
+			margin: 0 auto;
+		}
+	}
+	
+	.evo_panel__login .skin-form .panel-heading h3 {
+		font-size: 18px;
+	}
+	
+	// Masonry responsive layout
+	.disp_posts, .disp_mediaidx {
+		.grid .grid-item {
+			&.two-cols {
+				width: 50%;
+			}
+		}
+		.grid .grid-item {
+			&.three-cols {
+				width: 50%;
+			}
+		}
+	}
+	
+	.evo_cover_image {
+		margin-bottom: 0;
+	}
+}
+
 @media (max-width: 768px) {
 	// Video link layout
 	.evo_post, .evo_intro_post, .evo_featured_post {
@@ -109,7 +141,7 @@
 				width: 100%;
 			}
 		}
-		.disp_posts .grid .grid-item {
+		.grid .grid-item {
 			&.three-cols {
 				width: 100%;
 			}

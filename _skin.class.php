@@ -75,7 +75,7 @@ class ego_Skin extends Skin
 				'std' => 'yes',		// Blog
 				'photo' => 'no',
 				'forum' => 'no',
-				'manual' => 'yes',
+				'manual' => 'maybe',
 				'group' => 'no',  // Tracker
 				// Any kind that is not listed should be considered as "maybe" supported
 			);
@@ -298,7 +298,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 						'defaultvalue' => 'default',
 				   ),
 				   'posts_masonry' => array(
-						'label'    => T_('Masonry Columns'),
+						'label'    => T_('Number of columns'),
 						'note'     => '(Select the number of columns if Masonry post format selected above)',
 						'type'     => 'radio',
 						'options'  => array(
@@ -409,7 +409,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				   'mediaidx_thumb_size' => array(
 						'label'        => T_('Thumbnail size for media index'),
 						'note'         => '',
-						'defaultvalue' => 'fit-320x320',
+						'defaultvalue' => 'crop-480x320',
 						'options'      => get_available_thumb_sizes(),
 						'type'         => 'select',
 					),
@@ -421,9 +421,8 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 							array( 'one', T_('1 Column') ),
 							array( 'two', T_('2 Columns') ),
 							array( 'three', T_('3 Columns') ),
-							array( 'fw_cols', T_('Full width') ),
 						),
-						'defaultvalue' => 'one',
+						'defaultvalue' => 'three',
 				   ),
 				'mediaidx_end' => array(
 					'layout' => 'end_fieldset',
@@ -678,7 +677,8 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				.disp_threads.detail_msgform main .comment-form input.submit,
 				.header-social-toggle .ufld_icon_links:hover:before,
 				.disp_threads.detail_msgform main .comment-form .btn-primary,
-				.widget_core_coll_subscription .btn
+				.widget_core_coll_subscription .btn,
+				.disp_msgform main .comment-form input.submit
 				{ background-color: '. $links_color ." }\n";
 				
 				$custom_css .= '
@@ -745,6 +745,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				.widget_core_coll_related_post_list ul li,
 				.widget_core_coll_item_list ul li, .widget_core_coll_item_list ul li ul li,
 				.widget_core_coll_xml_feeds ul li, .widget_core_coll_xml_feeds div.notes,
+				.widget_core_content_hierarchy ul li,
 				.compact_search_form input.search_field,
 				.widget_plugin_evo_Arch ul li, .arcdir_list_wrapper ul li,
 				.disp_user .profile_content .profile_column_right fieldset.fieldset legend.panel-title
@@ -799,6 +800,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				$custom_css .= '.evo_comment_avatar img { border: 3px solid '. $site_borders ." }\n";
 				$custom_css .= '.comment-form--title { border-top: 3px solid '. $site_borders ." }\n";
 				$custom_css .= '.disp_search .widget_core_coll_search_form .extended_search_form .search_field { border-bottom: 2px solid '. $site_borders ." }\n";
+				$custom_css .= '.disp_msgform main .comment-form input.submit { border-color: '. $links_color ." }\n";
 			}
 		
 		

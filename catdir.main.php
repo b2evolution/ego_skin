@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the main/default page template for the "fisa_blog" skin.
+ * This is the main/default page template for the "bootstrap_blog" skin.
  *
  * This skin only uses one single template which includes most of its features.
  * It will also rely on default includes for specific dispays (like the comment form).
@@ -12,7 +12,7 @@
  * to handle the request (based on $disp).
  *
  * @package evoskins
- * @subpackage horizon_blog_skin
+ * @subpackage bootstrap_blog
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -35,6 +35,32 @@ skin_include( '_html_header.inc.php', array() );
 // If site headers are enabled, they will be included here:
 siteskin_include( '_site_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
+
+// Default params:
+$params = array(
+		'feature_block'              => false,			// fp>yura: what is this for??
+		// Classes for the <article> tag:
+		'item_class'                 => 'evo_post evo_content_block',
+		'item_type_class'            => 'evo_post__ptyp_',
+		'item_status_class'          => 'evo_post__',
+		// Controlling the title:
+		'disp_title'                 => true,
+		'item_title_masonry_before'  => '<div class="evo_post_masonry">',
+		'item_title_line_before'     => '<div class="evo_post_title">',	// Note: we use an extra class because it facilitates styling
+		'item_title_line_before_spec'=> '<div class="evo_post_title special_posts_simple_layout__title">',
+			'item_title_before'          => '<h2>',	
+			'item_title_after'           => '</h2>',
+			'item_title_single_before'   => '<h1>',	// This replaces the above in case of disp=single or disp=page
+			'item_title_single_after'    => '</h1>',
+		'item_title_line_after'      => '</div>',
+		// Controlling the content:
+		'content_mode'               => 'auto',		// excerpt|full|normal|auto -- auto will auto select depending on $disp-detail
+		'image_class'                => 'img-responsive',
+		'image_size'                 => 'fit-1280x720',
+		'author_link_text'           => 'preferredname',
+	);
+
+
 echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>";
 ?>
 <nav class="navbar">				
@@ -152,6 +178,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	) );
 ?>
 
+
 <div class="container main-page-content">
 
 <div class="row">
@@ -159,6 +186,19 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	<div class="<?php echo $Skin->get_column_class(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
+		
+		<?php 			
+		// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
+			item_prevnext_links( array(
+					'block_start' => '<nav><ul class="pager special_pager_layout">',
+						'prev_start'  => '<li class="previous">',
+						'prev_end'    => '</li>',
+						'next_start'  => '<li class="next">',
+						'next_end'    => '</li>',
+					'block_end'   => '</ul></nav>',
+				) );
+			// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
+		?>
 
 		<!-- ================================= START OF MAIN AREA ================================== -->
 
@@ -172,19 +212,6 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 				) );
 			// --------------------------------- END OF MESSAGES ---------------------------------
 		}
-		?>
-
-		<?php
-			// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
-			item_prevnext_links( array(
-					'block_start' => '<nav><ul class="pager">',
-						'prev_start'  => '<li class="previous">',
-						'prev_end'    => '</li>',
-						'next_start'  => '<li class="next">',
-						'next_end'    => '</li>',
-					'block_end'   => '</ul></nav>',
-				) );
-			// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
 		?>
 
 		<?php
@@ -207,11 +234,6 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'display_edit_links'=> false,
 					'catdir_text' => T_('Categories'),
 					'arcdir_text' => T_('Archives'),
-					'contacts_text' => T_(''),
-					'search_text' => T_(''),
-					'messages_text' => T_('Contact us:'),
-					'usercomments_text' => T_(''),
-					'useritems_text' => T_(''),
 				) );
 			// ----------------------------- END OF REQUEST TITLE ----------------------------
 		?>
@@ -297,7 +319,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'featured_intro_before' => '<div class="intro_background_image"></div>',
 					'featured_intro_after'  => '',
 					// Form "Sending a message"
-					'msgform_form_title' => T_('Contact us:'),
+					'msgform_form_title' => T_('Sending a message'),
 				) );
 			// Note: you can customize any of the sub templates included here by
 			// copying the matching php file into your skin directory.
@@ -309,11 +331,12 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 
 	<?php
-	if( $Skin->is_visible_sidebar() )
+	if( $Skin->is_visible_sidebar_single() )
 	{ // Display sidebar:
 	?>
-	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
+	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout_posts' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<!-- =================================== START OF SIDEBAR =================================== -->
+		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false ) { ?>
 		<div class="evo_container evo_container__sidebar">
 		<?php
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
@@ -351,8 +374,8 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
 		</div>
+		<?php } // if Sidebar2 Single option not selected ?>
 
-		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false ) { ?>
 		<div class="evo_container evo_container__sidebar2">
 		<?php
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
@@ -390,7 +413,6 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
 		</div>
-		<?php } // if Sidebar2 Single option not selected ?>
 	</aside><!-- .col -->
 	<?php }// if visible sidebar ?>
 

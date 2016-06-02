@@ -73,10 +73,10 @@ class ego_Skin extends Skin
 		$supported_kinds = array(
 				'main' => 'yes',
 				'std' => 'yes',		// Blog
-				'photo' => 'no',
+				'photo' => 'yes',
 				'forum' => 'no',
-				'manual' => 'maybe',
-				'group' => 'no',  // Tracker
+				'manual' => 'partial',
+				'group' => 'maybe',  // Tracker
 				// Any kind that is not listed should be considered as "maybe" supported
 			);
 		return $supported_kinds;
@@ -136,7 +136,7 @@ class ego_Skin extends Skin
 					),
 					'site_borders' => array(
 						'label'         => T_('Color scheme second supporting color'),
-						'note'          => T_('Default color is #eee. This color is used as a third color color used for the custom site color scheme. It is mostly used for borders on elements.'),
+						'note'          => T_('Default color is #eee. This color is used as a third color used for the custom site color scheme. It is mostly used for borders on elements.'),
 						'defaultvalue'  => '#eee',
 						'type'          => 'color',
 					),
@@ -427,6 +427,44 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				'mediaidx_end' => array(
 					'layout' => 'end_fieldset',
 				),
+				
+				
+				// Catdir disp customizations
+				'catdir_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Category Page Options')
+				),
+					'catdir_layout' => array(
+						'label'    => T_('Category Page Layout'),
+						'note'     => '(Select the number of columns for displaying media items)',
+						'type'     => 'radio',
+						'options'  => array(
+							array( 'catdir_list', T_('List') ),
+							array( 'catdir_masonry', T_('Masonry') ),
+						),
+						'defaultvalue' => 'catdir_list',
+					),
+				   'catdir_masonry_cols' => array(
+						'label'    => T_('Masonry Columns'),
+						'note'     => '(Select the number of columns for displaying media items)',
+						'type'     => 'radio',
+						'options'  => array(
+							array( 'one', T_('1 Column') ),
+							array( 'two', T_('2 Columns') ),
+							array( 'three', T_('3 Columns') ),
+						),
+						'defaultvalue' => 'two',
+				   ),
+				   'catdir_thumb_size' => array(
+						'label'        => T_('Thumbnail size for category items'),
+						'note'         => T_('Use this only if Masonry layout is enabled'),
+						'defaultvalue' => 'crop-480x320',
+						'options'      => get_available_thumb_sizes(),
+						'type'         => 'select',
+					),
+				'catdir_end' => array(
+					'layout' => 'end_fieldset',
+				),
 
 
 				// Footer layout customzation
@@ -591,7 +629,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 		require_js( $this->get_url().'js/scripts.js' );
 		
 		// Include Masonry Grind for Posts and Mediaidx disps
-		if ( in_array ( $disp, array( 'posts', 'mediaidx' ) ) ) {
+		if ( in_array ( $disp, array( 'posts', 'mediaidx', 'catdir' ) ) ) {
 			require_js( $this->get_url() . 'js/masonry.pkgd.min.js' );
 			require_js( $this->get_url() . 'js/imagesloaded.pkgd.min.js' );
 			add_js_headline("

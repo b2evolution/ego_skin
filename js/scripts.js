@@ -1,3 +1,17 @@
+$(document).mouseup(function (e)
+{
+	var menu_social_toggle = $( '.menu-social-toggle' );    
+    $.each(menu_social_toggle, function(key, value) {
+        if (!$(value).is(e.target) // if the target of the click isn't the menu-social-toggle
+            && $(value).has(e.target).length === 0) // nor a descendant of the the menu-social-toggle
+        {
+			// Hide field if clicked elsewhere
+            $('.ufld_icon_links a').removeClass( ' drop-down-social' );
+			$('.ufld_icon_links a').fadeOut(400);
+        }
+    });
+});
+
 jQuery(document).ready(function() {
 	
 	/* Header Search Field
@@ -15,6 +29,7 @@ jQuery(document).ready(function() {
 			jQuery('.header-main-search-field').fadeOut(400);
 		}
 	});
+	
 	
 	/* Disp search search field placeholder
 	*********************************************************/

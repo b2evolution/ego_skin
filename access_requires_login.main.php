@@ -24,7 +24,7 @@ if( version_compare( $app_version, '6.4' ) < 0 )
 // This is the main template; it may be used to display very different things.
 // Do inits depending on current $disp:
 skin_init( $disp );
-
+global $Blog;
 
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
 skin_include( '_html_header.inc.php', array() );
@@ -87,7 +87,7 @@ if( $Skin->is_visible_container( 'menu' ) )
 				} else if ( $Skin->get_setting( 'title_logo_w' ) == 'display_logo' && !empty($Skin->get_setting( 'title_logo_w' )) ) {
 					$logo_w_path = $Skin->get_setting('logo_w_path');
 					echo '<div class="navbar-brand navbar-logo">';
-					echo '<a href="'.$baseurl.'"><img src="'.$skins_url.'/ego_skin/'.$logo_w_path.'" /></a>';
+					echo '<a href="'.$Blog->get( 'url' ).'"><img src="'.$skins_url.'/ego_skin/'.$logo_w_path.'" /></a>';
 					echo '</div>';
 				}
 				// ---------------------- END OF "Menu" Collection title/logo ---------------------- 

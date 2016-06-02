@@ -1496,8 +1496,20 @@ p.tag_cloud a {
 // --------- Universal item list widget & Recent posts widget --------- 
 @import "../../rsc/less/_universal_item_list_widget.module.less";
 // *********************** Custom module styles:
-div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_featured_posts.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_post_list.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_page_list.evo_1pic__special ul li .item_first_image_placeholder:before, div.widget_core_coll_related_post_list.evo_1pic__special ul li .item_first_image_placeholder:before {
+div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeholder:before,
+div.widget_core_coll_featured_posts.evo_1pic__special ul li .item_first_image_placeholder:before,
+div.widget_core_coll_post_list.evo_1pic__special ul li .item_first_image_placeholder:before,
+div.widget_core_coll_page_list.evo_1pic__special ul li .item_first_image_placeholder:before,
+div.widget_core_coll_related_post_list.evo_1pic__special ul li .item_first_image_placeholder:before {
     margin-top: 27px;
+}
+div.widget_core_coll_item_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title, div.widget_core_coll_featured_posts.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title, div.widget_core_coll_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title, div.widget_core_coll_page_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title, div.widget_core_coll_related_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title {
+    font-weight: 700;
+    line-height: 1.5em;
+    margin: 10px 0 5px;
+	a {
+	font-size: 16px;
+	}
 }
 // --------------------------------------------------------------------
 
@@ -1639,6 +1651,30 @@ div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeho
 			span.note {
 				color: #333;
 				display: block;
+				font-size: 14px;
+				font-weight: 700;
+				padding: 10px 0;
+			}
+		}
+	}
+}
+
+// ****************************************************************************
+// Disp catdir
+// ****************************************************************************
+
+.disp_catdir {
+	.grid {
+		text-align: center;
+		.grid-item {
+			padding: 15px;
+			float: left;
+			img {
+				max-width: 100%;
+				max-height: 500px;
+				height: auto;
+			}
+			a {
 				font-size: 14px;
 				font-weight: 700;
 				padding: 10px 0;

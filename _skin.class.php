@@ -17,7 +17,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  */
 class ego_Skin extends Skin
 {	
-	var $version = '1.0';
+	var $version = '1.0.0';
 	/**
 	 * Do we want to use style.min.css instead of style.css ?
 	 */
@@ -102,7 +102,7 @@ class ego_Skin extends Skin
 				),
 					'layout' => array(
 						'label' => T_('Default Pages Layout'),
-						'note' => '',
+						'note' => T_('Select general skin layout.'),
 						'defaultvalue' => 'right_sidebar',
 						'options' => array(
 							'single_column'              => T_('Single Column Large'),
@@ -116,7 +116,7 @@ class ego_Skin extends Skin
 					),
 					'max_image_height' => array(
 						'label' => T_('Max image height'),
-						'note' => 'px',
+						'note' => 'px. ' . T_('Set maximum height for post images.'),
 						'defaultvalue' => '',
 						'type' => 'integer',
 						'allow_empty' => true,
@@ -124,25 +124,25 @@ class ego_Skin extends Skin
 					),
 					'links_color' => array(
 						'label'        => T_('Links Color Schemes'),
-						'note'         => T_('Default links color schemes is #096. This color is used for links, buttons, hover and active classes.'),
+						'note'         => T_('Default links color schemes is') . ' #096. ' . T_('This color is used for links, buttons, hover and active classes.'),
 						'defaultvalue' => '#096',
 						'type'         => 'color',
 					),
 					'site_bg_color' => array(
 						'label'         => T_('Color scheme supporting color'),
-						'note'          => T_('Default supporting color is #fff. This color appears as the second color scheme combination and is used as a supporting color for links and page sections.'),
+						'note'          => T_('Default supporting color is') . ' #fff. ' . T_('This color appears as the second color scheme combination and is used as a supporting color for links and page sections.'),
 						'defaultvalue'  => '#fff',
 						'type'          => 'color',
 					),
 					'site_borders' => array(
 						'label'         => T_('Color scheme second supporting color'),
-						'note'          => T_('Default color is #eee. This color is used as a third color used for the custom site color scheme. It is mostly used for borders on elements.'),
+						'note'          => T_('Default color is') . ' #eee. ' . T_('This color is used as a third color used for the custom site color scheme. It is mostly used for borders on elements.'),
 						'defaultvalue'  => '#eee',
 						'type'          => 'color',
 					),
 					'title_logo_w' => array(
 						'label' => T_('Display logo/title'),
-						'note' => 'Decide whether you want to display blog title, logo or neither of both.',
+						'note' => T_('Decide whether you want to display blog title, logo or neither of both.'),
 						'defaultvalue' => 'display_logo',
 						'options' => array(
 							'display_logo'   => T_('Display logo'),
@@ -176,13 +176,13 @@ class ego_Skin extends Skin
 				),
 					'menu_bg_color' => array(
 						'label'         => T_('Navigation background color'),
-						'note'          => T_('Default color is #fff.'),
+						'note'          => T_('Default color is.') . ' #fff.',
 						'defaultvalue'  => '#fff',
 						'type'          => 'color',
 					),
 					'menu_a_color' => array(
 						'label'         => T_('Navigation links color'),
-						'note'          => T_('Default color is #333.'),
+						'note'          => T_('Default color is.') . ' #333.',
 						'defaultvalue'  => '#333',
 						'type'          => 'color',
 					),
@@ -200,9 +200,9 @@ class ego_Skin extends Skin
 					),
 					'nav_hamb_menu' => array(
 						'label'          => T_('Hamburger menu at'),
-						'note'           => T_('px. Set the width in pixels below which menu will have hamburger layout. Type <b>numbers only</b>.'),
+						'note'           => T_('px. Set the width in pixels below which menu will have hamburger layout.'),
 						'defaultvalue'   => '820',
-						'type'           => 'text',
+						'type'           => 'integer',
 						'size'           => '7',
 					),
 				'nav_links_end' => array(
@@ -217,7 +217,7 @@ class ego_Skin extends Skin
 					// Front Disp layout
 					'layout_front' => array(
 						'label' => T_('Front Page Layout'),
-						'note' => '',
+						'note' => T_('Select front page layout.'),
 						'defaultvalue' => 'single_column_narrow',
 						'options' => array(
 							'single_column'              => T_('Single Column Large'),
@@ -274,7 +274,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 					// Posts Disp layout
 					'layout_posts' => array(
 						'label' => T_('Posts Page Layout'),
-						'note' => '',
+						'note' => T_('Select posts page layout.'),
 						'defaultvalue' => 'right_sidebar',
 						'options' => array(
 							'single_column'              => T_('Single Column Large'),
@@ -288,7 +288,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 					),
 				   'posts_format' => array(
 						'label'    => T_('Posts Format'),
-						'note'     => '',
+						'note'     => '(' . T_('Select posts format on posts page.') . ')',
 						'type'     => 'radio',
 						'options'  => array(
 							array( 'default', T_('Default') ),
@@ -299,7 +299,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				   ),
 				   'posts_masonry' => array(
 						'label'    => T_('Number of columns'),
-						'note'     => '(Select the number of columns if Masonry post format selected above)',
+						'note'     => '(' . T_('Select the number of columns if Masonry post format is selected above') . ')',
 						'type'     => 'radio',
 						'options'  => array(
 							array( 'one', T_('1 Column') ),
@@ -324,7 +324,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 					),
 					'pag_alignment' => array(
 						'label'        => T_('Pagination Alignment'),
-						'note'         => T_(''),
+						'note'         => T_('Select pagination alignment on posts page.'),
 						'type'         => 'select',
 						'options'      => array(
 							'left'   => T_('Left'),
@@ -345,7 +345,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 					// Single Disp layout
 					'layout_single' => array(
 						'label' => T_('Single Page Layout'),
-						'note' => '',
+						'note' => T_('Select single page layout.'),
 						'defaultvalue' => 'right_sidebar',
 						'options' => array(
 							'single_column'              => T_('Single Column Large'),
@@ -360,7 +360,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 					// Sidebar 2 Container Only
 					'sidebar2_single' => array(
 						'label' => T_('Sidebar2 on Single Page'),
-						'note' => T_('Check this to enable Sidebar2 container <b>only</b> on Single page. On other pages regular Sidebar container will be shown.'),
+						'note' => T_('Check this to enable Sidebar2 container only on single pages. On other pages regular Sidebar container will be shown.'),
 						'defaultvalue' => 1,
 						'type' => 'checkbox',
 					),
@@ -377,19 +377,19 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 						),
 						'cover_text' => array(
 							'label'         => T_('Cover section text color'),
-							'note'          => T_('Default color is #fefefe.'),
+							'note'          => T_('Default color is') . ' #fefefe.',
 							'defaultvalue'  => '#fefefe',
 							'type'          => 'color',
 						),
 						'cover_links' => array(
 							'label'         => T_('Cover section links color'),
-							'note'          => T_('Default color is #fefefe.'),
+							'note'          => T_('Default color is') . ' #fefefe.',
 							'defaultvalue'  => '#fefefe',
 							'type'          => 'color',
 						),
 						'cover_borders' => array(
 							'label'         => T_('Cover section borders color'),
-							'note'          => T_('Default color is #fefefe.'),
+							'note'          => T_('Default color is') . ' #fefefe.',
 							'defaultvalue'  => '#fefefe',
 							'type'          => 'color',
 						),
@@ -404,18 +404,18 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				// Mediaidx disp customizations
 				'mediaidx_start' => array(
 					'layout' => 'begin_fieldset',
-					'label'  => T_('Media Page Options')
+					'label'  => T_('Media Page Settings')
 				),
 				   'mediaidx_thumb_size' => array(
-						'label'        => T_('Thumbnail size for media index'),
-						'note'         => '',
+						'label'        => T_('Thumbnail size'),
+						'note'         => T_('Thumbnail size for Media index page.'),
 						'defaultvalue' => 'crop-480x320',
 						'options'      => get_available_thumb_sizes(),
 						'type'         => 'select',
 					),
 				   'mediaidx_masonry' => array(
 						'label'    => T_('Masonry Columns'),
-						'note'     => '(Select the number of columns for displaying media items)',
+						'note'     => '(' . T_('Select the number of columns for displaying media items') . ')',
 						'type'     => 'radio',
 						'options'  => array(
 							array( 'one', T_('1 Column') ),
@@ -432,11 +432,11 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				// Catdir disp customizations
 				'catdir_start' => array(
 					'layout' => 'begin_fieldset',
-					'label'  => T_('Category Page Options')
+					'label'  => T_('Category Page Settings')
 				),
 					'catdir_layout' => array(
 						'label'    => T_('Category Page Layout'),
-						'note'     => '(Select the number of columns for displaying media items)',
+						'note'     => '(' . T_('Select the number of columns for displaying media items') . ')',
 						'type'     => 'radio',
 						'options'  => array(
 							array( 'catdir_list', T_('List') ),
@@ -446,7 +446,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 					),
 				   'catdir_masonry_cols' => array(
 						'label'    => T_('Masonry Columns'),
-						'note'     => '(Select the number of columns for displaying media items)',
+						'note'     => '(' . T_('Select the number of columns for displaying media items') . ')',
 						'type'     => 'radio',
 						'options'  => array(
 							array( 'one', T_('1 Column') ),
@@ -456,8 +456,8 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 						'defaultvalue' => 'two',
 				   ),
 				   'catdir_thumb_size' => array(
-						'label'        => T_('Thumbnail size for category items'),
-						'note'         => T_('Use this only if Masonry layout is enabled'),
+						'label'        => T_('Thumbnail size'),
+						'note'         => T_('Use this only if Masonry layout is enabled.'),
 						'defaultvalue' => 'crop-480x320',
 						'options'      => get_available_thumb_sizes(),
 						'type'         => 'select',
@@ -554,7 +554,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 
 				'section_username_start' => array(
 					'layout' => 'begin_fieldset',
-					'label'  => T_('Username options')
+					'label'  => T_('Username Settings')
 				),
 					'gender_colored' => array(
 						'label' => T_('Display gender'),
@@ -626,16 +626,17 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 			) );
 			
 		// Skin specific initializations:
-		require_js( $this->get_url().'js/scripts.js' );
+		require_js( 'js/scripts.js', 'relative' );
 		
 		// Include Masonry Grind for Posts and Mediaidx disps
 		if ( in_array ( $disp, array( 'posts', 'mediaidx', 'catdir' ) ) ) {
-			require_js( $this->get_url() . 'js/masonry.pkgd.min.js' );
-			require_js( $this->get_url() . 'js/imagesloaded.pkgd.min.js' );
+			require_js( 'js/masonry.pkgd.min.js', 'relative' );
+			require_js( 'js/imagesloaded.pkgd.min.js', 'relative' );
 			add_js_headline("
 				jQuery( document ).ready( function($) {
-					$('.grid').imagesLoaded().done( function( instance ) {
-						$('.grid').masonry({
+					$( '.grid' ).imagesLoaded().done( function( instance ) {
+						$( '.grid' ).masonry(
+						{
 							// options
 							itemSelector: '.grid-item',
 						});

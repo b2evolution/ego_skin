@@ -55,7 +55,7 @@ echo '">'; // Beginning of post display
 
 <article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>">
 
-	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && ! empty($Item->get_cover_image_url()) && $disp == 'single' )
+	<?php if ( $Skin->get_setting( 'spec_cover_image' ) == true && ! empty($Item->get_cover_image_url()) && in_array( $disp, array( 'single', 'page' ) ) )
 	{ // We leave this blank if special cover image option is checked and if there is no cover image upladed
 	} else { ?> 
 	

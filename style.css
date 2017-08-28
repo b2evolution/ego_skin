@@ -981,15 +981,9 @@ div.bSideItem h4 {
 .pagination li a {
   border-radius: 4px;
   font-size: 13px;
-  padding: 6px 12px;
+  padding: 10px 12px;
   margin-right: 4px;
   margin-bottom: 4px;
-}
-@media (min-width: 1025px) {
-  .pagination li span,
-  .pagination li a {
-    padding: 10px 16px;
-  }
 }
 div.action_messages,
 div.log_container {

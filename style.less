@@ -5,6 +5,7 @@
 // Site Font family
 body {
 	font-family: 'Droid Serif', serif;
+	overflow-x: hidden !important;
 }
 
 // Content specific styles on all pages
@@ -413,7 +414,6 @@ textarea.message_text {
 				font-size: 24px;
 				-moz-osx-font-smoothing: grayscale;
 				padding: 12px;
-				border-radius: 50%;
 				display: block;
 				width: 51px;
 				float: left;
@@ -531,6 +531,7 @@ textarea.message_text {
 		vertical-align: middle;
 	}
 }
+.disp_page,
 .disp_single {
 	.evo_post_title h1 {
 		font-weight: 700;
@@ -540,7 +541,8 @@ textarea.message_text {
 		font-size: 46px;
 	}
 }
-.disp_page, .disp_single {
+.disp_page,
+.disp_single {
 	.evo_comment__list_title {
 		font-size: 20px;
 	}
@@ -623,17 +625,20 @@ textarea.message_text {
 	}
 }
 
-// Special Cover Image position disp=single
-.disp_single .spec_cover_image__header {
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.77);
-	padding: 15% 15px 0;
-	display: table-cell;
-	vertical-align: middle;
-	.evo_post_title, .evo_post__categories, .evo_post__info {
-		display: block;
-		text-align: left;
-		max-width: 700px;
-		margin: 0 auto;
+// Special Cover Image position disp=single and disp=page
+.disp_page,
+.disp_single {
+	.spec_cover_image__header {
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.77);
+		padding: 15% 15px 0;
+		display: table-cell;
+		vertical-align: middle;
+		.evo_post_title, .evo_post__categories, .evo_post__info {
+			display: block;
+			text-align: left;
+			max-width: 700px;
+			margin: 0 auto;
+		}
 	}
 }
 
@@ -641,23 +646,44 @@ textarea.message_text {
 .pager.special_pager_layout {
 	margin: 0 0 30px;
 	li a {
-		border-radius: 0;
+		border-radius: 20px;
 		padding: 12px 14px;
 		.transition-0.1s;
 	}
 }
+.spec_cover_image__header {
+	.pager.special_pager_layout {
+	    display: block;
+		max-width: 700px;
+		margin: 0 auto 30px;
+		
+		li a {
+		    background: rgba(255,255,255,0.2);
+		}
+	}
+}
 
 // Disp single add meta comments button
-.disp_single .evo_comment__meta_info a {
-	border-radius: 3px;
-	background-color: transparent;
-	-webkit-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+.disp_page,
+.disp_single {
+	.evo_comment__meta_info {
+		padding: 12px 0 10px;
+		
+		a {
+			border-radius: 3px;
+			background-color: transparent;
+			-webkit-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+	}
 }
 
 // Disp single add comments feed when logged out
-.disp_single.anonymous .evo_post_feedback_feed_msg {
-	margin-top: 60px;
+.disp_page.anonymous,
+.disp_single.anonymous {
+	.evo_post_feedback_feed_msg {
+		margin-top: 60px;
+	}
 }
 
 
@@ -691,9 +717,9 @@ textarea.message_text {
 				padding-top: 0;
 			}
 		}
-		.panel-body {
-			padding-top: 0;
-		}
+	}
+	.panel-body {
+		padding: 0 15px 15px !important;
 	}
 }
 .evo_post_comment_notification p {
@@ -719,11 +745,19 @@ textarea.message_text {
 .ratings_table {
 	display: block;
 }
-
+.default-comment {
+	> .panel-heading {
+		padding: 15px 0;
+	}
+	
+	> .panel-body {
+		padding: 15px 0 0;
+	}
+}
 .comment-form {
 	.form-group { // Input areas
 		float: left;
-		width: 50%;
+		width: 100%;
 		&#ffield_g, &#ffield_uploadfile_A1 { // Textarea
 			width: 100%;
 		}
@@ -778,11 +812,45 @@ textarea.message_text {
 		}
 	}
 }
+// Meta comment wrapper
+.evo_item_meta_comments {
+	padding: 0;
+	
+	legend.panel-heading {
+		font-weight: 700;
+		padding-bottom: 25px;
+	}
+	
+	.panel-heading {
+	    padding: 0;
+		background: transparent;
+		border: none;
+		
+		h4 {
+			padding-top: 25px;
+			padding-bottom: 25px;
+			font-weight: 700;
+		}
+	}
+	
+	.panel-body {
+		background: 0;
+		padding: 0;
+	}
+	
+	.panel-meta {
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+		padding-bottom: 35px;
+	}
+}
 // "Leave a comment" title
 .comment-form--title {
 	margin-top: 80px;    
 	border-top: 3px solid #eee;
     padding-top: 25px;
+	font-weight: 700;
 }
 .evo_post_comment_notification {
 	margin-top: 25px;
@@ -993,9 +1061,17 @@ div.bSideItem {
 	li span, li a {
 			border-radius: 4px;
 			font-size: 13px;
-			padding: 10px 16px;
+			padding: 6px 12px;
 			margin-right: 4px;
 			margin-bottom: 4px;
+	}
+}
+
+@media (min-width: 1025px) {
+	.pagination {
+		li span, li a {
+			padding: 10px 16px;
+		}
 	}
 }
 
@@ -1304,7 +1380,7 @@ main {
 
 // Sidebar widgets
 .evo_container__sidebar, .evo_container__sidebar2 {
-	padding: 0 20px;
+	padding: 0;
 	.widget_core_coll_post_list, 
 	.widget_core_coll_comment_list, 
 	.widget_core_coll_item_list,
@@ -1321,6 +1397,12 @@ main {
 		}
 	}
 }
+@media (min-width: 768px) {
+	.evo_container__sidebar, .evo_container__sidebar2 {
+		padding: 0 20px;
+	}
+}
+
 	
 // XML Feeds widget in sidebar
 .widget_core_coll_xml_feeds div.notes {

@@ -229,7 +229,7 @@ echo '">'; // Beginning of post display
 			'block_title_start' => '<h3>',
 			'block_title_end' => '</h3>',
 			// Template params for "Item Tags" widget
-			'widget_coll_item_tags_before'    => '<div class="evo_post__full">'.T_('Tags').': ',
+			'widget_coll_item_tags_before'    => '<div class="evo_post__full">',
 			'widget_coll_item_tags_after'     => '</div>',
 			// Params for skin file "_item_content.inc.php"
 			'widget_coll_item_content_params' => $params,

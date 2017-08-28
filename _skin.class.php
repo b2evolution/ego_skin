@@ -799,7 +799,6 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				
 				$custom_css .= '
 				.widget_core_coll_category_list ul li a,
-				.evo_post header .categories-icon, .evo_featured_post .categories-icon,
 				.evo_post__categories a,
 				#bCalendarToday,
 				p.tag_cloud a,
@@ -892,8 +891,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 			}
 			if ( $cover_borders = $this->get_setting( 'cover_borders' ) ) {
 				$custom_css .= '
-				.spec_cover_image__header .evo_post__categories a,
-				.spec_cover_image__header .evo_post__categories .categories-icon
+				.spec_cover_image__header .evo_post__categories a
 				{ border: 1px solid '. $cover_borders ." }\n";
 			}
 			

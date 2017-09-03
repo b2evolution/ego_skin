@@ -508,7 +508,6 @@ textarea.message_text {
 .disp_page .evo_post_title h1,
 .disp_single .evo_post_title h1 {
   font-weight: 700;
-  display: table-cell;
   margin: 0;
   padding: 25px 0;
   font-size: 46px;

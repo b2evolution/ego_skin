@@ -485,20 +485,25 @@ textarea.message_text {
 .evo_featured_post {
   padding-left: 15px;
 }
-.evo_post_title {
-  display: table;
-}
 .evo_post_title h2 {
   font-weight: 700;
-  display: table-cell;
   margin: 0;
   padding: 25px 0;
   font-size: 46px;
 }
 .evo_post_title .btn-group {
-  display: table-cell;
   padding: 20px 0 10px 30px;
   vertical-align: middle;
+}
+.evo_intro_post .evo_post_title,
+.featuredpost .evo_post_title {
+  display: table;
+}
+.evo_intro_post .evo_post_title h2,
+.featuredpost .evo_post_title h2,
+.evo_intro_post .evo_post_title .btn-group,
+.featuredpost .evo_post_title .btn-group {
+  display: table-cell;
 }
 .disp_page .evo_post_title h1,
 .disp_single .evo_post_title h1 {

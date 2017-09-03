@@ -517,18 +517,29 @@ textarea.message_text {
 
 // Positions on the action buttons near page titles
 .evo_post_title {
-	display: table;
+	// display: table;
 	h2 {
 		font-weight: 700;
-		display: table-cell;
+		// display: table-cell;
 		margin: 0;
 		padding: 25px 0;
 		font-size: 46px;
 	}
 	.btn-group {
-		display: table-cell;
+		// display: table-cell;
 		padding: 20px 0 10px 30px;
 		vertical-align: middle;
+	}
+}
+.evo_intro_post,
+.featuredpost {
+	.evo_post_title {
+		display: table;
+		
+		h2,
+		.btn-group {
+			display: table-cell;
+		}
 	}
 }
 .disp_page,

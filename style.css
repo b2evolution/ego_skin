@@ -1270,26 +1270,26 @@ main .widget_plugin_evo_Arch ul li span.dimmed:before {
   border-radius: 4px !important;
 }
 .evo_container__sidebar,
-.evo_container__sidebar2 {
+.evo_container__sidebar_2 {
   padding: 0;
 }
 .evo_container__sidebar .widget_core_coll_post_list ul li a,
-.evo_container__sidebar2 .widget_core_coll_post_list ul li a,
+.evo_container__sidebar_2 .widget_core_coll_post_list ul li a,
 .evo_container__sidebar .widget_core_coll_comment_list ul li a,
-.evo_container__sidebar2 .widget_core_coll_comment_list ul li a,
+.evo_container__sidebar_2 .widget_core_coll_comment_list ul li a,
 .evo_container__sidebar .widget_core_coll_item_list ul li a,
-.evo_container__sidebar2 .widget_core_coll_item_list ul li a,
+.evo_container__sidebar_2 .widget_core_coll_item_list ul li a,
 .evo_container__sidebar .widget_core_coll_xml_feeds ul li a,
-.evo_container__sidebar2 .widget_core_coll_xml_feeds ul li a {
+.evo_container__sidebar_2 .widget_core_coll_xml_feeds ul li a {
   font-size: 14px;
 }
 .evo_container__sidebar .widget_plugin_evo_Calr table,
-.evo_container__sidebar2 .widget_plugin_evo_Calr table {
+.evo_container__sidebar_2 .widget_plugin_evo_Calr table {
   width: 100%;
 }
 @media (min-width: 768px) {
   .evo_container__sidebar,
-  .evo_container__sidebar2 {
+  .evo_container__sidebar_2 {
     padding: 0 20px;
   }
 }
@@ -1415,6 +1415,46 @@ p.tag_cloud a:hover {
 .evo_container__footer {
   margin-top: 80px;
 }
+div.widget_core_coll_item_list.evo_layout_flow .widget_flow_blocks,
+div.widget_core_coll_featured_posts.evo_layout_flow .widget_flow_blocks,
+div.widget_core_coll_post_list.evo_layout_flow .widget_flow_blocks,
+div.widget_core_coll_page_list.evo_layout_flow .widget_flow_blocks,
+div.widget_core_coll_related_post_list.evo_layout_flow .widget_flow_blocks {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+div.widget_core_coll_item_list.evo_layout_flow .widget_flow_blocks > div,
+div.widget_core_coll_featured_posts.evo_layout_flow .widget_flow_blocks > div,
+div.widget_core_coll_post_list.evo_layout_flow .widget_flow_blocks > div,
+div.widget_core_coll_page_list.evo_layout_flow .widget_flow_blocks > div,
+div.widget_core_coll_related_post_list.evo_layout_flow .widget_flow_blocks > div {
+  padding: 8px;
+  margin: 14px;
+  overflow: hidden;
+  background-color: #fafafa;
+  border-radius: 4px;
+  text-align: left;
+  width: 250px;
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+div.widget_core_coll_item_list.evo_layout_flow.evo_withteaser .widget_flow_blocks > div .item_title,
+div.widget_core_coll_featured_posts.evo_layout_flow.evo_withteaser .widget_flow_blocks > div .item_title,
+div.widget_core_coll_post_list.evo_layout_flow.evo_withteaser .widget_flow_blocks > div .item_title,
+div.widget_core_coll_page_list.evo_layout_flow.evo_withteaser .widget_flow_blocks > div .item_title,
+div.widget_core_coll_related_post_list.evo_layout_flow.evo_withteaser .widget_flow_blocks > div .item_title,
+div.widget_core_coll_item_list.evo_layout_flow.evo_withexcerpt .widget_flow_blocks > div .item_title,
+div.widget_core_coll_featured_posts.evo_layout_flow.evo_withexcerpt .widget_flow_blocks > div .item_title,
+div.widget_core_coll_post_list.evo_layout_flow.evo_withexcerpt .widget_flow_blocks > div .item_title,
+div.widget_core_coll_page_list.evo_layout_flow.evo_withexcerpt .widget_flow_blocks > div .item_title,
+div.widget_core_coll_related_post_list.evo_layout_flow.evo_withexcerpt .widget_flow_blocks > div .item_title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5em;
+  margin: 10px 0 5px;
+}
 div.widget_core_coll_item_list.evo_layout_rwd .widget_rwd_content,
 div.widget_core_coll_featured_posts.evo_layout_rwd .widget_rwd_content,
 div.widget_core_coll_post_list.evo_layout_rwd .widget_rwd_content,
@@ -1505,10 +1545,10 @@ div.widget_core_coll_featured_posts.evo_1pic__special ul li .item_first_image_pl
 div.widget_core_coll_post_list.evo_1pic__special ul li .item_first_image_placeholder,
 div.widget_core_coll_page_list.evo_1pic__special ul li .item_first_image_placeholder,
 div.widget_core_coll_related_post_list.evo_1pic__special ul li .item_first_image_placeholder {
-  display: block;
+  display: table;
   float: left;
-  height: 80px;
-  width: 80px;
+  max-width: 380px;
+  max-height: 380px;
   background: #f0f0f0;
   margin-right: 6px;
   border-radius: 3px;
@@ -1519,12 +1559,12 @@ div.widget_core_coll_post_list.evo_1pic__special ul li .item_first_image_placeho
 div.widget_core_coll_page_list.evo_1pic__special ul li .item_first_image_placeholder:before,
 div.widget_core_coll_related_post_list.evo_1pic__special ul li .item_first_image_placeholder:before {
   font-family: FontAwesome;
-  display: block;
+  display: table-cell;
   content: '\f0f6';
   color: #dcdcdc;
   font-size: 40px;
-  margin-top: 12px;
-  margin-left: 23px;
+  vertical-align: middle;
+  text-align: center;
 }
 div.widget_core_coll_item_list.evo_1pic__special ul li div.item_title,
 div.widget_core_coll_featured_posts.evo_1pic__special ul li div.item_title,
@@ -1561,14 +1601,13 @@ div.widget_core_coll_post_list.evo_pics div.item_images,
 div.widget_core_coll_page_list.evo_pics div.item_images,
 div.widget_core_coll_related_post_list.evo_pics div.item_images {
   display: inline-block;
-  margin: 6px 6px 0 0;
 }
 div.widget_core_coll_item_list.evo_pics div.item_images img,
 div.widget_core_coll_featured_posts.evo_pics div.item_images img,
 div.widget_core_coll_post_list.evo_pics div.item_images img,
 div.widget_core_coll_page_list.evo_pics div.item_images img,
 div.widget_core_coll_related_post_list.evo_pics div.item_images img {
-  margin-right: 6px;
+  margin: 6px 6px 0 0;
 }
 div.widget_core_coll_item_list.evo_pics.evo_1pic__special li,
 div.widget_core_coll_featured_posts.evo_pics.evo_1pic__special li,
@@ -1584,7 +1623,6 @@ div.widget_core_coll_post_list.evo_pics.evo_1pic__special div.item_images,
 div.widget_core_coll_page_list.evo_pics.evo_1pic__special div.item_images,
 div.widget_core_coll_related_post_list.evo_pics.evo_1pic__special div.item_images {
   float: left;
-  margin: 6px 6px 6px 0;
 }
 div.widget_core_coll_item_list.evo_withexcerpt.evo_1pic__special ul li,
 div.widget_core_coll_featured_posts.evo_withexcerpt.evo_1pic__special ul li,
@@ -1793,9 +1831,9 @@ div.widget_core_coll_related_post_list div.item_first_image {
   text-align: center;
 }
 div.evo_container__sidebar div.widget_core_coll_item_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a,
-div.evo_container__sidebar2 div.widget_core_coll_item_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a,
+div.evo_container__sidebar_2 div.widget_core_coll_item_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a,
 div.evo_container__sidebar div.widget_core_coll_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a,
-div.evo_container__sidebar2 div.widget_core_coll_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a {
+div.evo_container__sidebar_2 div.widget_core_coll_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a {
   font-size: 16px;
 }
 @media (max-width: 1599px) {
@@ -1808,6 +1846,16 @@ div.evo_container__sidebar2 div.widget_core_coll_post_list.evo_1pic__special.evo
   div.widget_core_coll_item_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a,
   div.widget_core_coll_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a {
     font-size: 18px;
+  }
+}
+@media (max-width: 414px) {
+  div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeholder,
+  div.widget_core_coll_featured_posts.evo_1pic__special ul li .item_first_image_placeholder,
+  div.widget_core_coll_post_list.evo_1pic__special ul li .item_first_image_placeholder,
+  div.widget_core_coll_page_list.evo_1pic__special ul li .item_first_image_placeholder,
+  div.widget_core_coll_related_post_list.evo_1pic__special ul li .item_first_image_placeholder {
+    max-width: 290px;
+    max-height: 290px;
   }
 }
 div.widget_core_coll_item_list.evo_1pic__special ul li .item_first_image_placeholder:before,
@@ -1833,19 +1881,82 @@ div.widget_core_coll_page_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.
 div.widget_core_coll_related_post_list.evo_1pic__special.evo_noexcerpt.evo_noteaser div.item_title a {
   font-size: 16px;
 }
-div.widget_core_coll_media_index.evo_layout_rwd .widget_rwd_content {
+div.widget_core_coll_media_index.evo_layout_list ul li img {
+  margin: 0 6px 6px 0;
+}
+div.widget_core_coll_media_index.evo_layout_rwd .widget_rwd_blocks > div,
+div.widget_core_coll_media_index.evo_layout_flow .widget_flow_blocks > div {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+div.widget_core_coll_media_index.evo_layout_rwd .widget_rwd_blocks .widget_rwd_content,
+div.widget_core_coll_media_index.evo_layout_flow .widget_flow_blocks > div {
+  padding: 8px;
   margin: 14px 0;
+  overflow: hidden;
+  background-color: #fafafa;
+  border-radius: 4px;
 }
-div.widget_core_coll_media_index.evo_layout_rwd img {
-  width: 100%;
+div.widget_core_coll_media_index.evo_layout_rwd .widget_rwd_blocks .widget_rwd_content img,
+div.widget_core_coll_media_index.evo_layout_flow .widget_flow_blocks > div img {
+  max-width: 100%;
+  max-height: 380px;
+  width: auto;
   height: auto;
+  margin: auto;
+  min-height: 32px;
+  min-width: 32px;
+  display: block;
+  border-radius: 3px;
 }
-div.widget_core_user_avatars.evo_layout_rwd .widget_rwd_content {
+div.widget_core_coll_media_index.evo_layout_rwd .widget_rwd_blocks .widget_rwd_content span.note,
+div.widget_core_coll_media_index.evo_layout_flow .widget_flow_blocks > div span.note {
+  margin-top: 8px;
+  display: block;
+}
+div.widget_core_coll_media_index.evo_layout_flow .widget_flow_blocks {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+div.widget_core_coll_media_index.evo_layout_flow .widget_flow_blocks > div {
+  margin-left: 14px;
+  margin-right: 14px;
+  text-align: left;
+  width: 250px;
+}
+div.widget_core_user_avatars.evo_layout_rwd .widget_rwd_blocks .widget_rwd_content,
+div.widget_core_user_avatars.evo_layout_flow .widget_flow_blocks > div {
+  padding: 8px;
   margin: 14px 0;
+  overflow: hidden;
+  background-color: #fafafa;
+  border-radius: 4px;
 }
-div.widget_core_user_avatars.evo_layout_rwd img {
-  width: 100%;
+div.widget_core_user_avatars.evo_layout_flow .widget_flow_blocks {
+  display: inline-block;
+  text-align: center;
+}
+div.widget_core_user_avatars.evo_layout_flow .widget_flow_blocks > div {
+  margin-left: 14px;
+  margin-right: 14px;
+  width: 250px;
+}
+div.widget_core_user_avatars.evo_layout_rwd .widget_rwd_blocks > div,
+div.widget_core_user_avatars.evo_layout_flow .widget_flow_blocks > div {
+  display: inline-block;
+  vertical-align: top;
+}
+div.widget_core_user_avatars.evo_layout_rwd .widget_rwd_blocks .widget_rwd_content img,
+div.widget_core_user_avatars.evo_layout_flow .widget_flow_blocks > div img {
+  max-width: 100%;
+  max-height: 380px;
+  width: auto;
   height: auto;
+  margin: auto;
+  display: block;
+  border-radius: 3px;
 }
 .widget_core_item_about_author .evo_avatar {
   float: left;
@@ -1862,6 +1973,21 @@ div.widget_core_user_avatars.evo_layout_rwd img {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 30px;
+}
+.widget_core_org_members.evo_layout_flow .widget_flow_blocks {
+  display: inline-block;
+  text-align: center;
+}
+.widget_core_org_members.evo_layout_flow .widget_flow_blocks > div {
+  display: inline-block;
+  float: none;
+  margin-left: 14px;
+  margin-right: 14px;
+  vertical-align: top;
+  width: 250px;
+}
+.widget_core_org_members.evo_layout_flow .widget_flow_blocks > div img {
+  border-radius: 50%;
 }
 .widget_core_org_members img {
   display: inline-block;
@@ -2294,11 +2420,11 @@ body.disp_arcdir div.arcdir_list_wrapper ul li span.dimmed:before {
 }
 @media (max-width: 992px) {
   .evo_container__sidebar,
-  .evo_container__sidebar2 {
+  .evo_container__sidebar_2 {
     margin-top: 80px;
   }
   .evo_container__sidebar .widget_plugin_evo_Calr table,
-  .evo_container__sidebar2 .widget_plugin_evo_Calr table {
+  .evo_container__sidebar_2 .widget_plugin_evo_Calr table {
     max-width: 320px;
     margin: 0 auto;
   }

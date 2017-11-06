@@ -93,8 +93,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
-			<ul class="navbar-nav evo_container evo_container__menu">
-			
+
 				<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
 					if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
 						<div class="header-search-toggle">
@@ -119,8 +118,11 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
 					// Display container and contents:
 					// Note: this container is designed to be a single <ul> list
-					skin_container( NT_('Menu'), array(
+					widget_container( 'menu', array(
 							// The following params will be used as defaults for widgets included in this container:
+							'container_display_if_empty' => false, // If no widget, don't display container at all
+							'container_start'     => '<ul class="navbar-nav evo_container $wico_class$">',
+							'container_end'       => '</ul>',
 							'block_start'         => '',
 							'block_end'           => '',
 							'block_display_title' => false,
@@ -140,7 +142,6 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 						) );
 					// ----------------------------- END OF "Menu" CONTAINER -----------------------------
 				?>
-			</ul>
 		</div><!-- .collapse -->
 </nav><!-- .row -->
 
@@ -168,21 +169,22 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					} else {
 						echo 'col-lg-12';
 					} ?>">
-		
-		<div class="evo_container evo_container__header center">
+
 		<?php
-			
 			// ------------------------- MESSAGES GENERATED FROM ACTIONS -------------------------
 			messages( array(
 					'block_start' => '<div class="action_messages">',
 					'block_end'   => '</div>',
 				) );
 			// --------------------------------- END OF MESSAGES ---------------------------------
-				
+
 			// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
 			// Display container and contents:
-			skin_container( NT_('Header'), array(
+			widget_container( 'header', array(
 					// The following params will be used as defaults for widgets included in this container:
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start'   => '<div class="evo_container $wico_class$ center">',
+					'container_end'     => '</div>',
 					'block_start'       => '<div class="evo_widget $wi_class$">',
 					'block_end'         => '</div>',
 					'block_title_start' => '<h1>',
@@ -195,8 +197,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 				) );
 			// ----------------------------- END OF "Header" CONTAINER -----------------------------
 		?>
-		</div>
-		
+
 		<?php 
 		if ( $Skin->get_setting( 'fr_sec_enable' ) == true )
 		{ // Check if enabled Front page special section in the back-office
@@ -377,12 +378,13 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	?>
 	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout_front' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<!-- =================================== START OF SIDEBAR =================================== -->
-		<div class="evo_container evo_container__sidebar">
 		<?php
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
-			// Display container contents:
-			skin_container( NT_('Sidebar'), array(
+			widget_container( 'sidebar', array(
 					// The following (optional) params will be used as defaults for widgets included in this container:
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start' => '<div class="evo_container $wico_class$">',
+					'container_end'   => '</div>',
 					// This will enclose each widget in a block:
 					'block_start' => '<div class="evo_widget $wi_class$">',
 					'block_end' => '</div>',
@@ -413,15 +415,15 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 				) );
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
 		?>
-		</div>
 
-		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false ) { ?>
-		<div class="evo_container evo_container__sidebar2">
-		<?php
-			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
-			// Display container contents:
-			skin_container( NT_('Sidebar 2'), array(
+		<?php if ( $Skin->get_setting( 'sidebar2_single' ) == false )
+		{	// Display 'Sidebar 2' widget container:
+			// ------------------------- "Sidebar 2" CONTAINER EMBEDDED HERE --------------------------
+			widget_container( 'sidebar_2', array(
 					// The following (optional) params will be used as defaults for widgets included in this container:
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start' => '<div class="evo_container $wico_class$">',
+					'container_end'   => '</div>',
 					// This will enclose each widget in a block:
 					'block_start' => '<div class="evo_widget $wi_class$">',
 					'block_end' => '</div>',
@@ -451,9 +453,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'search_submit_after'  => '</span></div>',
 				) );
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php } // if Sidebar2 Single option not selected ?>
+		} // if Sidebar2 Single option not selected ?>
 	</aside><!-- .col -->
 	<?php } // if visible sidebar ?>
 
@@ -465,11 +465,13 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 	<!-- =================================== START OF FOOTER =================================== -->
 	<div class="col-md-12">
 
-		<div class="evo_container evo_container__footer">
 		<?php
-			// Display container and contents:
-			skin_container( NT_("Footer"), array(
+			// ------------------------- "Footer" CONTAINER EMBEDDED HERE --------------------------
+			widget_container( 'footer', array(
 					// The following params will be used as defaults for widgets included in this container:
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start'   => '<div class="evo_container $wico_class$">',
+					'container_end'     => '</div><div class="clearfix"></div>',
 					'block_start'       => '<div class="evo_widget $wi_class$">',
 					'block_end'         => '</div>',
 					// Search
@@ -478,12 +480,9 @@ echo "<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' r
 					'search_submit_before' => '<span class="input-group-btn">',
 					'search_submit_after'  => '</span></div>',
 				) );
-			// Note: Double quotes have been used around "Footer" only for test purposes.
+			// ----------------------------- END OF "Footer" CONTAINER -----------------------------
 		?>
-		</div>
 
-		<div class="clearfix"></div>
-		
 		<p class="center small">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):

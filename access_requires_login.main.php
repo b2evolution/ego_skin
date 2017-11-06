@@ -97,8 +97,7 @@ if( $Skin->is_visible_container( 'menu' ) )
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
-			<ul class="navbar-nav evo_container evo_container__menu">
-			
+
 				<?php // ------------------------- "Menu" SEARCH TOGGLER --------------------------
 					if ( $Skin->get_setting( 'nav_search' ) == true ) { ?>
 						<div class="header-search-toggle">
@@ -123,8 +122,11 @@ if( $Skin->is_visible_container( 'menu' ) )
 					// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
 					// Display container and contents:
 					// Note: this container is designed to be a single <ul> list
-					skin_container( NT_('Menu'), array(
+					widget_container( 'menu', array(
 							// The following params will be used as defaults for widgets included in this container:
+							'container_display_if_empty' => false, // If no widget, don't display container at all
+							'container_start'     => '<ul class="navbar-nav evo_container $wico_class$">',
+							'container_end'       => '</ul>',
 							'block_start'         => '',
 							'block_end'           => '',
 							'block_display_title' => false,
@@ -139,7 +141,6 @@ if( $Skin->is_visible_container( 'menu' ) )
 						) );
 					// ----------------------------- END OF "Menu" CONTAINER -----------------------------
 				?>
-			</ul>
 		</div><!-- .collapse -->
 </nav><!-- .row -->
 
@@ -311,15 +312,13 @@ if( $Skin->is_visible_container( 'menu' ) )
 	<aside class="col-md-4<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<?php
 		if( $Skin->is_visible_container( 'sidebar' ) )
-		{ // Display 'Sidebar' widget container
-		?>
-		<!-- =================================== START OF SIDEBAR =================================== -->
-		<div class="evo_container evo_container__sidebar">
-		<?php
+		{	// Display 'Sidebar' widget container:
 			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
-			// Display container contents:
-			skin_container( NT_('Sidebar'), array(
+			widget_container( 'sidebar', array(
 					// The following (optional) params will be used as defaults for widgets included in this container:
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start' => '<div class="evo_container $wico_class$">',
+					'container_end'   => '</div>',
 					// This will enclose each widget in a block:
 					'block_start' => '<div class="evo_widget $wi_class$">',
 					'block_end' => '</div>',
@@ -349,20 +348,17 @@ if( $Skin->is_visible_container( 'menu' ) )
 					'search_submit_after'  => '</span></div>',
 				) );
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php } ?>
+		} ?>
 
 		<?php
 		if( $Skin->is_visible_container( 'sidebar2' ) )
-		{ // Display 'Sidebar 2' widget container
-		?>
-		<div class="evo_container evo_container__sidebar2">
-		<?php
-			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
-			// Display container contents:
-			skin_container( NT_('Sidebar 2'), array(
+		{	// Display 'Sidebar 2' widget container:
+			// ------------------------- "Sidebar 2" CONTAINER EMBEDDED HERE --------------------------
+			widget_container( 'sidebar_2', array(
 					// The following (optional) params will be used as defaults for widgets included in this container:
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start' => '<div class="evo_container $wico_class$">',
+					'container_end'   => '</div>',
 					// This will enclose each widget in a block:
 					'block_start' => '<div class="evo_widget $wi_class$">',
 					'block_end' => '</div>',
@@ -392,9 +388,7 @@ if( $Skin->is_visible_container( 'menu' ) )
 					'search_submit_after'  => '</span></div>',
 				) );
 			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php } ?>
+		} ?>
 
 	</aside><!-- .col -->
 	<?php } ?>
@@ -409,22 +403,19 @@ if( $Skin->is_visible_container( 'menu' ) )
 
 		<?php
 		if( $Skin->is_visible_container( 'footer' ) )
-		{ // Display 'Footer' widget container
-		?>
-		<div class="evo_container evo_container__footer">
-		<?php
-			// Display container and contents:
-			skin_container( NT_("Footer"), array(
+		{	// Display 'Footer' widget container:
+			// ------------------------- "Footer" CONTAINER EMBEDDED HERE --------------------------
+			widget_container( 'footer', array(
 					// The following params will be used as defaults for widgets included in this container:
-					'block_start'       => '<div class="evo_widget $wi_class$">',
-					'block_end'         => '</div>',
+					'container_display_if_empty' => false, // If no widget, don't display container at all
+					'container_start' => '<div class="evo_container $wico_class$">',
+					'container_end'   => '</div><div class="clearfix"></div>',
+					'block_start'     => '<div class="evo_widget $wi_class$">',
+					'block_end'       => '</div>',
 				) );
-			// Note: Double quotes have been used around "Footer" only for test purposes.
-		?>
-		</div>
-		<?php } ?>
+			// ----------------------------- END OF "Footer" CONTAINER -----------------------------
+		} ?>
 
-		<div class="clearfix"></div>
 		<p class="center">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):

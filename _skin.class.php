@@ -40,7 +40,7 @@ class ego_Skin extends Skin
 	 */
 	function get_default_type()
 	{
-		return 'normal';
+		return 'rwd';
 	}
 
 
@@ -82,7 +82,36 @@ class ego_Skin extends Skin
 		return $supported_kinds;
 	}
 
-	
+
+	/**
+	 * Get the container codes of the skin main containers
+	 *
+	 * This should NOT be protected. It should be used INSTEAD of file parsing.
+	 * File parsing should only be used if this function is not defined
+	 *
+	 * @return array
+	 */
+	function get_declared_containers()
+	{
+		// Note: second param below is the ORDER
+		return array(
+				'header'                    => array( NT_('Header'), 10 ),
+				'menu'                      => array( NT_('Menu'), 15 ),
+				'front_page_main_area'      => array( NT_('Front Page Main Area'), 40 ),
+				'item_single_header'        => array( NT_('Item Single Header'), 50 ),
+				'item_single'               => array( NT_('Item Single'), 51 ),
+				'item_page'                 => array( NT_('Item Page'), 55 ),
+				'contact_page_main_area'    => array( NT_('Contact Page Main Area'), 60 ),
+				'sidebar'                   => array( NT_('Sidebar'), 80 ),
+				'sidebar_2'                 => array( NT_('Sidebar_2'), 81 ),
+				'footer'                    => array( NT_('Footer'), 100 ),
+				'user_profile_left'         => array( NT_('User Profile - Left'), 110 ),
+				'user_profile_right'        => array( NT_('User Profile - Right'), 120 ),
+				'404_page'                  => array( NT_('404 Page'), 130 ),
+			);
+	}
+
+
 	/**
 	 * Get definitions for editable params
 	 *
@@ -923,7 +952,7 @@ Welcome to Ego skin.&nbsp;Built specially for <a href='http://b2evolution.net/'>
 				// if Sidebar2 is NOT reserved for disp=single only, then:
 				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
 			} else {
-				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4, .evo_container__sidebar2 .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
+				$custom_css .= '.evo_container__sidebar .evo_widget:nth-child(1) div > h4, .evo_container__sidebar_2 .evo_widget:nth-child(1) div > h4 { margin-top: 0 !important;'." }\n";
 			}
 			
 			
